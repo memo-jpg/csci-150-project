@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c47b8gwmrurwh"]
+
+[ext_resource type="Texture2D" uid="uid://b8sqxgi3idirp" path="res://mapDev/projectResources/kenneyAssets/cityTileset/Tilemap/tilemap_packed.png" id="1_28d7r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2k2i"]
+atlas = ExtResource("1_28d7r")
+region = Rect2(549, 392, 36, 24)
+
+[node name="Sprite2D" type="Sprite2D"]
+texture_filter = 1
+texture = SubResource("AtlasTexture_m2k2i")
+region_rect = Rect2(577.05475, 414.57663, 46.92566, 28.387115)
