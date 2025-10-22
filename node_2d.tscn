@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://flqfgk8wyi03"]
+
+[ext_resource type="Script" uid="uid://dmwxmpol6gsu4" path="res://test.gd" id="1_wtcfe"]
+[ext_resource type="PackedScene" uid="uid://v3w01tkko2jo" path="res://enemy.tscn" id="2_0e48y"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_wtcfe")
+testMobScene = ExtResource("2_0e48y")
+
+[node name="Camera2D" type="Camera2D" parent="."]
