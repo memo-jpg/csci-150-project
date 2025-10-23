@@ -6,6 +6,7 @@
 [node name="Player" type="Node2D"]
 
 [node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(60, 75)
 scale = Vector2(1.2291666, 1.5416666)
 texture = ExtResource("1_4flbx")
 script = ExtResource("1_onrkg")
