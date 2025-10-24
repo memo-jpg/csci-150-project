@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://gjmf48hc5fx4"]
+
+[ext_resource type="Script" uid="uid://dfncute6v0g8l" path="res://mapDev/scripts/mapNode.gd" id="1_uma8q"]
+[ext_resource type="Texture2D" uid="uid://b8sqxgi3idirp" path="res://mapDev/projectResources/kenneyAssets/cityTileset/Tilemap/tilemap_packed.png" id="2_254ls"]
+[ext_resource type="Script" uid="uid://buwlmx2oa4j2a" path="res://mapDev/scripts/mapNodeClicked.gd" id="3_254ls"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gpel7"]
+atlas = ExtResource("2_254ls")
+region = Rect2(549, 388, 36, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_254ls"]
+size = Vector2(37.09092, 24.000002)
+
+[node name="mapNode" type="Node2D"]
+script = ExtResource("1_uma8q")
+nodeName = "testNode"
+metadata/_custom_type_script = "uid://dfncute6v0g8l"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_gpel7")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("3_254ls")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5454445, 0)
+shape = SubResource("RectangleShape2D_254ls")
