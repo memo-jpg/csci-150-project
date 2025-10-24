@@ -1,11 +1,14 @@
 extends Node
 
-func _init():
-	pass
+@export var testMobScene: PackedScene
+var  testEnemy: Node2D
+
+func _process(delta): 
+	if(Input.is_action_pressed('spawnTest')):
+		testEnemy = testMobScene.instantiate()
+		testEnemy.position = Vector2(0,0) 
+		print('child added')
+		add_child(testEnemy)
+	if(Input.is_action_pressed('damageTest')):
+		testEnemy.setHp(50)
 	
-# Called when the node enters the scene tree for the FIRST time.
-func _ready() -> void:
-	pass
-	
-func _process(delta: float) -> void:
-	pass
