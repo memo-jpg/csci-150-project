@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=4 uid="uid://cj8nnrtt0giys"]
+[gd_scene load_steps=6 format=4 uid="uid://cj8nnrtt0giys"]
 
 [ext_resource type="TileSet" uid="uid://hrqpe14gp11w" path="res://mapDev/tileSet.tres" id="1_jhupi"]
 [ext_resource type="Script" uid="uid://wmqx45sjpmnr" path="res://mapDev/_MapScene.gd" id="1_jplie"]
 [ext_resource type="Texture2D" uid="uid://b8sqxgi3idirp" path="res://mapDev/projectResources/kenneyAssets/cityTileset/Tilemap/tilemap_packed.png" id="2_jhupi"]
-[ext_resource type="PackedScene" uid="uid://gjmf48hc5fx4" path="res://mapDev/mapNode.tscn" id="4_jplie"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jplie"]
 texture = ExtResource("2_jhupi")
@@ -1068,22 +1067,6 @@ tile_set = SubResource("TileSet_vhvuy")
 visible = false
 tile_map_data = PackedByteArray("AAAXABAAAQAiABQAAAAXABEAAQAiABUAAAAYABAAAQAjABQAAAAYABEAAQAjABUAAAAZABAAAQAkABQAAAAZABEAAQAkABUAAAAeABQAAQAiABQAAAAeABUAAQAiABUAAAAfABQAAQAjABQAAAAfABUAAQAjABUAAAAgABQAAQAkABQAAAAgABUAAQAkABUAAAAmABgAAQAiABQAAAAmABkAAQAiABUAAAAnABgAAQAjABQAAAAnABkAAQAjABUAAAAoABgAAQAkABQAAAAoABkAAQAkABUAAAArABMAAQAiABQAAAArABQAAQAiABUAAAAsABMAAQAjABQAAAAsABQAAQAjABUAAAAtABMAAQAkABQAAAAtABQAAQAkABUAAAA1ABAAAQAiABQAAAA1ABEAAQAiABUAAAA2ABAAAQAjABQAAAA2ABEAAQAjABUAAAA3ABAAAQAkABQAAAA3ABEAAQAkABUAAABBABEAAQAjAAIAAABBABIAAQAjAAMAAABHABEAAQAjAAIAAABHABIAAQAjAAMAAABDABEAAQAVAA8AAABDABIAAQAVABAAAABEABEAAQAWAA8AAABEABIAAQAWABAAAABFABEAAQAXAA8AAABFABIAAQAXABAAAABDAA4AAQAXAAkAAABDAA8AAQAXAAoAAABDABAAAQAXAAsAAABEAA4AAQAYAAkAAABEAA8AAQAYAAoAAABEABAAAQAYAAsAAABFAA4AAQAZAAkAAABFAA8AAQAZAAoAAABFABAAAQAZAAsAAABCABAAAQAQAA4AAABCABEAAQAQAA8AAABCABIAAQAQABAAAABGABAAAQATAA4AAABGABEAAQATAA8AAABGABIAAQATABAAAAA7ABcAAQAiABQAAAA7ABgAAQAiABUAAAA8ABcAAQAjABQAAAA8ABgAAQAjABUAAAA9ABcAAQAkABQAAAA9ABgAAQAkABUAAAA=")
 tile_set = ExtResource("1_jhupi")
-
-[node name="initNode" parent="." instance=ExtResource("4_jplie")]
-visible = false
-position = Vector2(78, 316)
-nodeId = 20
-nodeName = "Node1"
-isActive = true
-
-[node name="mapNode2" parent="initNode" instance=ExtResource("4_jplie")]
-position = Vector2(60, -36)
-nodeId = 21
-nodeName = "Node2"
-isActive = true
-
-[node name="mapNode" parent="initNode" instance=ExtResource("4_jplie")]
-position = Vector2(142, -7)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(579, 324)

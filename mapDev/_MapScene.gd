@@ -9,18 +9,26 @@ var start_y_pos: int = 300
 
 var num_of_nodes: int = 10
 
-
 func _ready():
 	place_nodes()
 	
+
+
+
 
 func place_nodes():
 	for i in range(num_of_nodes):
 		
 		var newNode = MAP_NODE.instantiate()
 		
+		
 		var xPos = start_x_pos + (i * spacing)
 		var yPos = randi_range(250, 400)
+		print("start x:", start_x_pos)
+		print("spacing: ", spacing)
+		print("y pos:", yPos)
+		# yPos + xPos
+		
 		
 		var nodeId = i
 		var nodeName = "Node " + str(i)
