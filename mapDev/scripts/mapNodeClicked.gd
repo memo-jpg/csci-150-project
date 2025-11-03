@@ -15,7 +15,7 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int):
 		# Current scene becomes previous globally
 		Global.prev_scene_path = get_tree().current_scene.scene_file_path
 		
-		get_tree().change_scene_to_file("res://mapDev/_mapTestScene.tscn")
+		get_tree().change_scene_to_file("res://mapDev/_fakeCombat.tscn")
 
 		# does change scene, just need to make temp combat scene
 		# get_tree().change_scene_to_file("res://mapDev/spriteCharMap.tscn")

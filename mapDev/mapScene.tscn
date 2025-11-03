@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=4 uid="uid://cj8nnrtt0giys"]
 
 [ext_resource type="TileSet" uid="uid://hrqpe14gp11w" path="res://mapDev/tileSet.tres" id="1_jhupi"]
-[ext_resource type="Script" uid="uid://wmqx45sjpmnr" path="res://mapDev/_MapScene.gd" id="1_jplie"]
+[ext_resource type="Script" uid="uid://wmqx45sjpmnr" path="res://mapDev/scripts/_MapScene.gd" id="1_jplie"]
 [ext_resource type="Texture2D" uid="uid://b8sqxgi3idirp" path="res://mapDev/projectResources/kenneyAssets/cityTileset/Tilemap/tilemap_packed.png" id="2_jhupi"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jplie"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jhupi"]
 texture = ExtResource("2_jhupi")
 0:0/0 = 0
 1:0/0 = 0
@@ -1044,7 +1044,7 @@ texture = ExtResource("2_jhupi")
 36:27/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_vhvuy"]
-sources/0 = SubResource("TileSetAtlasSource_jplie")
+sources/0 = SubResource("TileSetAtlasSource_jhupi")
 
 [node name="_MapScene" type="Node2D"]
 script = ExtResource("1_jplie")
