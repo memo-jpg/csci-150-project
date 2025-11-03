@@ -3,8 +3,9 @@ extends Node
 
 @onready var _map: Node2D = %_Map
 
-
-
+########################################
+# Extended part of this @ 48:15 === https://youtu.be/43BZsLZheA4?t=2895
+########################################
 func saveGame():
 	var saved_game:savedGame = savedGame.new()
 	

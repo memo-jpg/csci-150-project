@@ -2,16 +2,16 @@ extends Area2D
 
 class_name mapNode
 
-@export var nodeId : int
-@export var nodeName : String
-@export var nodeData : int
-@export var isActive : bool
 
-@export var nodePos : Vector2
+var nodeId : int
+var nodeName : String
+var nodeData : int
+var isActive : bool
+
+var nodePos : Vector2
 
 func _ready():
-	input_pickable = true  # ensure it can receive input
-	position = nodePos     # if you’re placing it dynamically
+	pass
 
 func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int):
 	# if map_node is active, is clickable
@@ -23,10 +23,18 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int):
 		
 		get_tree().change_scene_to_file("res://mapDev/_fakeCombat.tscn")
 
+
 func on_save_game(saved_data:Array[SavedData]):
-	var my_data = SavedData.new()
+	
+	var my_data = SavedMapData.new()
 	my_data.position = global_position
 	my_data.scene_path = scene_file_path
+	my_data.isActive = isActive
+	my_data.nodeData = nodeData
+	my_data.nodeName = nodeName
+	#my_data.nodePos = global_position
+	my_data.nodeId = nodeId
+	
 	
 	saved_data.append(my_data)
 	
@@ -36,8 +44,15 @@ func on_before_load_game():
 	queue_free()
 	
 func on_load_game(saved_data:SavedData):
+	var my_data:SavedMapData = saved_data as SavedMapData
+	
 	global_position = saved_data.position
-
+	isActive = my_data.isActive
+	nodeData = my_data.nodeData
+	nodeName = my_data.nodeName
+	#nodePos = my_data.nodePos
+	nodeId = my_data.nodeId
+	
 
 func _init(argId: int = -1, argName: String = "noName", argData: int = -1):
 	nodeId = argId
