@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=4 uid="uid://2lak1mf2od02"]
+[gd_scene load_steps=9 format=4 uid="uid://2lak1mf2od02"]
 
 [ext_resource type="Script" uid="uid://b3e6l240fuwfd" path="res://mapDev/scripts/_MainScene.gd" id="1_k5q3u"]
 [ext_resource type="Script" uid="uid://brjwxhar671b" path="res://mapDev/scripts/_GameManager.gd" id="2_drw4x"]
 [ext_resource type="Script" uid="uid://wmqx45sjpmnr" path="res://mapDev/scripts/_MapScene.gd" id="3_drw4x"]
-[ext_resource type="Script" uid="uid://bnpofs3jy167w" path="res://mapDev/scripts/_Combat.gd" id="4_8ennv"]
 [ext_resource type="TileSet" uid="uid://hrqpe14gp11w" path="res://mapDev/tileSet.tres" id="4_ws67c"]
 [ext_resource type="Texture2D" uid="uid://b8sqxgi3idirp" path="res://mapDev/projectResources/kenneyAssets/cityTileset/Tilemap/tilemap_packed.png" id="5_8ennv"]
 [ext_resource type="Script" uid="uid://dksq6xjngymi5" path="res://mapDev/scripts/saveGame/saverLoader.gd" id="7_1qghs"]
@@ -1084,6 +1083,8 @@ position = Vector2(579, 324)
 
 [node name="_Player" type="Node" parent="_GameManager"]
 
+[node name="_Combat" type="Node2D" parent="."]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 offset = Vector2(400, 400)
 transform = Transform2D(1, 0, 0, 1, 400, 400)
@@ -1102,13 +1103,6 @@ text = "save"
 [node name="loadButton" type="Button" parent="CanvasLayer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "load"
-
-[node name="_Combat" type="Node2D" parent="."]
-script = ExtResource("4_8ennv")
-
-[node name="Camera2D" type="Camera2D" parent="_Combat"]
-position = Vector2(551, 339)
-zoom = Vector2(2.075, 2.075)
 
 [node name="Utilities" type="Node" parent="."]
 

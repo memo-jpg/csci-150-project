@@ -13,22 +13,23 @@ var placedNodes : Array = []
 func _ready():
 	print("_Map Node2D running")
 	place_nodes()
-	draw_lines()
-	
+	# draw_lines() # cur no need, but save/load work
+
 
 func draw_lines():
-	for i in range(len(placedNodes) - 1):
-		var nodeA = placedNodes[i]
-		var nodeB = placedNodes[i + 1]
+	if(placedNodes.size() > 0):
+		for i in range(len(placedNodes) - 1):
+			var nodeA = placedNodes[i]
+			var nodeB = placedNodes[i + 1]
 		
-		var line = Line2D.new()  # Create a new Line2D
-		line.add_point(nodeA.position)  # Add the position of node A
-		line.add_point(nodeB.position)  # Add the position of node B
-		line.width = 2  # Line width
-		line.default_color = Color(0, 0, 0)  # White color for the line
-		
-		# Add the line to the scene to visually connect the nodes
-		add_child(line)
+			var line = Line2D.new()  # Create a new Line2D
+			line.add_point(nodeA.position)  # Add the position of node A
+			line.add_point(nodeB.position)  # Add the position of node B
+			line.width = 2  # Line width
+			line.default_color = Color(0, 0, 0)  # White color for the line
+			
+			# Add the line to the scene to visually connect the nodes
+			add_child(line)
 
 
 

@@ -46,13 +46,18 @@ func on_before_load_game():
 func on_load_game(saved_data:SavedData):
 	var my_data:SavedMapData = saved_data as SavedMapData
 	
-	global_position = saved_data.position
+	global_position = my_data.position
 	isActive = my_data.isActive
 	nodeData = my_data.nodeData
 	nodeName = my_data.nodeName
 	#nodePos = my_data.nodePos
 	nodeId = my_data.nodeId
 	
+	
+
+# figure out where to draw lines later
+
+
 
 func _init(argId: int = -1, argName: String = "noName", argData: int = -1):
 	nodeId = argId
