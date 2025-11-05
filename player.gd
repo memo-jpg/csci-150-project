@@ -1,5 +1,9 @@
 extends Sprite2D
 var characterName : String = "Elliot"
+<<<<<<< HEAD
+var shield : int = 0
+=======
+>>>>>>> 31680f1b18f72913f42324819c6b75811811c8f1
 var maxHP : int = 87
 var currentHP : int = maxHP
 var maxEnergy : int = 3
@@ -49,7 +53,12 @@ func setMaxHandSize(newMaxHandSize : int):
 	maxHandSize = newMaxHandSize
 	return maxHandSize
 
+<<<<<<< HEAD
+func Apply_shield_to_player(shld: int):
+	shield += shld
+=======
 
+>>>>>>> 31680f1b18f72913f42324819c6b75811811c8f1
 func _init():
 	print("Hello World!")
 
@@ -69,7 +78,11 @@ func _process(delta: float) -> void:
 	#rotation += angular_speed * delta
 	if Input.is_action_pressed("ui_left"):
 		print("Left is pressed")
+<<<<<<< HEAD
+		currentHP -= 2 #TODO can you explain what this is for?
+=======
 		currentHP -= 2
+>>>>>>> 31680f1b18f72913f42324819c6b75811811c8f1
 		print("current hp is now: ", currentHP)
 	if Input.is_action_pressed("ui_right"):
 		print("Right is pressed")
