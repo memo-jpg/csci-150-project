@@ -10,7 +10,7 @@ extends Node
 func saveGame():
 	var saved_game:savedGame = savedGame.new()
 	
-	var saved_data:Array[SavedData] = []
+	var saved_data:Array[savedData] = []
 	get_tree().call_group("game_events", "on_save_game", saved_data)
 	saved_game.saved_data = saved_data
 	

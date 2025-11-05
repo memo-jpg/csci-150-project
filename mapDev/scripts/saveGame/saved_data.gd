@@ -1,4 +1,4 @@
-class_name SavedData
+class_name savedData
 extends Resource
 
 @export var position:Vector2

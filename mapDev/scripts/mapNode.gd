@@ -24,7 +24,7 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int):
 		get_tree().change_scene_to_file("res://mapDev/_fakeCombat.tscn")
 
 
-func on_save_game(saved_data:Array[SavedData]):
+func on_save_game(saved_data:Array[savedData]):
 	
 	var my_data = SavedMapData.new()
 	my_data.position = global_position
@@ -43,7 +43,7 @@ func on_before_load_game():
 	get_parent().remove_child(self)
 	queue_free()
 	
-func on_load_game(saved_data:SavedData):
+func on_load_game(saved_data:savedData):
 	var my_data:SavedMapData = saved_data as SavedMapData
 	
 	global_position = my_data.position

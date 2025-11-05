@@ -1,5 +1,5 @@
 class_name SavedMapData
-extends SavedData
+extends savedData
 
 @export var nodeId : int
 @export var nodeName : String
