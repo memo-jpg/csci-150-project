@@ -10,10 +10,27 @@ var num_of_nodes: int = 10
 var placedNodes : Array = []
 
 
+# @onready var _map: Node2D = %_Map
+
+@onready var saver_loader: saverLoader = %SaverLoader
+
 func _ready():
 	print("_Map Node2D running")
-	place_nodes()
+	# if (NEW_GAME): { place nodes, saveGame }, else{ loadGame }
+	# place_nodes()
+
 	# draw_lines() # cur no need, but save/load work
+	if(FileAccess.file_exists("user://savegame.tres")):
+		print("Save file exists")
+		
+		saver_loader.loadGame()
+		# loadGame // from SaverLoader
+		
+	else: # if new game
+		place_nodes()
+		# saveGame() # save the nodes
+		print("Save file does NOT exist")
+		
 
 
 func draw_lines():
@@ -56,7 +73,7 @@ func place_nodes():
 		
 		
 		add_child(newNode)
-		placedNodes.append(newNode)
+		# placedNodes.append(newNode)
 		# could pass a sceneChange("COMBAT_SCENE", newNode.data)
 		# newNode.data could hold an array of enemies that appear
 		

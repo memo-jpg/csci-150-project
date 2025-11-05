@@ -2,6 +2,7 @@ class_name saverLoader
 extends Node
 
 @onready var _map: Node2D = %_Map
+# @onready var _map: Node2D = $"../../_GameManager/_Map"
 
 ########################################
 # Extended part of this @ 48:15 === https://youtu.be/43BZsLZheA4?t=2895
@@ -25,6 +26,7 @@ func loadGame():
 	for item in saved_game.saved_data:
 		var scene = load(item.scene_path) as PackedScene
 		var restored_node = scene.instantiate()
+		print(_map)
 		_map.add_child(restored_node)
 		
 		if restored_node.has_method("on_load_game"):

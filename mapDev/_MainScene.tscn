@@ -1052,6 +1052,12 @@ sources/0 = SubResource("TileSetAtlasSource_1qghs")
 [node name="_MainScene" type="Node"]
 script = ExtResource("1_k5q3u")
 
+[node name="Utilities" type="Node" parent="."]
+
+[node name="SaverLoader" type="Node" parent="Utilities"]
+unique_name_in_owner = true
+script = ExtResource("7_1qghs")
+
 [node name="_GameManager" type="Node" parent="."]
 script = ExtResource("2_drw4x")
 
@@ -1103,12 +1109,6 @@ text = "save"
 [node name="loadButton" type="Button" parent="CanvasLayer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "load"
-
-[node name="Utilities" type="Node" parent="."]
-
-[node name="SaverLoader" type="Node" parent="Utilities"]
-unique_name_in_owner = true
-script = ExtResource("7_1qghs")
 
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HBoxContainer/saveButton" to="Utilities/SaverLoader" method="saveGame"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HBoxContainer/loadButton" to="Utilities/SaverLoader" method="loadGame"]

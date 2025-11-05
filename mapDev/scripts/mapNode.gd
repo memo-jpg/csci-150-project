@@ -3,12 +3,12 @@ extends Area2D
 class_name mapNode
 
 
-var nodeId : int
-var nodeName : String
-var nodeData : int
-var isActive : bool
+@export var nodeId : int
+@export var nodeName : String
+@export var nodeData : int
+@export var isActive : bool
 
-var nodePos : Vector2
+@export var nodePos : Vector2
 
 func _ready():
 	pass
