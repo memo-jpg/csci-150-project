@@ -9,9 +9,6 @@ var num_of_nodes: int = 10
 
 var placedNodes : Array = []
 
-
-# @onready var _map: Node2D = %_Map
-
 @onready var saver_loader: saverLoader = %SaverLoader
 
 func _ready():
@@ -67,6 +64,7 @@ func place_nodes():
 		newNode.setNodeId(nodeId);
 		var nodeName = "Node " + str(i)
 		newNode.setNodeName(nodeName)
+		
 		
 		if(i == 0):
 			newNode.isActive = true

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbyogbk21nva"]
+
+[ext_resource type="Script" uid="uid://dfncute6v0g8l" path="res://mapDev/scripts/mapNode.gd" id="1_uma8q"]
+[ext_resource type="Texture2D" uid="uid://b8sqxgi3idirp" path="res://mapDev/projectResources/kenneyAssets/cityTileset/Tilemap/tilemap_packed.png" id="2_254ls"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nmsw"]
+atlas = ExtResource("2_254ls")
+region = Rect2(549, 388, 36, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kqsor"]
+size = Vector2(37.09092, 24.000002)
+
+[node name="Area2D" type="Area2D" groups=["game_events"]]
+script = ExtResource("1_uma8q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_6nmsw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5454445, 0)
+shape = SubResource("RectangleShape2D_kqsor")
