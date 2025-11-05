@@ -28,6 +28,7 @@ class Card:
 var deck: Array = []
 var hand: Array = []
 var discard: Array = []
+var drawlimit: int = 5
 
 
 # -------------------------
@@ -73,12 +74,23 @@ func discard_to_deck(deck: Array, discard: Array) -> void:
 	shuffle_cards(deck)
 
 
-func hand_to_deck(deck: Array, hand: Array, discard: Array) -> void:
+func hand_to_deck(deck: Array, hand: Array) -> void:
 	deck += hand
 	hand.clear()
 	shuffle_cards(deck)
 
-
+func hand_to_discard(hand: Array, discard: Array) -> void:
+	discard += hand
+	hand.clear()
+	
+func getdrawlimit():
+	return drawlimit
+func getdeck():
+	return deck
+func gethand():
+	return hand
+func getdiscard():
+	return discard
 # -------------------------
 # Example setup
 # -------------------------
@@ -94,7 +106,7 @@ func _ready() -> void:
 	add_card_to_deck(deck, Card.new("Special", "Confuse", 0, 0, 0))
 
 	shuffle_cards(deck)
-	draw_cards(deck, hand, 5)
+	draw_cards(deck, hand, drawlimit)
 
 	print("Your Hand:")
 	for i in range(hand.size()):
