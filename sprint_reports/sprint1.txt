@@ -1,0 +1,1 @@
+Guillermo - Worked on creating the player class for the playable character. 
