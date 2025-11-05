@@ -20,10 +20,13 @@ config/icon="res://icon.svg"
 Global="*res://mapDev/Global.gd"
 MapData="*res://mapDev/MapData.gd"
 
+<<<<<<< HEAD
 [dotnet]
 
 project/assembly_name="Project TBD"
 
+=======
+>>>>>>> 31680f1b18f72913f42324819c6b75811811c8f1
 [input]
 
 mouseClick={
