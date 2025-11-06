@@ -25,6 +25,7 @@ func start_player_turn():
 	cards.draw_cards(cards.getdeck(), cards.gethand(), cards.getdrawlimit())#draw cards at turn start
 	player.shield = 0 #shield expires at the start of turn
 	#TODO # low priority but I should create a draw cards with no arguments to call later probably
+	#NEED FIX #I should create a draw cards with no arguments to call later probably
 
 func end_player_turn():
 	print("-- PLAYER TURN END --")
