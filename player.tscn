@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cm4eg124yumej"]
 
 [ext_resource type="Texture2D" uid="uid://c2xjf5gmr7ghp" path="res://Sprites/Player_Idle.png" id="1_4flbx"]
-[ext_resource type="Script" uid="uid://be1ivd8v3o0nh" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="Script" path="res://player.gd" id="1_onrkg"]
 
 [node name="Player" type="Node2D"]
 
