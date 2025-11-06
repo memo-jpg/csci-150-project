@@ -1,13 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://cm4eg124yumej"]
 
 [ext_resource type="Texture2D" uid="uid://c2xjf5gmr7ghp" path="res://Sprites/Player_Idle.png" id="1_4flbx"]
-<<<<<<< HEAD
 [ext_resource type="Script" uid="uid://be1ivd8v3o0nh" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://dyhoal8to6cg3" path="res://icon.svg" id="3_hqtel"]
 [ext_resource type="Script" uid="uid://bsxq4e70phb25" path="res://deck.gd" id="3_i3pqv"]
-=======
-[ext_resource type="Script" path="res://player.gd" id="1_onrkg"]
->>>>>>> a3fc91fb2bdbb5c9ccaa09c96288137ef9b06474
 
 [node name="Player" type="Node2D"]
 
