@@ -3,7 +3,6 @@ var currentHp: int
 @export var maxHp: int
 var pos: int
 var currentAction: int
-<<<<<<< HEAD
 var statusEffect
 var currentshield: int
 var Actions: Array = []
@@ -75,18 +74,3 @@ func _ready() -> void:
 	
 	for action in Actions:
 		action.display()
-=======
-var actions: action
-var statusEffect
-
-class action:
-	var type
-
-func setHp(newHp):
-	if(newHp<maxHp): {
-	currentHp=newHp
-	} 
-	else: {
-		currentHP=maxHp
-	}
->>>>>>> 31680f1b18f72913f42324819c6b75811811c8f1
