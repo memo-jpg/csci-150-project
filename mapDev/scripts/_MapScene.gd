@@ -24,9 +24,10 @@ func _ready():
 		# loadGame // from SaverLoader
 		
 	else: # if new game
-		place_nodes()
-		# saveGame() # save the nodes
 		print("Save file does NOT exist")
+		place_nodes()
+		saver_loader.saveGame()
+		# saveGame() # save the nodes
 		
 
 

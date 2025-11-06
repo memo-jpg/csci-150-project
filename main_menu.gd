@@ -3,7 +3,8 @@ extends Node2D
 
 func _on_play_pressed() -> void:
 	print('pressed')
-	get_tree().change_scene_to_file('res://mapDev/mapScene.tscn')
+	get_tree().change_scene_to_file("res://mapDev/_MainScene.tscn")
+
 
 
 func _on_settings_pressed() -> void:
