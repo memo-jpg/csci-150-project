@@ -129,15 +129,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	#rotation += angular_speed * delta
 	if Input.is_action_pressed("ui_left"):
-<<<<<<< HEAD
 		print("Left is pressed")
 		currentHP -= 2 #TODO can you explain what this is for?
 		print("current hp is now: ", currentHP)
-=======
 		#print("Left is pressed")
 		currentHP -= 2
 		#print("current hp is now: ", currentHP)
->>>>>>> dev2
+		
 	if Input.is_action_pressed("ui_right"):
 		#print("Right is pressed")
 		currentEnergy -= 1

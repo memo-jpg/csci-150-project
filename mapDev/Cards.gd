@@ -7,7 +7,9 @@ var damage: int = 0
 var shield: int = 0
 var energyCost: int = 0
 
-#Setters	
+#Setters
+func setID(newID : int):
+	id = newID
 func setType(newType : String):
 	type = newType
 	#return type
@@ -23,7 +25,9 @@ func setShield(newShield : int):
 func setEnergyCost(newCost : int):
 	energyCost = newCost
 	#return energyCost
-#Getters	
+#Getters
+func getID():
+	return id
 func getType():
 	return type
 func getCardName():

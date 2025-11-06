@@ -22,7 +22,7 @@ func load_cards(file_path: String) -> void:
 			
 			for card_dict in card_list:
 				var card_obj = Cards.new()
-				card_obj.id = card_dict["id"]
+				card_obj.setID(card_dict["id"])
 				card_obj.setType(card_dict["type"])
 				card_obj.setName(card_dict["cardName"])
 				card_obj.setDamage(card_dict["damage"])
