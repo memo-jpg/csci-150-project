@@ -1,1 +1,2 @@
 Guillermo - Worked on creating the player class for the playable character. 
+Nestor - Worked on rendering a map for the player with interacatble nodes with car sprites that when clicked would display it's values if the node's isActive value was true, currently being node ID, name, position, and data.
