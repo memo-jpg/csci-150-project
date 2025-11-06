@@ -1,8 +1,8 @@
 extends Node
 
-@export var player: Node
-@export var enemy: Node
-@export var cards: Node
+@export var player: Player
+@export var enemy: Enemy
+@export var cards: Cards
 
 var turn: String = "player"  # can be "player" or "enemy" might not be needed since enemies 
 #don't technically have a turn

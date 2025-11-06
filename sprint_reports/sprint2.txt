@@ -1,0 +1,1 @@
+Guillermo - Working on creating multiple cards for the game. Trying to get a JSON parser to work, so that we can hold all of our cards in a single JSON file.
