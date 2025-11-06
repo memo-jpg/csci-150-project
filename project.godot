@@ -11,22 +11,18 @@ config_version=5
 [application]
 
 config/name="Project TBD"
-run/main_scene="uid://cj8nnrtt0giys"
+run/main_scene="uid://2lak1mf2od02"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Global="*res://mapDev/Global.gd"
-MapData="*res://mapDev/MapData.gd"
 
-<<<<<<< HEAD
 [dotnet]
 
 project/assembly_name="Project TBD"
 
-=======
->>>>>>> 31680f1b18f72913f42324819c6b75811811c8f1
 [input]
 
 mouseClick={

@@ -1,9 +1,6 @@
 class_name Player extends Sprite2D
 var characterName : String = "Elliot"
-<<<<<<< HEAD
 var shield : int = 0
-=======
->>>>>>> 31680f1b18f72913f42324819c6b75811811c8f1
 var maxHP : int = 87
 var currentHP : int = maxHP
 var maxEnergy : int = 3
@@ -110,12 +107,8 @@ func gethand():
 func getdiscard():
 	return discard
 
-<<<<<<< HEAD
 func Apply_shield_to_player(shld: int):
 	shield += shld
-=======
-
->>>>>>> 31680f1b18f72913f42324819c6b75811811c8f1
 func _init():
 	print("Hello World!")
 
@@ -138,11 +131,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("ui_left"):
 <<<<<<< HEAD
 		print("Left is pressed")
-<<<<<<< HEAD
 		currentHP -= 2 #TODO can you explain what this is for?
-=======
-		currentHP -= 2
->>>>>>> 31680f1b18f72913f42324819c6b75811811c8f1
 		print("current hp is now: ", currentHP)
 =======
 		#print("Left is pressed")
