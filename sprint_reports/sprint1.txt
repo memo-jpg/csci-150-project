@@ -1,0 +1,3 @@
+Guillermo - Worked on creating the player class for the playable character. 
+Nestor - Worked on rendering a map for the player with interacatble nodes with car sprites that when clicked would display it's values if the node's isActive value was true, currently being node ID, name, position, and data. Only issue I had was learning how the GDScript language was structured as well as adjusting to the syntax.
+Calvin - Created base class for enemies. Ran into minor issues with not having time to implement status effects class.

@@ -3,6 +3,7 @@ extends Node
 @export var testMobScene: PackedScene
 var  testEnemy: Node2D
 
+
 func _process(delta): 
 	if(Input.is_action_pressed('spawnTest')):
 		testEnemy = testMobScene.instantiate()
