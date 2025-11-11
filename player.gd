@@ -17,6 +17,8 @@ var hand: Array = []
 var discard: Array = []
 var drawlimit: int = 5
 
+
+
 #Getters
 func getCharacterName():
 	return characterName
@@ -139,5 +141,33 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("ui_right"):
 		#print("Right is pressed")
 		currentEnergy -= 1
+	
+	
+
+
+func on_save_game(saved_data:Array[savedData]):
+	
+	var my_data = SavedPlayerData.new()
+	my_data.scene_path = scene_file_path
+	my_data.position = global_position
+	
+	my_data.currentHP = currentHP
+	my_data.characterName = characterName
+	
+	saved_data.append(my_data)
+	
+	
+
+func on_before_load_game():
+	get_parent().remove_child(self)
+	queue_free()
+	
+
+func on_load_game(saved_data:savedData):
+	var my_data:SavedPlayerData = saved_data as SavedPlayerData
+	
+	global_position = my_data.position
+	currentHP = my_data.currentHP
+	characterName = my_data.characterName
 	
 	

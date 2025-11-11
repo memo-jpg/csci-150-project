@@ -3,7 +3,7 @@ extends savedData
 
 @export var nodeId : int
 @export var nodeName : String
-@export var nodeData : int
+@export var nodeData : Array
 @export var isActive : bool
 
 @export var nodePos : Vector2
