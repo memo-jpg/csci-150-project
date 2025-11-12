@@ -1,5 +1,7 @@
 extends Node2D
 const MAP_NODE = preload("res://mapDev/mapNode.tscn")
+const PLAYER = preload("res://mapDev/_testPlayer.tscn")
+
 
 var spacing: int = 100
 var start_x_pos: int = 50
@@ -10,13 +12,14 @@ var num_of_nodes: int = 10
 var placedNodes : Array = []
 
 @onready var saver_loader: saverLoader = %SaverLoader
-@onready var player: Player = %Player
+# @onready var player: Player = %Player
 
 func placingPlayer():
 	if(placedNodes.size() > 0):
-		for i in range(placedNodes.size()):
-			if(placedNodes[i].isActive):
-				player.global_position = placedNodes[i].position 
+		for node in placedNodes:
+			if(node.isActive):
+				#playChar.global_position = node.position
+				break 
 	
 	
 
@@ -26,34 +29,33 @@ func _ready():
 	# if (NEW_GAME): { place nodes, saveGame }, else{ loadGame }
 	# place_nodes()
 	# draw_lines() # cur no need, but save/load work
-	print(player.getCharacterName())
-	
-	print(player.getCurrentHP())
-	player.setCurrentHP(20)
-	print(player.getCurrentHP())
+	# print(player.getCharacterName())
+	#print(playChar.getCurrentHP())
+	#playChar.setCurrentHP(20)
+	#print(playChar.getCurrentHP())
 	
 	if(FileAccess.file_exists("user://savegame.tres")):
 		print("Save file exists")
 		saver_loader.loadGame(placedNodes)
 		draw_lines()
-		placingPlayer()
+		# placingPlayer()
 		# loadGame // from SaverLoader
 
 		
 	else: # if new game
 		print("Save file does NOT exist")
 		generate_map()
+		
 		saver_loader.saveGame()
 		saver_loader.loadGame(placedNodes)
 		draw_lines()
-		placingPlayer()
+		# placingPlayer()
 		# saveGame() # save the nodes
 		
 	# _play_char.position = placedNodes[0].position
 
 
 func generate_map():
-	
 	
 	
 	

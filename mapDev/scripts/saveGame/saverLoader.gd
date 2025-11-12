@@ -30,6 +30,7 @@ func loadGame(myArr : Array):
 		# print(_map)
 		_map.add_child(restored_node)
 		
+		# currently appends all items, even player character since its part of the .tres file, works but need to distinguish between player object and node 
 		myArr.append(restored_node)
 		
 		if restored_node.has_method("on_load_game"):
