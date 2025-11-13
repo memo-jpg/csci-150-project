@@ -51,6 +51,8 @@ func _ready():
 		var newPlayer = PLAYER.instantiate()
 		newPlayer.setCurrentHP(20)
 		newPlayer.position = Vector2(60, 60)
+		newPlayer.curNodeId = 0
+		
 		add_child(newPlayer)
 		print(newPlayer.getCurrentHP())
 		
@@ -64,9 +66,6 @@ func _ready():
 
 
 func generate_map():
-	
-	
-	
 	
 	
 	
@@ -87,6 +86,8 @@ func generate_map():
 		newNode.setNodeName(nodeName)
 		
 		
+		
+		
 		if(i == 0):
 			newNode.isActive = true
 		else:
@@ -97,6 +98,7 @@ func generate_map():
 		# placedNodes.append(newNode)
 		# could pass a sceneChange("COMBAT_SCENE", newNode.data)
 		# newNode.data could hold an array of enemies that appear
+		
 		
 
 
