@@ -1,4 +1,8 @@
-class_name Player extends Node2D
+
+
+class_name Player extends Node2D 
+
+
 var characterName : String = "Elliot"
 var shield : int = 0
 var maxHP : int = 87
@@ -112,7 +116,7 @@ func getdiscard():
 func Apply_shield_to_player(shld: int):
 	shield += shld
 func _init():
-	print("Hello World!")
+	print("_testPlayer script _init() ran")
 
 # Called when the node enters the scene tree for the FIRST time.
 func _ready() -> void:
@@ -172,5 +176,5 @@ func on_load_game(saved_data:savedData):
 	currentHP = my_data.currentHP
 	characterName = my_data.characterName
 	curNodeId = my_data.curNodeId
-	print(my_data.position)
+	print(my_data.currentHP)
 	

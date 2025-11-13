@@ -14,6 +14,7 @@ var placedNodes : Array = []
 @onready var saver_loader: saverLoader = %SaverLoader
 # @onready var player: Player = %Player
 
+
 func placingPlayer():
 	if(placedNodes.size() > 0):
 		for node in placedNodes:
@@ -36,6 +37,7 @@ func _ready():
 	
 	if(FileAccess.file_exists("user://savegame.tres")):
 		print("Save file exists")
+		
 		saver_loader.loadGame(placedNodes)
 		draw_lines()
 		# placingPlayer()
@@ -45,6 +47,12 @@ func _ready():
 	else: # if new game
 		print("Save file does NOT exist")
 		generate_map()
+		
+		var newPlayer = PLAYER.instantiate()
+		newPlayer.setCurrentHP(20)
+		newPlayer.position = Vector2(60, 60)
+		add_child(newPlayer)
+		print(newPlayer.getCurrentHP())
 		
 		saver_loader.saveGame()
 		saver_loader.loadGame(placedNodes)
