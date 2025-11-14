@@ -1,4 +1,5 @@
-class_name Player extends Sprite2D
+class_name PlayerTwo extends Node2D 
+
 
 var characterName : String = "Elliot"
 var shield : int = 0
@@ -113,7 +114,7 @@ func getdiscard():
 func Apply_shield_to_player(shld: int):
 	shield += shld
 func _init():
-	print("Hello World!")
+	print("_testPlayer script _init() ran")
 
 # Called when the node enters the scene tree for the FIRST time.
 func _ready() -> void:
@@ -143,4 +144,35 @@ func _process(delta: float) -> void:
 		#print("Right is pressed")
 		currentEnergy -= 1
 	
+	
+
+
+var curNodeId : int
+
+func on_save_game(saved_data:Array[savedData]):
+	
+	var my_data = SavedPlayerData.new()
+	my_data.scene_path = scene_file_path
+	my_data.position = global_position
+	
+	my_data.currentHP = currentHP
+	my_data.characterName = characterName
+	my_data.curNodeId = curNodeId
+	saved_data.append(my_data)
+	
+	
+
+func on_before_load_game():
+	get_parent().remove_child(self)
+	queue_free()
+	
+
+func on_load_game(saved_data:savedData):
+	var my_data:SavedPlayerData = saved_data as SavedPlayerData
+	
+	global_position = my_data.position
+	currentHP = my_data.currentHP
+	characterName = my_data.characterName
+	curNodeId = my_data.curNodeId
+	print(my_data.currentHP)
 	

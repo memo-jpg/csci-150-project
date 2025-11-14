@@ -5,7 +5,7 @@ class_name mapNode
 
 @export var nodeId : int
 @export var nodeName : String
-@export var nodeData : int
+@export var nodeData : Array # rand array of ints to test
 @export var isActive : bool
 
 @export var nodePos : Vector2
@@ -13,11 +13,16 @@ class_name mapNode
 func _ready():
 	pass
 
-func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int):
+func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
 	# if map_node is active, is clickable
 	if (event.is_action_pressed("mouseClick") && isActive):
 		print("Node is clicked") 
 		print(getLevelInfo())
+		print(getNodeId())
+		print(self.getNodeId())
+		self.isActive = !self.isActive
+		
+		
 		# Current scene becomes previous globally
 		Global.prev_scene_path = get_tree().current_scene.scene_file_path
 		
@@ -27,15 +32,19 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int):
 func on_save_game(saved_data:Array[savedData]):
 	
 	var my_data = SavedMapData.new()
-	my_data.position = global_position
 	my_data.scene_path = scene_file_path
+	my_data.position = global_position
+	
+	my_data.nodeId = nodeId
+	print(nodeId)
+	my_data.nodeName = nodeName
 	my_data.isActive = isActive
 	my_data.nodeData = nodeData
-	my_data.nodeName = nodeName
 	#my_data.nodePos = global_position
-	my_data.nodeId = nodeId
-	
-	
+	if(isActive):
+		$tileSet.region_rect = Rect2(549, 392, 36, 24)
+	else:
+		$tileSet.region_rect = Rect2(549, 328, 36, 24)
 	saved_data.append(my_data)
 	
 
@@ -47,29 +56,29 @@ func on_load_game(saved_data:savedData):
 	var my_data:SavedMapData = saved_data as SavedMapData
 	
 	global_position = my_data.position
+	nodeId = my_data.nodeId
+	nodeName = my_data.nodeName
 	isActive = my_data.isActive
 	nodeData = my_data.nodeData
-	nodeName = my_data.nodeName
 	#nodePos = my_data.nodePos
-	nodeId = my_data.nodeId
-	
-	
+	# $tileSet.region_rect = Rect2(200, 200, 30, 30)
+	if(my_data.isActive):
+		$tileSet.region_rect = Rect2(549, 392, 36, 24)
+	else:
+		$tileSet.region_rect = Rect2(549, 328, 36, 24)
+		
 
 # figure out where to draw lines later
+func change_sprite():
+	
+	pass
 
-
-
-func _init(argId: int = -1, argName: String = "noName", argData: int = -1):
+func _init(argId: int = -1, argName: String = "noName", argData: Array = [0, 1, 2, 3]):
 	nodeId = argId
 	nodeName = argName
 	nodeData = argData
 	isActive = false
 	
-	
-
-
-func getLevelInfo():
-	return ("Name: %s\nLevel %s\n" % [str(nodeName), str(nodeId)])
 
 func setNodeId(argId : int):
 	nodeId = argId
@@ -80,12 +89,15 @@ func setNodeName(argName : String):
 func setNodePos(argX : float, argY : float):
 	nodePos = Vector2(argX, argY)
 
+
 func getNodeName():
 	return nodeName
 
-func getId():
+func getNodeId():
 	return nodeId;
-	
-	
+
 func getNodePos():
 	return nodePos;
+
+func getLevelInfo():
+	return ("Name: %s\nLevel %s\n" % [str(nodeName), str(nodeId)])

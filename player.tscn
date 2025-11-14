@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c2xjf5gmr7ghp" path="res://Sprites/Player_Idle.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://be1ivd8v3o0nh" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://dyhoal8to6cg3" path="res://icon.svg" id="3_hqtel"]
-[ext_resource type="Script" uid="uid://bsxq4e70phb25" path="res://deck.gd" id="3_i3pqv"]
+[ext_resource type="Script" path="res://deck.gd" id="3_i3pqv"]
 
 [node name="Player" type="Node2D"]
 
