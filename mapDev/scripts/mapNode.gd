@@ -19,6 +19,10 @@ func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
 		print("Node is clicked") 
 		print(getLevelInfo())
 		print(getNodeId())
+		print(self.getNodeId())
+		self.isActive = !self.isActive
+		
+		
 		# Current scene becomes previous globally
 		Global.prev_scene_path = get_tree().current_scene.scene_file_path
 		

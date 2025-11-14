@@ -11,26 +11,15 @@ var num_of_nodes: int = 10
 
 var placedNodes : Array = []
 
+# create a var for player than can be sent to the loader and saved in the main scene so that position can be handled
+
 @onready var saver_loader: saverLoader = %SaverLoader
 # @onready var player: Player = %Player
 
 
-func placingPlayer():
-	if(placedNodes.size() > 0):
-		for node in placedNodes:
-			if(node.isActive):
-				#playChar.global_position = node.position
-				break 
-	
-	
-
-
 func _ready():
 	print("_Map Node2D running")
-	# if (NEW_GAME): { place nodes, saveGame }, else{ loadGame }
-	# place_nodes()
-	# draw_lines() # cur no need, but save/load work
-	# print(player.getCharacterName())
+	
 	#print(playChar.getCurrentHP())
 	#playChar.setCurrentHP(20)
 	#print(playChar.getCurrentHP())
@@ -38,11 +27,23 @@ func _ready():
 	if(FileAccess.file_exists("user://savegame.tres")):
 		print("Save file exists")
 		
-		saver_loader.loadGame(placedNodes)
+		saver_loader.loadGame(placedNodes) # takes array here and appens the map nodes to it
+		
+		for item in placedNodes:
+			#if(item.isActive && item.nodeId):
+			print("NodeID:", item.nodeId)
+			print(item.isActive)
+			print("Pos: ", item.position, "\n")
+			
+			print(get_tree())
+				# print(player.curNodeId)
+			#print(item.nodeId)
+			# print(PLAYER.curNodeId)
+		
+		
 		draw_lines()
 		# placingPlayer()
 		# loadGame // from SaverLoader
-
 		
 	else: # if new game
 		print("Save file does NOT exist")
@@ -51,13 +52,19 @@ func _ready():
 		var newPlayer = PLAYER.instantiate()
 		newPlayer.setCurrentHP(20)
 		newPlayer.position = Vector2(60, 60)
+		
 		newPlayer.curNodeId = 0
 		
 		add_child(newPlayer)
 		print(newPlayer.getCurrentHP())
 		
+		
+		
 		saver_loader.saveGame()
 		saver_loader.loadGame(placedNodes)
+		
+		
+		
 		draw_lines()
 		# placingPlayer()
 		# saveGame() # save the nodes
@@ -66,8 +73,6 @@ func _ready():
 
 
 func generate_map():
-	
-	
 	
 	for i in range(num_of_nodes):
 		var newNode = MAP_NODE.instantiate()
@@ -95,7 +100,7 @@ func generate_map():
 		# newNode.isActive = true;
 		
 		add_child(newNode)
-		# placedNodes.append(newNode)
+		#placedNodes.append(newNode)
 		# could pass a sceneChange("COMBAT_SCENE", newNode.data)
 		# newNode.data could hold an array of enemies that appear
 		
@@ -108,7 +113,7 @@ func draw_lines():
 		for i in range(len(placedNodes) - 1):
 			var nodeA = placedNodes[i]
 			var nodeB = placedNodes[i + 1]
-		
+			
 			var line = Line2D.new()  # Create a new Line2D
 			line.add_point(nodeA.position)  # Add the position of node A
 			line.add_point(nodeB.position)  # Add the position of node B
