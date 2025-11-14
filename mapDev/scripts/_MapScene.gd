@@ -35,8 +35,8 @@ func _ready():
 			print(item.isActive)
 			print("Pos: ", item.position, "\n")
 			
-			print(get_tree())
-				# print(player.curNodeId)
+			# print(get_tree())
+			# print(player.curNodeId)
 			#print(item.nodeId)
 			# print(PLAYER.curNodeId)
 		
