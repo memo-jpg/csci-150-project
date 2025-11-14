@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cn1amlhpd8nt8"]
+[gd_scene load_steps=3 format=3 uid="uid://ba0kavrme0yfo"]
 
-[ext_resource type="Script" uid="uid://bsb3cyh8mb63v" path="res://mapDev/scripts/_testPlayer.gd" id="1_xkfqm"]
+[ext_resource type="Script" path="res://mapDev/scripts/_testPlayer.gd" id="1_xkfqm"]
 [ext_resource type="Texture2D" uid="uid://c2xjf5gmr7ghp" path="res://Sprites/Player_Idle.png" id="2_rhhi0"]
 
 [node name="_testPlayer" type="Node2D" groups=["game_events"]]

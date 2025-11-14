@@ -1,6 +1,4 @@
-
-
-class_name Player extends Node2D 
+class_name PlayerTwo extends Node2D 
 
 
 var characterName : String = "Elliot"
