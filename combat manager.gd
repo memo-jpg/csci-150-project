@@ -1,8 +1,11 @@
 extends Node
 
-@export var player: Player
+@export var player: PackedScene
 @export var enemy: Enemy
 @export var cards: Cards
+
+var playerNode
+
 
 var turn: String = "player"  # can be "player" or "enemy" might not be needed since enemies 
 #don't technically have a turn
@@ -12,18 +15,23 @@ var meta_damage = 10
 
 func _ready():
 	# Called when combat starts
+	playerNode = player.instantiate();
+	#Temp value instantiation
+	playerNode.setMaxHP(300)
+	playerNode.setCurrentHP(100)
+	add_child(playerNode)
+	
 	print("Combat started.")
-	if not player or not enemy: #debug
+	if not playerNode or not enemy: #debug
 		push_warning("⚠️ Missing player or enemy reference in CombatManager!")
 	start_player_turn()
 
 # TURN CONTROL #TODO it might be best to turn it into a state machine, completely seperating everything
 func start_player_turn(): 
-	turn = "player" #probably not needed
-	player.setCurrentEnergy(player.getMaxEnergy()) #recover energy
+	playerNode.setCurrentEnergy(3) #recover energy
 	print("\n-- PLAYER TURN START --")
-	cards.draw_cards(cards.getdeck(), cards.gethand(), cards.getdrawlimit())#draw cards at turn start
-	player.shield = 0 #shield expires at the start of turn
+	playerNode.draw_cards(playerNode.getdeck(), playerNode.gethand(), playerNode.getMaxHandSize())#draw cards at turn start
+	playerNode.shield = 0 #shield expires at the start of turn
 	#TODO # low priority but I should create a draw cards with no arguments to call later probably
 	#NEED FIX #I should create a draw cards with no arguments to call later probably
 
@@ -184,3 +192,9 @@ func check_combat_state():
 		elif enemy.currentHp <= 0:
 			print("✅ Enemy defeated!")
 			# TODO
+
+
+func _on_end_combat_test_pressed() -> void:
+	var prevScene = Global.prev_scene_path
+	if (prevScene != ""):
+		get_tree().change_scene_to_file(prevScene)

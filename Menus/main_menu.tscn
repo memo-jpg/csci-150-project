@@ -7,6 +7,7 @@
 [node name="Main Menu" type="Node2D"]
 script = ExtResource("1_fu7sn")
 settingsScene = ExtResource("2_fu7sn")
+mapScene = "res://mapDev/_MainScene.tscn"
 
 [node name="Menu Image" type="Sprite2D" parent="."]
 position = Vector2(572, 325.49997)

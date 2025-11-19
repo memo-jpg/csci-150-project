@@ -6,12 +6,12 @@
 [ext_resource type="Script" uid="uid://bsxq4e70phb25" path="res://deck.gd" id="3_i3pqv"]
 
 [node name="Player" type="Node2D"]
+script = ExtResource("1_onrkg")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(60, 75)
 scale = Vector2(1.2291666, 1.5416666)
 texture = ExtResource("1_4flbx")
-script = ExtResource("1_onrkg")
 
 [node name="Deck" type="Sprite2D" parent="."]
 position = Vector2(-69, 90)

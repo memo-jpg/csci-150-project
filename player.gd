@@ -1,4 +1,4 @@
-class_name Player extends Sprite2D
+class_name Player extends Node2D
 var characterName : String = "Elliot"
 var shield : int = 0
 var maxHP : int = 87
@@ -9,13 +9,11 @@ var maxHandSize : int = 5
 var currentHandSize : int = maxHandSize #default amount of cards we can hold on our turn 
 var positon : int = 0 #will always stay 0,
 #var statusList = [] #we don't have out statusEffect class done yet, so leaving this here.
-#var sprite : Sprite = $Sprite
 #var speed = 50
 #var angular_speed = speed * PI
 var deck: Array = []
 var hand: Array = []
 var discard: Array = []
-var drawlimit: int = 5
 
 #Getters
 func getCharacterName():
@@ -98,8 +96,6 @@ func hand_to_deck(deck: Array, hand: Array) -> void:
 func hand_to_discard(hand: Array, discard: Array) -> void:
 	discard += hand
 	hand.clear()
-func getdrawlimit():
-	return drawlimit
 func getdeck():
 	return deck
 func gethand():

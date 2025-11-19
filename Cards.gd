@@ -1,5 +1,5 @@
 extends Node
-class_name Cards
+class_name playerCards
 
 # -------------------------
 # Card definition
