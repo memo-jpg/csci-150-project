@@ -1,8 +1,11 @@
 extends Node
 
-@export var player: Player
+@export var player: PackedScene
 @export var enemy: Enemy
 @export var cards: Cards
+
+var playerNode
+
 
 var turn: String = "player"  # can be "player" or "enemy" might not be needed since enemies 
 #don't technically have a turn
@@ -23,8 +26,14 @@ var gold_totem = false # gain shield at turn start
 
 func _ready():
 	# Called when combat starts
+	playerNode = player.instantiate();
+	#Temp value instantiation
+	playerNode.setMaxHP(300)
+	playerNode.setCurrentHP(100)
+	add_child(playerNode)
+	
 	print("Combat started.")
-	if not player or not enemy: #debug
+	if not playerNode or not enemy: #debug
 		push_warning("⚠️ Missing player or enemy reference in CombatManager!")
 	start_player_turn()
 
@@ -33,14 +42,14 @@ func start_player_turn():
 	turn_counter += 1
 	turn = "player" #probably not needed
 	if protien_bar:
-		player.setCurrentEnergy(player.getMaxEnergy()+2) #recover extra energy
+		playerNode.setCurrentEnergy(playerNode.getMaxEnergy()+2) #recover extra energy
 	else:
-		player.setCurrentEnergy(player.getMaxEnergy()) #recover energy
+		playerNode.setCurrentEnergy(playerNode.getMaxEnergy()) #recover energy
 	print("\n-- PLAYER TURN START --")
-	cards.draw_cards()#draw cards at turn start
-	player.shield = 0 #shield expires at the start of turn
+	playerNode.draw_cards(playerNode.getdeck(), playerNode.gethand(), playerNode.getMaxHandSize())#draw cards at turn start
+	playerNode.shield = 0 #shield expires at the start of turn
 	if handy_shield:
-		player.shield += 4
+		playerNode.shield += 4
 	#TODO # low priority but I should create a draw cards with no arguments to call later probably
 	#NEED FIX #I should create a draw cards with no arguments to call later probably
 
@@ -214,3 +223,9 @@ func check_combat_state():
 			else:
 				player.gold += randi_range(25, 50)
 			# TODO
+
+
+func _on_end_combat_test_pressed() -> void:
+	var prevScene = Global.prev_scene_path
+	if (prevScene != ""):
+		get_tree().change_scene_to_file(prevScene)
