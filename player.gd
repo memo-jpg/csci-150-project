@@ -9,6 +9,7 @@ var currentEnergy : int = maxEnergy
 var maxHandSize : int = 5
 var currentHandSize : int = maxHandSize #default amount of cards we can hold on our turn 
 var positon : int = 0 #will always stay 0,
+var gold : int = 0 #new 
 #var statusList = [] #we don't have out statusEffect class done yet, so leaving this here.
 #var sprite : Sprite = $Sprite
 #var speed = 50
