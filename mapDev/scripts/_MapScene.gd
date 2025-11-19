@@ -18,22 +18,20 @@ var num_of_nodes: int = 10
 # @onready var player: Player = %Player
 
 func _ready():
-	print("_Map Node2D running")
+	print("_MainScene _ready running")
 	
-	#print(playChar.getCurrentHP())
-	#playChar.setCurrentHP(20)
-	#print(playChar.getCurrentHP())
+	handleScene()
 	
+
+
+func handleScene():
 	if(FileAccess.file_exists("user://savegame.tres")):
 		print("Save file exists")
 		
 		var loadedDict = saver_loader.loadGame() # takes array here and appens the map nodes to it
 		
-
-		
 		var playerRestored = loadedDict.get("player", null)
 		var placedNodes = loadedDict.get("mapNodes", [])
-		
 		
 		if(playerRestored):
 			print(playerRestored)
@@ -43,34 +41,29 @@ func _ready():
 		else:
 			print("Player is null")
 			
+		
+		
 		for node in placedNodes:
 			print("Node pos: ", node.global_position)
-			if(node.nodeId == playerRestored.curNodeId):
-				playerRestored.position = node.position
-				#node.isActive = false
-				#playerRestored.curNodeId = node.nodeId + 1
+			if(node.nodeId == Global.curNodeId):
+				playerRestored.global_position = node.global_position
+				playerRestored.global_position.y -= 30
+				#node.isActive = true
 				
-			#if(node.isActive):
-				
-		
 		draw_lines(placedNodes)
 		# placingPlayer()
 		# loadGame // from SaverLoader
 		
-	else: # if new game
+	else: # New game case
 		print("Save file does NOT exist")
 		generate_map()
 		
+		# Creating player and setting position and curNodeId
 		var newPlayer = PLAYER.instantiate()
-		newPlayer.setCurrentHP(20)
 		newPlayer.position = Vector2(60, 60)
+		newPlayer.curNodeId = Global.curNodeId
 		
-		newPlayer.curNodeId = 0
-		
-		add_child(newPlayer)
-		print(newPlayer.getCurrentHP())
-		
-		
+		add_child(newPlayer)		
 		
 		saver_loader.saveGame()
 		var loadedDict = saver_loader.loadGame()
@@ -78,26 +71,29 @@ func _ready():
 		var playerRestored = loadedDict.get("player", null)
 		var placedNodes = loadedDict.get("mapNodes", [])
 		
-		
 		if(playerRestored):
 			print(playerRestored)
+			print("player.curNodeId: ", playerRestored.curNodeId)
+			print("player.name: ", playerRestored.name)
+			print("player.position: ", playerRestored.position)
 		else:
 			print("Player is null")
 			
+		
+		draw_lines(placedNodes)
+		
 		for node in placedNodes:
 			print("Node pos: ", node.global_position)
 			if(node.nodeId == playerRestored.curNodeId):
-				playerRestored.position = node.position
+				playerRestored.global_position = node.global_position
+				playerRestored.global_position.y -= 30
+				#node.isActive = true
+				saver_loader.saveGame()
 				#node.isActive = false
 				#playerRestored.curNodeId = node.nodeId + 1
 				
 		
-		draw_lines(placedNodes)
-		
-		# placingPlayer()
-		# saveGame() # save the nodes
-		
-	# _play_char.position = placedNodes[0].position
+	
 
 
 func generate_map():
@@ -121,14 +117,14 @@ func generate_map():
 		
 		
 		
-		if(i == 0):
-			newNode.isActive = true
-		else:
-			newNode.isActive = false
+		#if(i == 0):
+		#	newNode.isActive = true
+		#else:
+		#	newNode.isActive = false
 		# newNode.isActive = true;
 		
 		add_child(newNode)
-		#placedNodes.append(newNode)
+		#\placedNodes.append(newNode)
 		# could pass a sceneChange("COMBAT_SCENE", newNode.data)
 		# newNode.data could hold an array of enemies that appear
 		

@@ -15,12 +15,8 @@ region = Rect2(549, 328, 36, 24)
 size = Vector2(37.09092, 24.000002)
 
 [node name="Area2D" type="Area2D" groups=["game_events"]]
+z_index = 55
 script = ExtResource("1_uma8q")
-nodeId = null
-nodeName = null
-nodeData = null
-isActive = null
-nodePos = null
 
 [node name="activeSprite" type="Sprite2D" parent="."]
 visible = false
