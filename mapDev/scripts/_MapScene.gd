@@ -38,6 +38,7 @@ func handleScene():
 			print("player.curNodeId: ", playerRestored.curNodeId)
 			print("player.name: ", playerRestored.name)
 			print("player.position: ", playerRestored.position)
+			#Global.curNodeId = playerRestored.curNodeId
 		else:
 			print("Player is null")
 			
@@ -48,6 +49,10 @@ func handleScene():
 			if(node.nodeId == Global.curNodeId):
 				playerRestored.global_position = node.global_position
 				playerRestored.global_position.y -= 30
+				node.isActive = true
+				if(node.nodeId == Global.curNodeId - 1 && Global.curNodeId >= 0):
+					node.isActive = false
+					
 				#node.isActive = true
 				
 		draw_lines(placedNodes)
