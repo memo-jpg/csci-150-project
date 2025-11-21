@@ -1,4 +1,7 @@
 class_name Player extends Node2D
+var hud : HUD
+
+
 var characterName : String = "Elliot"
 var shield : int = 0
 var maxHP : int = 87
@@ -123,6 +126,9 @@ func _ready() -> void:
 	#print("Energy: ", currentEnergy)
 	#print("position: ", positon)
 	#print("Hand Size: ", currentHandSize)
+	hud = get_tree().get_root().get_node("CombatScene/HUD")
+	hud.update_all(self) #<<whenever something can be changed, call this guy <<
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
