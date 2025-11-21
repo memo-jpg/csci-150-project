@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=4 uid="uid://cj8nnrtt0giys"]
 
-[ext_resource type="TileSet" uid="uid://hrqpe14gp11w" path="res://mapDev/projectResources/tileSet.tres" id="1_jhupi"]
+[ext_resource type="TileSet" uid="uid://kxcfvxp55ryw" path="res://mapDev/projectResources/tileSet.tres" id="1_jhupi"]
 [ext_resource type="Script" uid="uid://wmqx45sjpmnr" path="res://mapDev/scripts/_MapScene.gd" id="1_jplie"]
 [ext_resource type="Texture2D" uid="uid://b8sqxgi3idirp" path="res://mapDev/projectResources/kenneyAssets/cityTileset/Tilemap/tilemap_packed.png" id="2_jhupi"]
 

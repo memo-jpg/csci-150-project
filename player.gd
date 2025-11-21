@@ -142,7 +142,7 @@ func _process(delta: float) -> void:
 	
 	
 	
-var curNodeId : int
+# var curNodeId : int
 	
 func on_save_game(saved_data:Array[savedData]):
 	
@@ -152,7 +152,7 @@ func on_save_game(saved_data:Array[savedData]):
 	
 	my_data.currentHP = currentHP
 	my_data.characterName = characterName
-	my_data.curNodeId = curNodeId
+	# my_data.curNodeId = curNodeId
 	saved_data.append(my_data)
 	
 	
@@ -168,6 +168,6 @@ func on_load_game(saved_data:savedData):
 	global_position = my_data.position
 	currentHP = my_data.currentHP
 	characterName = my_data.characterName
-	curNodeId = my_data.curNodeId
-	print("on_laod_game curNodeId: ",my_data.curNodeId)
+	# curNodeId = my_data.curNodeId
+	print("on_laod_game curNodeId: ",Global.curNodeId)
 	

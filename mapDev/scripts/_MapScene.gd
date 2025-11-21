@@ -35,7 +35,7 @@ func handleScene():
 		
 		if(playerRestored):
 			print(playerRestored)
-			print("player.curNodeId: ", playerRestored.curNodeId)
+			print("Global.curNodeId: ", Global.curNodeId)
 			print("player.name: ", playerRestored.name)
 			print("player.position: ", playerRestored.position)
 			#Global.curNodeId = playerRestored.curNodeId
@@ -50,9 +50,13 @@ func handleScene():
 				playerRestored.global_position = node.global_position
 				playerRestored.global_position.y -= 30
 				node.isActive = true
-				if(node.nodeId == Global.curNodeId - 1 && Global.curNodeId >= 0):
-					node.isActive = false
+				
+			else: #(node.nodeId != Global.curNodeId):
+				node.isActive = false
 					
+					
+		
+		saver_loader.saveGame()
 				#node.isActive = true
 				
 		draw_lines(placedNodes)
@@ -61,12 +65,12 @@ func handleScene():
 		
 	else: # New game case
 		print("Save file does NOT exist")
+		Global.curNodeId = 0
 		generate_map()
 		
 		# Creating player and setting position and curNodeId
 		var newPlayer = PLAYER.instantiate()
 		newPlayer.position = Vector2(60, 60)
-		newPlayer.curNodeId = Global.curNodeId
 		
 		add_child(newPlayer)
 		
@@ -78,7 +82,7 @@ func handleScene():
 		
 		if(playerRestored):
 			print(playerRestored)
-			print("player.curNodeId: ", playerRestored.curNodeId)
+			print("Global.curNodeId: ", Global.curNodeId)
 			print("player.name: ", playerRestored.name)
 			print("player.position: ", playerRestored.position)
 		else:
@@ -89,11 +93,12 @@ func handleScene():
 		
 		for node in placedNodes:
 			print("Node pos: ", node.global_position)
-			if(node.nodeId == playerRestored.curNodeId):
+			if(node.nodeId == Global.curNodeId):
 				playerRestored.global_position = node.global_position
 				playerRestored.global_position.y -= 30
 				node.isActive = true
-				saver_loader.saveGame()
+				
+		saver_loader.saveGame()
 				#node.isActive = false
 				#playerRestored.curNodeId = node.nodeId + 1
 				
