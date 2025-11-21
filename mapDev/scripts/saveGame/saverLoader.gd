@@ -28,7 +28,7 @@ func loadGame():
 	get_tree().call_group("game_events", "on_before_load_game")
 	
 	var mapNodeArr : Array = []
-	var playerRestored : PlayerTwo = null
+	var playerRestored : Player = null
 	
 	
 	
@@ -44,7 +44,7 @@ func loadGame():
 			
 		
 		# handles playerRestore
-		elif(item.scene_path == "res://mapDev/_testPlayer.tscn"):
+		elif(item.scene_path == "res://player.tscn"):
 			playerRestored = restored_node
 			_map.add_child(playerRestored)
 		

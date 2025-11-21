@@ -30,6 +30,7 @@ func _ready():
 	#Temp value instantiation
 	playerNode.setMaxHP(300)
 	playerNode.setCurrentHP(100)
+	playerNode.global_position = Vector2(60,60)
 	add_child(playerNode)
 	
 	print("Combat started.")

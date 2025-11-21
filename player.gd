@@ -140,3 +140,34 @@ func _process(delta: float) -> void:
 		currentEnergy -= 1
 	
 	
+	
+	
+var curNodeId : int
+	
+func on_save_game(saved_data:Array[savedData]):
+	
+	var my_data = SavedPlayerData.new()
+	my_data.scene_path = scene_file_path
+	my_data.position = global_position
+	
+	my_data.currentHP = currentHP
+	my_data.characterName = characterName
+	my_data.curNodeId = curNodeId
+	saved_data.append(my_data)
+	
+	
+
+func on_before_load_game():
+	get_parent().remove_child(self)
+	queue_free()
+	
+
+func on_load_game(saved_data:savedData):
+	var my_data:SavedPlayerData = saved_data as SavedPlayerData
+	
+	global_position = my_data.position
+	currentHP = my_data.currentHP
+	characterName = my_data.characterName
+	curNodeId = my_data.curNodeId
+	print("on_laod_game curNodeId: ",my_data.curNodeId)
+	

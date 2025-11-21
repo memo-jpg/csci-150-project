@@ -1,6 +1,6 @@
 extends Node2D
 const MAP_NODE = preload("res://mapDev/mapNode.tscn")
-const PLAYER = preload("res://mapDev/_testPlayer.tscn")
+const PLAYER = preload("res://player.tscn")
 
 
 var spacing: int = 100
@@ -63,7 +63,7 @@ func handleScene():
 		newPlayer.position = Vector2(60, 60)
 		newPlayer.curNodeId = Global.curNodeId
 		
-		add_child(newPlayer)		
+		add_child(newPlayer)
 		
 		saver_loader.saveGame()
 		var loadedDict = saver_loader.loadGame()
@@ -87,7 +87,7 @@ func handleScene():
 			if(node.nodeId == playerRestored.curNodeId):
 				playerRestored.global_position = node.global_position
 				playerRestored.global_position.y -= 30
-				#node.isActive = true
+				node.isActive = true
 				saver_loader.saveGame()
 				#node.isActive = false
 				#playerRestored.curNodeId = node.nodeId + 1
