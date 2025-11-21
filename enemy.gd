@@ -68,7 +68,7 @@ func _ready() -> void:
 	add_enemy_action_to_Actions(enemy_action.new("special", "Roar", 3, 0, 3))
 	add_enemy_action_to_Actions(enemy_action.new("simple", "Nut cracker", 4, 20, 0))
 	add_enemy_action_to_Actions(enemy_action.new("simple", "Survive", 5, 0, 20))
-	add_enemy_action_to_Actions(enemy_action.new("special", "time_stop", 6, 0, 0))
+	add_enemy_action_to_Actions(enemy_action.new("special", "time stop", 6, 0, 0))
 	add_enemy_action_to_Actions(enemy_action.new("special", "confuse", 7, 0, 0))
 	add_enemy_action_to_Actions(enemy_action.new("special", "Meta", 8, 0, 0))
 	

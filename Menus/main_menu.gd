@@ -1,9 +1,10 @@
 extends Node2D
 @export var settingsScene: PackedScene
+@export var mapScene: String
 
 func _on_play_pressed() -> void:
 	print('pressed')
-	get_tree().change_scene_to_file("res://mapDev/_MainScene.tscn")
+	get_tree().change_scene_to_file(mapScene)
 
 
 

@@ -14,18 +14,19 @@ func _ready():
     pass
 
 func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
-    # if map_node is active, is clickable
-    if (event.is_action_pressed("mouseClick") && isActive):
-        print("Node is clicked") 
-        print(getLevelInfo())
-        print(getNodeId())
-        self.isActive = false
-        
-        
-        # Current scene becomes previous globally
-        Global.prev_scene_path = get_tree().current_scene.scene_file_path
-        Global.curNodeId += 1
-        get_tree().change_scene_to_file("res://mapDev/_fakeCombat.tscn")
+	# if map_node is active, is clickable
+	if (event.is_action_pressed("mouseClick") && isActive):
+		print("Node is clicked") 
+		print(getLevelInfo())
+		print(getNodeId())
+		print(self.getNodeId())
+		self.isActive = !self.isActive
+		
+		
+		# Current scene becomes previous globally
+		Global.prev_scene_path = get_tree().current_scene.scene_file_path
+		
+		get_tree().change_scene_to_file("res://combat.tscn")
 
 
 func on_save_game(saved_data:Array[savedData]):

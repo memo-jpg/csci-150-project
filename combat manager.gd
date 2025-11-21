@@ -1,35 +1,61 @@
 extends Node
 
-@export var player: Player
+@export var player: PackedScene
 @export var enemy: Enemy
 @export var cards: Cards
+
+var playerNode
+
 
 var turn: String = "player"  # can be "player" or "enemy" might not be needed since enemies 
 #don't technically have a turn
 
 var expecting_meta_input = false # possibly implementing meta elements
 var meta_damage = 10
+var turn_counter = 0
+
+#========= Artifacts =============#
+var protection_charm = false #reduce all sources of damage
+var protien_bar = false # extra energy at turn start
+var handy_shield = false # gain shield at turn start
+var gold_totem = false # gain shield at turn start
+
+
+
+#========= Artifacts =============#
 
 func _ready():
 	# Called when combat starts
+	playerNode = player.instantiate();
+	#Temp value instantiation
+	playerNode.setMaxHP(300)
+	playerNode.setCurrentHP(100)
+	add_child(playerNode)
+	
 	print("Combat started.")
-	if not player or not enemy: #debug
+	if not playerNode or not enemy: #debug
 		push_warning("⚠️ Missing player or enemy reference in CombatManager!")
 	start_player_turn()
 
 # TURN CONTROL #TODO it might be best to turn it into a state machine, completely seperating everything
 func start_player_turn(): 
+	turn_counter += 1
 	turn = "player" #probably not needed
-	player.setCurrentEnergy(player.getMaxEnergy()) #recover energy
+	if protien_bar:
+		playerNode.setCurrentEnergy(playerNode.getMaxEnergy()+2) #recover extra energy
+	else:
+		playerNode.setCurrentEnergy(playerNode.getMaxEnergy()) #recover energy
 	print("\n-- PLAYER TURN START --")
-	cards.draw_cards(cards.getdeck(), cards.gethand(), cards.getdrawlimit())#draw cards at turn start
-	player.shield = 0 #shield expires at the start of turn
+	playerNode.draw_cards(playerNode.getdeck(), playerNode.gethand(), playerNode.getMaxHandSize())#draw cards at turn start
+	playerNode.shield = 0 #shield expires at the start of turn
+	if handy_shield:
+		playerNode.shield += 4
 	#TODO # low priority but I should create a draw cards with no arguments to call later probably
 	#NEED FIX #I should create a draw cards with no arguments to call later probably
 
 func end_player_turn():
 	print("-- PLAYER TURN END --")
-	cards.hand_to_discard(cards.gethand(), cards.discard()) #discard cards at turn end
+	cards.hand_to_discard(cards.gethand(), cards.getdiscard())
 	start_enemy_turn()
 
 func start_enemy_turn(): #TODO someone double check my work here
@@ -66,8 +92,12 @@ func use_card(card):
 			match card.name:
 				"confuse":
 					print("TODO: add debuffs here")
+				
 				"time control":
-					start_player_turn()
+					print("Player takes an extra turn!")
+					cards.hand_to_discard(cards.gethand(), cards.getdiscard())
+					start_player_turn()  # enemy turn is skipped
+					return
 				"Sword & shield":
 					enemy.apply_damage_to_enemy(card.damage)
 					apply_block_to_player(card.shield)
@@ -78,7 +108,10 @@ func use_card(card):
 	var hand = cards.gethand()
 	var discard = cards.getdiscard()
 	var index = hand.find(card)#part of godots logic
-	cards.discard_card(hand, discard, index) #discard the card that was just used
+	if card.exhaust:
+		cards.exhaust_card(index)
+	else:
+		cards.discard_card(index)
 
 	check_combat_state()
 
@@ -93,11 +126,12 @@ func use_card(card):
 	#print("Enemy took ", amount, " damage. HP now: ", enemy.currentHp)
 
 func apply_damage_to_player(damage: int):
+	if protection_charm:
+		damage = damage - 5
 	if damage <= 0:
 		return # No damage to apply
 
 	var damage_remaining = damage
-
 	# 1. Apply damage to shield first
 	if player.shield > 0:
 		if damage_remaining <= player.shield:
@@ -149,7 +183,7 @@ func enemy_action(intent: int): # send -1 to have it be randomized, or select yo
 	print("Enemy uses:", name, "(", type, ")")
 	
 	# Perform action similarly to player cards
-	match intention["type"]:
+	match intention.type:
 		"simple":# we can add an exclusion to not type anything when its 0
 			print("Enemy attacks for", dmg)
 			apply_damage_to_player(dmg)
@@ -160,10 +194,9 @@ func enemy_action(intent: int): # send -1 to have it be randomized, or select yo
 				"confuse":
 					print("Enemy inflicts confusion!")
 					# TODO: Add debuff logic here
-				"time_stop":
+				"time stop":
 					print("Enemy manipulates time!")
-					end_enemy_turn()
-					start_enemy_turn()
+					#give all other enemies an extra move here
 				"huh?":
 					print("Enemy is drooling and staring blankly")
 				"Roar":
@@ -180,7 +213,19 @@ func check_combat_state():
 		if player.getCurrentHP() <= 0:
 			print("💀 Player defeated!")
 			#check if player died first
+			turn_counter = 0 
 			# TODO,HANDLE DEATH
 		elif enemy.currentHp <= 0:
+			turn_counter = 0 
 			print("✅ Enemy defeated!")
+			if gold_totem:
+				player.gold += randi_range(50, 75)
+			else:
+				player.gold += randi_range(25, 50)
 			# TODO
+
+
+func _on_end_combat_test_pressed() -> void:
+	var prevScene = Global.prev_scene_path
+	if (prevScene != ""):
+		get_tree().change_scene_to_file(prevScene)
