@@ -8,10 +8,27 @@ class_name mapNode
 @export var nodeData : Array # rand array of ints to test
 @export var isActive : bool
 
+#@export_enum("COMBAT:0","SHOP:1") var nodeType : int = -1
+enum nodeTypes {EMPTY, COMBAT, SHOP}
+@export var curNodeType : int
+
 @export var nodePos : Vector2
 
 func _ready():
 	pass
+	
+
+
+func _init(argId: int = -1, argName: String = "noName", argNodeType: nodeTypes = nodeTypes.EMPTY, argData: Array = [0, 1, 2, 3]):
+	nodeId = argId
+	nodeName = argName
+	curNodeType = argNodeType
+	nodeData = argData
+	isActive = false
+	
+	print(curNodeType)
+	
+
 
 func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
 	# if map_node is active, is clickable
@@ -40,9 +57,10 @@ func on_save_game(saved_data:Array[savedData]):
 	my_data.isActive = isActive
 	my_data.nodeData = nodeData
 	#my_data.nodePos = global_position
+	
 	if(isActive):
 		$tileSet.region_rect = Rect2(549, 392, 36, 24)
-	else:
+	elif(!isActive):
 		$tileSet.region_rect = Rect2(549, 328, 36, 24)
 	
 	saved_data.append(my_data)
@@ -64,9 +82,10 @@ func on_load_game(saved_data:savedData):
 	# $tileSet.region_rect = Rect2(200, 200, 30, 30)
 	if(my_data.isActive): # && my_data.nodeName == COMBAT ,use this rect
 		$tileSet.region_rect = Rect2(549, 392, 36, 24)
-	else:
+	elif(!my_data.isActive):
 		$tileSet.region_rect = Rect2(549, 328, 36, 24)
 		
+	
 	
 	# if my_data.isActive && my_data.nodeName == SHOP : show node
 
@@ -74,15 +93,12 @@ func on_load_game(saved_data:savedData):
 func change_sprite():
 	pass
 
-func _init(argId: int = -1, argName: String = "noName", argData: Array = [0, 1, 2, 3]):
-	nodeId = argId
-	nodeName = argName
-	nodeData = argData
-	isActive = false
-	
 
 func setNodeId(argId : int):
 	nodeId = argId
+
+func setNodeType(argNodeType : nodeTypes):
+	curNodeType = argNodeType
 
 func setNodeName(argName : String):
 	nodeName = str(argName)
@@ -95,10 +111,13 @@ func getNodeName():
 	return nodeName
 
 func getNodeId():
-	return nodeId;
+	return nodeId
+
+func getNodeType():
+	return curNodeType
 
 func getNodePos():
-	return nodePos;
+	return nodePos
 
 func getLevelInfo():
 	return ("Name: %s\nLevel %s\n" % [str(nodeName), str(nodeId)])

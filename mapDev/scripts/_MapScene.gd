@@ -46,7 +46,7 @@ func handleScene():
 		
 		for node in placedNodes:
 			print("Node pos: ", node.global_position)
-			if(node.nodeId == Global.curNodeId):
+			if(node.nodeId == Global.curNodeId && Global.curNodeId <= placedNodes.size()):
 				playerRestored.global_position = node.global_position
 				playerRestored.global_position.y -= 45
 				node.isActive = true
@@ -56,12 +56,11 @@ func handleScene():
 					
 					
 		
-		saver_loader.saveGame()
-				#node.isActive = true
+				
 				
 		draw_lines(placedNodes)
-		# placingPlayer()
-		# loadGame // from SaverLoader
+		
+		saver_loader.saveGame()
 		
 	else: # New game case
 		print("Save file does NOT exist")
@@ -89,15 +88,22 @@ func handleScene():
 			print("Player is null")
 			
 		
-		draw_lines(placedNodes)
 		
 		for node in placedNodes:
 			print("Node pos: ", node.global_position)
-			if(node.nodeId == Global.curNodeId):
+			if(node.nodeId == Global.curNodeId && Global.curNodeId <= placedNodes.size()):
 				playerRestored.global_position = node.global_position
 				playerRestored.global_position.y -= 45
 				node.isActive = true
 				
+			else: #(node.nodeId != Global.curNodeId):
+				node.isActive = false
+				
+		
+		
+		draw_lines(placedNodes)
+		
+		
 		saver_loader.saveGame()
 				#node.isActive = false
 				#playerRestored.curNodeId = node.nodeId + 1
@@ -113,29 +119,22 @@ func generate_map():
 		
 		var xPos = start_x_pos + (i * spacing)
 		var yPos = randi_range(250, 400)
-		#print("start x:", start_x_pos)
-		#print("spacing: ", spacing)
-		#print("y pos:", yPos)
 		
 		newNode.setNodePos(xPos,yPos);
 		newNode.position = newNode.getNodePos()
+		
 		var nodeId = i
-		newNode.setNodeId(nodeId);
+		newNode.setNodeId(nodeId)
+		
 		var nodeName = "Node " + str(i)
 		newNode.setNodeName(nodeName)
 		
-		
-		
-		
-		#if(i == 0):
-		#	newNode.isActive = true
-		#else:
-		#	newNode.isActive = false
-		# newNode.isActive = true;
+		newNode.setCurNodeType("COMBAT")
+		# make it so COMBAT has more weight to be selected, maybe have shop in the middle for now ?
+		#newNode.setNodeType(COMBAT)
 		
 		add_child(newNode)
-		#\placedNodes.append(newNode)
-		# could pass a sceneChange("COMBAT_SCENE", newNode.data)
+		
 		# newNode.data could hold an array of enemies that appear
 		
 		
