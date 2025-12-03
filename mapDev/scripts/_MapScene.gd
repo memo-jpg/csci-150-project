@@ -48,7 +48,7 @@ func handleScene():
 			print("Node pos: ", node.global_position)
 			if(node.nodeId == Global.curNodeId):
 				playerRestored.global_position = node.global_position
-				playerRestored.global_position.y -= 30
+				playerRestored.global_position.y -= 45
 				node.isActive = true
 				
 			else: #(node.nodeId != Global.curNodeId):
@@ -95,7 +95,7 @@ func handleScene():
 			print("Node pos: ", node.global_position)
 			if(node.nodeId == Global.curNodeId):
 				playerRestored.global_position = node.global_position
-				playerRestored.global_position.y -= 30
+				playerRestored.global_position.y -= 45
 				node.isActive = true
 				
 		saver_loader.saveGame()

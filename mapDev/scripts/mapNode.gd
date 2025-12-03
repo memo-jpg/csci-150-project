@@ -15,7 +15,7 @@ func _ready():
 
 func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
 	# if map_node is active, is clickable
-	if (event.is_action_pressed("mouseClick") && isActive):
+	if (event.is_action_pressed("mouseClick") && isActive): # && nodeName == COMBAT
 		print("Node is clicked") 
 		print(getLevelInfo())
 		print(getNodeId())
@@ -24,7 +24,9 @@ func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
 		# Current scene becomes previous globally
 		Global.prev_scene_path = get_tree().current_scene.scene_file_path
 		
-		get_tree().change_scene_to_file("res://combat.tscn")
+		get_tree().change_scene_to_file("res://combat.tscn") #Change to combat
+		
+		
 
 
 func on_save_game(saved_data:Array[savedData]):
@@ -42,6 +44,7 @@ func on_save_game(saved_data:Array[savedData]):
 		$tileSet.region_rect = Rect2(549, 392, 36, 24)
 	else:
 		$tileSet.region_rect = Rect2(549, 328, 36, 24)
+	
 	saved_data.append(my_data)
 	
 
@@ -59,11 +62,13 @@ func on_load_game(saved_data:savedData):
 	nodeData = my_data.nodeData
 	#nodePos = my_data.nodePos
 	# $tileSet.region_rect = Rect2(200, 200, 30, 30)
-	if(my_data.isActive):
+	if(my_data.isActive): # && my_data.nodeName == COMBAT ,use this rect
 		$tileSet.region_rect = Rect2(549, 392, 36, 24)
 	else:
 		$tileSet.region_rect = Rect2(549, 328, 36, 24)
 		
+	
+	# if my_data.isActive && my_data.nodeName == SHOP : show node
 
 # figure out where to draw lines later
 func change_sprite():
