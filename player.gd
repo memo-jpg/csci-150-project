@@ -74,6 +74,9 @@ func remove_card_from_deck(deck: Array, index: int) -> void:
 	if index >= 0 and index < deck.size():
 		deck.remove_at(index)
 func draw_cards(deck: Array, hand: Array, draw_limit: int) -> void:
+
+	if deck.size() == 0:
+		discard_to_deck(deck, discard)
 	for i in range(draw_limit):
 		if deck.size() == 0:
 			break
@@ -83,21 +86,25 @@ func discard_card(hand: Array, discard: Array, index: int) -> void:
 		discard.append(hand[index])
 		hand.remove_at(index)
 func reset_combat(deck: Array, hand: Array, discard: Array) -> void:
-	deck += hand
-	hand.clear()
-	deck += discard
+	for card in hand:
+		deck.append(card)
+	for card in discard:
+		deck.append(card)
 	discard.clear()
 	shuffle_cards(deck)
 func discard_to_deck(deck: Array, discard: Array) -> void:
-	deck += discard
+	for card in discard:
+		deck.append(card)
 	discard.clear()
 	shuffle_cards(deck)
 func hand_to_deck(deck: Array, hand: Array) -> void:
-	deck += hand
+	for card in hand:
+		deck.append(card)
 	hand.clear()
 	shuffle_cards(deck)
 func hand_to_discard(hand: Array, discard: Array) -> void:
-	discard += hand
+	for card in hand:
+		discard.append(card)
 	hand.clear()
 func getdeck():
 	return deck
@@ -140,3 +147,9 @@ func _process(delta: float) -> void:
 		currentEnergy -= 1
 	
 	
+
+#pulls the deck after it is loaded
+func _on_deck_ready() -> void:
+	var temp = get_node("./Deck")
+	deck = temp.cards
+	print(deck)

@@ -1,4 +1,7 @@
-class_name Cards extends Sprite2D
+class_name Cards extends Node2D
+
+signal cardActive(cardId: int)
+
 var id : int
 var type: String = "None"
 var cardName: String = "Default Card Name"
@@ -6,6 +9,7 @@ var description : String = " None"
 var damage: int = 0
 var shield: int = 0
 var energyCost: int = 0
+var sprite: String
 
 #Setters
 func setID(newID : int):
@@ -25,6 +29,9 @@ func setShield(newShield : int):
 func setEnergyCost(newCost : int):
 	energyCost = newCost
 	#return energyCost
+func setSprite(newSprite : String):
+	sprite = newSprite
+
 #Getters
 func getID():
 	return id
@@ -38,6 +45,8 @@ func getShield():
 	return shield
 func getEnergyCost():
 	return energyCost
+func getSprite():
+	return sprite
 
 func _init() -> void:
 	type = getType()
@@ -47,9 +56,6 @@ func _init() -> void:
 	energyCost = getEnergyCost()
 	# effect= *status effect #to be added
 	
-func display() -> void:
-		pass#print("%s [%s] - Damage: %d, Shield: %d, Energy: %d" % [name, type, damage, shield, energy])
-
 
 # -------------------------
 # Deck / hand / discard arrays
@@ -135,3 +141,9 @@ func display() -> void:
 	#print("Your Hand:")
 	#for i in range(hand.size()):
 		#hand[i].display()
+
+
+func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if (event.is_action_pressed("mouseClick")):
+		print(cardName + ' is active')
+		cardActive.emit(id)

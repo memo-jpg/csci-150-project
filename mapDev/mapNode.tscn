@@ -33,7 +33,6 @@ texture_filter = 1
 texture = SubResource("AtlasTexture_01khq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5454445, 0)
 shape = SubResource("RectangleShape2D_kqsor")
 
 [node name="tileSet" type="Sprite2D" parent="."]

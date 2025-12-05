@@ -7,7 +7,8 @@
 			"description": "Swing for 5 damage",
 			"damage": 5,
 			"shield": 0,
-			"energyCost": 1 
+			"energyCost": 1,
+			"sprite": "res://Sprites/Player_Walk2.png"
 		},
 		{
 			"id": 1,
@@ -16,7 +17,8 @@
 			"description": "Grants 5 temporary shield",
 			"damage": 0,
 			"shield": 5,
-			"energyCost": 1
+			"energyCost": 1,
+			"sprite": "res://Sprites/Player_Walk1.png"
 		},
 		{
 			"id": 2,
@@ -25,7 +27,8 @@
 			"description": "Ticks damage per turn for however long duration is",
 			"damage": 2, 
 			"shield": 0,
-			"energyCost": 1
+			"energyCost": 1,
+			"sprite": "res://Sprites/Player_Jump.png"
 		}    
 	]
 }
