@@ -37,14 +37,19 @@ func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
 		print(getLevelInfo())
 		print(getNodeId())
 		
-		
 		# Current scene becomes previous globally
 		Global.prev_scene_path = get_tree().current_scene.scene_file_path
 		
-		get_tree().change_scene_to_file("res://combat.tscn") #Change to combat
+		if(nodeName == "COMBAT"):
+			print("Combat Node is clicked") 
+			get_tree().change_scene_to_file("res://combat.tscn") #Change to combat
+			
+		elif(nodeName == "SHOP"):
+			print("Shop Node is clicked") 
+			get_tree().change_scene_to_file("res://combat.tscn") #Change to shop
+			
 		
 		
-
 
 func on_save_game(saved_data:Array[savedData]):
 	
@@ -58,9 +63,20 @@ func on_save_game(saved_data:Array[savedData]):
 	my_data.nodeData = nodeData
 	#my_data.nodePos = global_position
 	
-	if(isActive):
+	
+	"""	# Debugger to check if active states are correct
+	if(isActive && my_data.nodeName == "COMBAT"):
 		$tileSet.region_rect = Rect2(549, 392, 36, 24)
+	elif(isActive && my_data.nodeName == "SHOP"):
+		$tileSet.region_rect = Rect2(549, 264, 36, 24)
 	elif(!isActive):
+		$tileSet.region_rect = Rect2(549, 328, 36, 24)
+	"""
+	if(my_data.nodeName == "COMBAT" && my_data.nodeId >= Global.curNodeId):
+		$tileSet.region_rect = Rect2(549, 392, 36, 24)
+	elif(my_data.nodeName == "SHOP" && my_data.nodeId >= Global.curNodeId):
+		$tileSet.region_rect = Rect2(549, 264, 36, 24)
+	elif(!my_data.isActive):
 		$tileSet.region_rect = Rect2(549, 328, 36, 24)
 	
 	saved_data.append(my_data)
@@ -80,11 +96,20 @@ func on_load_game(saved_data:savedData):
 	nodeData = my_data.nodeData
 	#nodePos = my_data.nodePos
 	# $tileSet.region_rect = Rect2(200, 200, 30, 30)
-	if(my_data.isActive): # && my_data.nodeName == COMBAT ,use this rect
+	"""	# Debugger to check if active states are correct
+	if(isActive && my_data.nodeName == "COMBAT"):
 		$tileSet.region_rect = Rect2(549, 392, 36, 24)
-	elif(!my_data.isActive):
+	elif(isActive && my_data.nodeName == "SHOP"):
+		$tileSet.region_rect = Rect2(549, 264, 36, 24)
+	elif(!isActive):
 		$tileSet.region_rect = Rect2(549, 328, 36, 24)
-		
+	"""
+	if(nodeName == "COMBAT" && nodeId >= Global.curNodeId):
+		$tileSet.region_rect = Rect2(549, 392, 36, 24)
+	elif(nodeName == "SHOP" && nodeId >= Global.curNodeId):
+		$tileSet.region_rect = Rect2(549, 264, 36, 24)
+	elif(!isActive):
+		$tileSet.region_rect = Rect2(549, 328, 36, 24)
 	
 	
 	# if my_data.isActive && my_data.nodeName == SHOP : show node
