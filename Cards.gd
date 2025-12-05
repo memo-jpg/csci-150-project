@@ -147,7 +147,27 @@ func hand_to_combatdeck(deck: Array, hand: Array) -> void:
 func hand_to_discard(hand: Array, discard: Array) -> void:
 	discard += hand
 	hand.clear()
-	
+
+func try_get_card(card_name: String, cost := -1, chance := -1, player_gold := 0) -> bool:
+	#a tool to add cards to deck, by either paying or by chance or both or neither
+	# If cost is used, player must pay
+	if cost > 0:
+		if player_gold < cost:
+			return false
+		player_gold -= cost
+
+	# If chance is used, roll for success
+	if chance > 0:
+		if randi() % 100 >= chance:
+			return false
+	# Finally try to add card
+	return add_card_to_main_deck_by_name(card_name)
+
+#example usage:
+#try_get_card("Slash")                          # direct award
+#try_get_card("Guard", 30, -1, player.gold)     # buy card for 30
+#try_get_card("Hollow strike", -1, 50)          # 50% chance reward
+
 func getdrawlimit():
 	return drawlimit
 func getdeck():

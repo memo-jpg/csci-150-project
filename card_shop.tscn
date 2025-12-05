@@ -1,0 +1,88 @@
+[gd_scene load_steps=2 format=3 uid="uid://db5hm5ryn3mbe"]
+
+[ext_resource type="Script" uid="uid://b0ykacads5c57" path="res://cardshop.gd" id="1_1odaw"]
+
+[node name="CardShop" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1odaw")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -3.0
+offset_right = 1152.0
+offset_bottom = 512.0
+
+[node name="CardSlots" type="HBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 1.0
+offset_right = 1153.0
+offset_bottom = 118.0
+
+[node name="Slot1" type="Button" parent="Panel/CardSlots"]
+layout_mode = 2
+text = "display card here"
+
+[node name="Slot2" type="Button" parent="Panel/CardSlots"]
+layout_mode = 2
+text = "Display card Here"
+
+[node name="Slot3" type="Button" parent="Panel/CardSlots"]
+layout_mode = 2
+text = "display card here"
+
+[node name="slot4" type="Button" parent="Panel/CardSlots"]
+layout_mode = 2
+text = "display card here"
+
+[node name="ZoomPanel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 233.0
+offset_top = -68.0
+offset_right = 853.0
+offset_bottom = 418.0
+
+[node name="BuyButton" type="Button" parent="ZoomPanel"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 363.0
+offset_right = 127.0
+offset_bottom = 486.0
+text = "BUY"
+
+[node name="CloseButton" type="Button" parent="ZoomPanel"]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 359.0
+offset_right = 620.0
+offset_bottom = 484.0
+text = "CLOSE"
+
+[node name="Steal" type="Button" parent="ZoomPanel"]
+layout_mode = 0
+offset_left = 233.0
+offset_top = 367.0
+offset_right = 382.0
+offset_bottom = 486.0
+text = "Steal"
+
+[node name="Cardtexture" type="TextureRect" parent="ZoomPanel"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 618.0
+offset_bottom = 364.0
+
+[connection signal="pressed" from="ZoomPanel/BuyButton" to="." method="_on_buy_button_pressed"]
+[connection signal="pressed" from="ZoomPanel/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="ZoomPanel/Steal" to="." method="_on_steal_pressed"]

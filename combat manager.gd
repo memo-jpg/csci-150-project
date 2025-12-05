@@ -19,9 +19,6 @@ var protection_charm = false #reduce all sources of damage
 var protien_bar = false # extra energy at turn start
 var handy_shield = false # gain shield at turn start
 var gold_totem = false # gain shield at turn start
-
-
-
 #========= Artifacts =============#
 
 func _ready():
