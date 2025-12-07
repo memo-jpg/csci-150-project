@@ -59,9 +59,9 @@ func start_player_turn():
 		playerNode.setCurrentEnergy(playerNode.getMaxEnergy()) #recover energy
 		energyBar.value=playerNode.getCurrentEnergy()
 	print("\n-- PLAYER TURN START --")
-	print(playerNode.getdeck())
+	#print(playerNode.getdeck())
 	playerNode.draw_cards(playerNode.getdeck(), playerNode.gethand(), playerNode.getMaxHandSize())#draw cards at turn start
-	print(playerNode.getdeck())
+	#print(playerNode.getdeck())
 	var cardPos=0
 	cardNodes=[] # clear card array since this should be a fresh hand
 	for card in playerNode.gethand(): #iterates througn hand and creates card scenes for each
@@ -76,15 +76,15 @@ func start_player_turn():
 		#newCard.texture = load(card.sprite)
 		#newCard.position.x = 90
 		#add_child(newCard)
-	print(playerNode.gethand())
-	print_tree()
+	#print(playerNode.gethand())
+	#print_tree()
 	playerNode.shield = 0 #shield expires at the start of turn
 	if handy_shield:
 		playerNode.shield += 4
 	#TODO # low priority but I should create a draw cards with no arguments to call later probably
 
 func _card_active(cardIndex):
-	print(cardIndex)
+	#print(cardIndex)
 	if(activeCard!=cardIndex):
 		if(activeCard != null):
 			cardNodes[activeCard].scale.x-=.3
@@ -99,15 +99,15 @@ func _card_active(cardIndex):
 		
 func _enemy_selected(enemyIndex):
 	if(activeCard!=null):
-		print(cardNodes[activeCard].getType())
+		#print(cardNodes[activeCard].getType())
 		if(cardNodes[activeCard].getType()=='atk'):
 			if(use_card(cardNodes[activeCard],enemyNodes[enemyIndex])):
 				playerNode.discard_card(playerNode.hand,playerNode.discard,activeCard)
 				cardNodes[activeCard].queue_free()
 				cardNodes.pop_at(activeCard)
 				activeCard=null
-				print(playerNode.hand)
-	
+				
+	check_combat_state()
 func end_player_turn():
 	print("-- PLAYER TURN END --")
 	playerNode.hand_to_discard(playerNode.gethand(), playerNode.getdiscard())
@@ -120,6 +120,7 @@ func start_enemy_turn(): #TODO someone double check my work here
 	print("\n-- ENEMY TURN START --")
 	for enemy in enemyNodes:
 		enemy_action(enemy.currentAction, enemy) #pass the enemy intention, if nothing it'll be random
+		enemy.currentAction+=1
 		await get_tree().create_timer(1.0).timeout #delay between enemy actions
 	#TODO to be modified further to handle multiple enemies
 	end_enemy_turn()
@@ -147,7 +148,7 @@ func use_card(card, enemyNode):
 	match card.type:
 		"atk":
 			enemyNode.apply_damage_to_enemy(card.damage)
-			print(card.damage)
+			#print(card.damage)
 			return 1
 		"block":
 			apply_block_to_player(card.shield)
@@ -206,7 +207,7 @@ func apply_damage_to_player(damage: int):
 
 	# 2. Apply remaining damage to HP
 	if damage_remaining > 0:
-		playerNode.hp -= damage_remaining
+		playerNode.currentHP -= damage_remaining
 		check_combat_state()
 
 
@@ -268,6 +269,7 @@ func enemy_action(intent: int,enemy: Node2D): # send -1 to have it be randomized
 				"Meta":
 					trigger_meta_damage(20) #press X to avoid 20 damage! #TODO we should either scrap this
 					#or add timing and other details around this. eitherway we can leave it be and never call it
+	print(playerNode.currentHP)
 	check_combat_state()
 
 func load_card(card: Object):
@@ -278,7 +280,7 @@ func load_card(card: Object):
 	newCard.setShield(card.shield)
 	newCard.setEnergyCost(card.energyCost)
 	#TODO set card info
-	print_tree()
+	#print_tree()
 	var cardSprite = newCard.find_child('Sprite2D')
 	cardSprite.texture = load(card.sprite)
 	
@@ -288,12 +290,20 @@ func load_card(card: Object):
 func check_combat_state():
 		if playerNode.getCurrentHP() <= 0:
 			print("💀 Player defeated!")
+			var prevScene = Global.prev_scene_path
+			if (prevScene != ""):
+				get_tree().change_scene_to_file(prevScene)
 			#check if player died first
 			turn_counter = 0 
 			# TODO,HANDLE DEATH
 		for enemy in enemyNodes:
 			if enemy.currentHp <= 0:
-				turn_counter = 0 
+				enemy.queue_free()
+				enemyNodes.pop_at(enemy.pos)
+				if !enemyNodes.size():
+					var prevScene = Global.prev_scene_path
+					if (prevScene != ""):
+						get_tree().change_scene_to_file(prevScene)
 				print("✅ Enemy defeated!")
 				if gold_totem:
 					playerNode.gold += randi_range(50, 75)
