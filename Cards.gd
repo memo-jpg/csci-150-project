@@ -1,5 +1,5 @@
 extends Node
-class_name playerCards
+class_name notCards
 
 # -------------------------
 # Card definition
@@ -11,14 +11,27 @@ class Card:
 	var shield: int
 	var energy: int
 	var exhaust: bool = false 
+	var sprite: String
 
-	func _init(_type: String, _name: String, _damage: int, _shield: int, _energy: int,  _exhaust := false) -> void:
+
+	func _init(_type: String, _name: String, _damage: int, _shield: int, _energy: int, _exhaust := false) -> void:
 		type = _type
 		name = _name
 		damage = _damage
 		shield = _shield
 		energy = _energy
 		exhaust = _exhaust
+
+
+	func initCard(_type: String, _name: String, _damage: int, _shield: int, _energy: int, _sprite: String, _exhaust := false):
+		type = _type
+		name = _name
+		damage = _damage
+		shield = _shield
+		energy = _energy
+		exhaust = _exhaust
+		sprite = _sprite
+		
 		# effect= *statuseffect #to be added
 	func display() -> void:
 		print("%s [%s] - Damage: %d, Shield: %d, Energy: %d Exhaust:%s" % [name, type, damage, shield, energy, str(exhaust)])

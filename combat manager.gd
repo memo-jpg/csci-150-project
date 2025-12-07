@@ -1,18 +1,22 @@
 extends Node
-
 @export var player: PackedScene
-@export var enemy: Enemy
-@export var cards: Cards
+@export var enemy: PackedScene
+@export var cards: PackedScene
+
 
 var playerNode
+var enemyNodes: Array[Node2D]
+var cardNodes: Array[Node2D]
 
-
+var activeCard = null
 var turn: String = "player"  # can be "player" or "enemy" might not be needed since enemies 
 #don't technically have a turn
 
 var expecting_meta_input = false # possibly implementing meta elements
 var meta_damage = 10
 var turn_counter = 0
+
+@onready var energyBar = get_node("ProgressBar")
 
 #========= Artifacts =============#
 var protection_charm = false #reduce all sources of damage
@@ -29,6 +33,14 @@ func _ready():
 	playerNode.setCurrentHP(100)
 	playerNode.global_position = Vector2(60,60)
 	add_child(playerNode)
+	energyBar.max_value = playerNode.getMaxEnergy()
+	#TODO enemy spawning needs to be set by the outside map call
+	var enemyNode = enemy.instantiate() #create enemy
+	enemyNodes.append(enemyNode) #add enemy to our enemy array
+	enemyNode.position.x=800 #temp hardcoded positions
+	enemyNode.position.y=300
+	enemyNode.enemyActive.connect(_enemy_selected) #connect signal for when enemy is clicked
+	add_child(enemyNode) #display enemy
 	
 	print("Combat started.")
 	if not playerNode or not enemy: #debug
@@ -43,47 +55,99 @@ func start_player_turn():
 		playerNode.setCurrentEnergy(playerNode.getMaxEnergy()+2) #recover extra energy
 	else:
 		playerNode.setCurrentEnergy(playerNode.getMaxEnergy()) #recover energy
+		energyBar.value=playerNode.getCurrentEnergy()
 	print("\n-- PLAYER TURN START --")
+	#print(playerNode.getdeck())
 	playerNode.draw_cards(playerNode.getdeck(), playerNode.gethand(), playerNode.getMaxHandSize())#draw cards at turn start
+	#print(playerNode.getdeck())
+	var cardPos=0
+	cardNodes=[] # clear card array since this should be a fresh hand
+	for card in playerNode.gethand(): #iterates througn hand and creates card scenes for each
+		var tempCard = load_card(card)
+		tempCard.setID(cardPos) 
+		tempCard.position.y = 500
+		tempCard.position.x = 100+200*cardPos 
+		tempCard.cardActive.connect(_card_active) #card tells us when it is clicked
+		cardNodes.append(tempCard) #add card Node object to our array
+		cardPos+=1
+		#var newCard = cards.instantiate()
+		#newCard.texture = load(card.sprite)
+		#newCard.position.x = 90
+		#add_child(newCard)
+	#print(playerNode.gethand())
+	#print_tree()
 	playerNode.shield = 0 #shield expires at the start of turn
 	if handy_shield:
 		playerNode.shield += 4
 	#TODO # low priority but I should create a draw cards with no arguments to call later probably
-	#NEED FIX #I should create a draw cards with no arguments to call later probably
 
+func _card_active(cardIndex):
+	#print(cardIndex)
+	if(activeCard!=cardIndex):
+		if(activeCard != null):
+			cardNodes[activeCard].scale.x-=.3
+			cardNodes[activeCard].scale.y-=.3
+		cardNodes[cardIndex].scale.x += .3
+		cardNodes[cardIndex].scale.y += .3
+		activeCard = cardIndex
+	else:
+		cardNodes[activeCard].scale.x-=.3
+		cardNodes[activeCard].scale.y-=.3
+		activeCard = null
+		
+func _enemy_selected(enemyIndex):
+	if(activeCard!=null):
+		#print(cardNodes[activeCard].getType())
+		if(cardNodes[activeCard].getType()=='atk'):
+			if(use_card(cardNodes[activeCard],enemyNodes[enemyIndex])):
+				playerNode.discard_card(playerNode.hand,playerNode.discard,activeCard)
+				cardNodes[activeCard].queue_free()
+				cardNodes.pop_at(activeCard)
+				activeCard=null
+				
+	check_combat_state()
 func end_player_turn():
 	print("-- PLAYER TURN END --")
-	cards.hand_to_discard(cards.gethand(), cards.getdiscard())
+	playerNode.hand_to_discard(playerNode.gethand(), playerNode.getdiscard())
+	for card in cardNodes:
+		card.queue_free()
 	start_enemy_turn()
 
 func start_enemy_turn(): #TODO someone double check my work here
 	turn = "enemy"
 	print("\n-- ENEMY TURN START --")
-	enemy_action(-1) #pass the enemy intention, if nothing it'll be random
-	await get_tree().create_timer(1.0).timeout #delay between enemy actions
+	for enemy in enemyNodes:
+		enemy_action(enemy.currentAction, enemy) #pass the enemy intention, if nothing it'll be random
+		enemy.currentAction+=1
+		await get_tree().create_timer(1.0).timeout #delay between enemy actions
 	#TODO to be modified further to handle multiple enemies
 	end_enemy_turn()
 
 func end_enemy_turn():
 	print("-- ENEMY TURN END --")
-	enemy.shield = 0 #shield expires at the start of turn
+	for enemy in enemyNodes:
+		enemy.currentshield = 0 #shield expires at the start of turn
 	start_player_turn()
 
 # CARD LOGIC
-func use_card(card):
+func use_card(card, enemyNode):
+	print('in use card func')
 	if turn != "player":
 		print("Can't use cards during enemy turn!")
-		return
+		return 0
 
-	if player.getCurrentEnergy() < card.energy:
+	if playerNode.getCurrentEnergy() < card.getEnergyCost():
 		print("Not enough energy!")
-		return
+		return 0
 
-	player.setCurrentEnergy(player.getCurrentEnergy() - card.energy)
-
+	playerNode.setCurrentEnergy(playerNode.getCurrentEnergy() - card.getEnergyCost())
+	energyBar.value=playerNode.getCurrentEnergy()
+	
 	match card.type:
-		"attack":
-			enemy.apply_damage_to_enemy(card.damage)
+		"atk":
+			enemyNode.apply_damage_to_enemy(card.damage)
+			#print(card.damage)
+			return 1
 		"block":
 			apply_block_to_player(card.shield)
 		"special":
@@ -95,21 +159,21 @@ func use_card(card):
 					print("Player takes an extra turn!")
 					cards.hand_to_discard(cards.gethand(), cards.getdiscard())
 					start_player_turn()  # enemy turn is skipped
-					return
+					return 0
 				"Sword & shield":
-					enemy.apply_damage_to_enemy(card.damage)
+					enemyNode.apply_damage_to_enemy(card.damage)
 					apply_block_to_player(card.shield)
 				"Shield slam":
-					enemy.apply_damage_to_enemy(player.shield)
+					enemyNode.apply_damage_to_enemy(player.shield)
 
 	# Properly discard the played card
-	var hand = cards.gethand()
-	var discard = cards.getdiscard()
-	var index = hand.find(card)#part of godots logic
-	if card.exhaust:
-		cards.exhaust_card(index)
-	else:
-		cards.discard_card(index)
+	#var hand = card.gethand()
+	#var discard = cards.getdiscard()
+	#var index = hand.find(card)#part of godots logic
+	#if card.exhaust:
+		#cards.exhaust_card(index)
+	#else:
+		#cards.discard_card(index)
 
 	check_combat_state()
 
@@ -131,22 +195,22 @@ func apply_damage_to_player(damage: int):
 
 	var damage_remaining = damage
 	# 1. Apply damage to shield first
-	if player.shield > 0:
-		if damage_remaining <= player.shield:
-			player.shield -= damage_remaining
+	if playerNode.shield > 0:
+		if damage_remaining <= playerNode.shield:
+			playerNode.shield -= damage_remaining
 			damage_remaining = 0 # All damage was absorbed
 		else:
-			damage_remaining -= player.shield # Only remaining damage
-			player.shield = 0 # Shield is destroyed
+			damage_remaining -= playerNode.shield # Only remaining damage
+			playerNode.shield = 0 # Shield is destroyed
 
 	# 2. Apply remaining damage to HP
 	if damage_remaining > 0:
-		player.hp -= damage_remaining
+		playerNode.currentHP -= damage_remaining
 		check_combat_state()
 
 
 func apply_block_to_player(amount: int):
-	player.shield += amount
+	playerNode.shield += amount
 	print("Applied block of ", amount)
 
 # ENEMY ACTIONS
@@ -166,7 +230,7 @@ func _input(event): #use this to implement meta damage anywhere
 			check_combat_state()
 		expecting_meta_input = false
 
-func enemy_action(intent: int): # send -1 to have it be randomized, or select yourself
+func enemy_action(intent: int,enemy: Node2D): # send -1 to have it be randomized, or select yourself
 	var intention = 0
 	if intent == -1: #Select a random action if no intent is chosen
 		intention = enemy.Actions[randi() % enemy.Actions.size()]#this is the enemy intention selector
@@ -188,13 +252,13 @@ func enemy_action(intent: int): # send -1 to have it be randomized, or select yo
 			print("Enemy guards for", shld)
 			enemy.apply_shield_to_enemy(shld)
 		"special":
-			match intention["id"]:
+			match intention["name"]:
 				"confuse":
 					print("Enemy inflicts confusion!")
 					# TODO: Add debuff logic here
 				"time stop":
 					print("Enemy manipulates time!")
-					#give all other enemies an extra move here
+				#give all other enemies an extra move here
 				"huh?":
 					print("Enemy is drooling and staring blankly")
 				"Roar":
@@ -203,23 +267,46 @@ func enemy_action(intent: int): # send -1 to have it be randomized, or select yo
 				"Meta":
 					trigger_meta_damage(20) #press X to avoid 20 damage! #TODO we should either scrap this
 					#or add timing and other details around this. eitherway we can leave it be and never call it
+	print(playerNode.currentHP)
 	check_combat_state()
 
-
+func load_card(card: Object):
+	var newCard = cards.instantiate()
+	newCard.setName(card.cardName)
+	newCard.setType(card.type)
+	newCard.setDamage(card.damage)
+	newCard.setShield(card.shield)
+	newCard.setEnergyCost(card.energyCost)
+	#TODO set card info
+	#print_tree()
+	var cardSprite = newCard.find_child('Sprite2D')
+	cardSprite.texture = load(card.sprite)
+	
+	add_child(newCard) 
+	return newCard
 # STATE CHECK
 func check_combat_state():
-		if player.getCurrentHP() <= 0:
+		if playerNode.getCurrentHP() <= 0:
 			print("💀 Player defeated!")
+			var prevScene = Global.prev_scene_path
+			if (prevScene != ""):
+				get_tree().change_scene_to_file(prevScene)
 			#check if player died first
 			turn_counter = 0 
 			# TODO,HANDLE DEATH
-		elif enemy.currentHp <= 0:
-			turn_counter = 0 
-			print("✅ Enemy defeated!")
-			if gold_totem:
-				player.gold += randi_range(50, 75)
-			else:
-				player.gold += randi_range(25, 50)
+		for enemy in enemyNodes:
+			if enemy.currentHp <= 0:
+				enemy.queue_free()
+				enemyNodes.pop_at(enemy.pos)
+				if !enemyNodes.size():
+					var prevScene = Global.prev_scene_path
+					if (prevScene != ""):
+						get_tree().change_scene_to_file(prevScene)
+				print("✅ Enemy defeated!")
+				if gold_totem:
+					playerNode.gold += randi_range(50, 75)
+				else:
+					playerNode.gold += randi_range(25, 50)
 			# TODO
 
 
@@ -227,3 +314,8 @@ func _on_end_combat_test_pressed() -> void:
 	var prevScene = Global.prev_scene_path
 	if (prevScene != ""):
 		get_tree().change_scene_to_file(prevScene)
+
+
+func _on_end_turn_pressed() -> void:
+	end_player_turn()
+	pass # Replace with function body.
