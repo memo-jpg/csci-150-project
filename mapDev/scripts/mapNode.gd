@@ -48,6 +48,7 @@ func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
 			print("Shop Node is clicked") 
 			get_tree().change_scene_to_file("res://combat.tscn") #Change to shop
 			
+		Global.curNodeId += 1
 		
 		
 
