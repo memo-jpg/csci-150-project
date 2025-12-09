@@ -28,6 +28,7 @@ func load_cards(file_path: String) -> void:
 				card_obj.setDamage(card_dict["damage"])
 				card_obj.setShield(card_dict["shield"])
 				card_obj.setEnergyCost(card_dict["energyCost"])
+				card_obj.setSprite(card_dict["sprite"])
 				
 				cards.append(card_obj)
 				print("Loaded Cards: ", card_obj.cardName)  #Output loaded cards for verification
