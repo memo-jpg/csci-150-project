@@ -184,3 +184,7 @@ func on_load_game(saved_data:savedData):
 	curNodeId = my_data.curNodeId
 	print("on_laod_game curNodeId: ",my_data.curNodeId)
 	
+
+func _on_deck_ready() -> void:
+	var temp = get_node("./Deck")
+	deck = temp.cards
