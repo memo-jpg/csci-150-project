@@ -312,7 +312,10 @@ func check_combat_state():
 
 func _on_end_combat_test_pressed() -> void:
 	var prevScene = Global.prev_scene_path
+	
 	if (prevScene != ""):
+		#Global.curNodeId += 1
+		#print("Global.curNodeId: ", Global.curNodeId)
 		get_tree().change_scene_to_file(prevScene)
 
 

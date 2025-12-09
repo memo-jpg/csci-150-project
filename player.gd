@@ -134,8 +134,9 @@ func _ready() -> void:
 	#print("position: ", positon)
 	#print("Hand Size: ", currentHandSize)
 	hud = get_tree().get_root().get_node("CombatScene/HUD")
-	hud.update_all(self) #<<whenever something can be changed, call this guy <<
+#	hud.update_all(self) #<<whenever something can be changed, call this guy <<
 
+# null instance on "hud.update_all(self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -166,6 +167,7 @@ func on_save_game(saved_data:Array[savedData]):
 	my_data.currentHP = currentHP
 	my_data.characterName = characterName
 	my_data.curNodeId = curNodeId
+	
 	saved_data.append(my_data)
 	
 	
@@ -182,5 +184,9 @@ func on_load_game(saved_data:savedData):
 	currentHP = my_data.currentHP
 	characterName = my_data.characterName
 	curNodeId = my_data.curNodeId
-	print("on_laod_game curNodeId: ",my_data.curNodeId)
+	#print("on_laod_game curNodeId: ",Global.curNodeId)
 	
+
+func _on_deck_ready() -> void:
+	var temp = get_node("./Deck")
+	deck = temp.cards
