@@ -134,7 +134,7 @@ func _ready() -> void:
 	#print("position: ", positon)
 	#print("Hand Size: ", currentHandSize)
 	hud = get_tree().get_root().get_node("CombatScene/HUD")
-	hud.update_all(self) #<<whenever something can be changed, call this guy <<
+#	hud.update_all(self) #<<whenever something can be changed, call this guy <<
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
