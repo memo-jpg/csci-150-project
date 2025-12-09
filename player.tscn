@@ -1,20 +1,17 @@
 [gd_scene load_steps=6 format=3 uid="uid://cm4eg124yumej"]
 
-[ext_resource type="Texture2D" uid="uid://c2xjf5gmr7ghp" path="res://Sprites/Player_Idle.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://be1ivd8v3o0nh" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://ba41d6ss8iho3" path="res://Sprites/Hero1.png" id="2_sweqy"]
 [ext_resource type="Texture2D" uid="uid://dyhoal8to6cg3" path="res://icon.svg" id="3_hqtel"]
 [ext_resource type="Script" uid="uid://bsxq4e70phb25" path="res://deck.gd" id="3_i3pqv"]
-<<<<<<< HEAD
 [ext_resource type="Script" uid="uid://cbivhmcvfg0t5" path="res://hud.gd" id="5_sweqy"]
-=======
->>>>>>> dev
 
 [node name="Player" type="Node2D" groups=["game_events"]]
 script = ExtResource("1_onrkg")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 z_index = 99
-texture = ExtResource("1_4flbx")
+texture = ExtResource("2_sweqy")
 
 [node name="Deck" type="Sprite2D" parent="."]
 visible = false
@@ -22,7 +19,6 @@ position = Vector2(-69, 90)
 texture = ExtResource("3_hqtel")
 script = ExtResource("3_i3pqv")
 
-<<<<<<< HEAD
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("5_sweqy")
 
@@ -59,6 +55,5 @@ layout_mode = 2
 
 [node name="EnergyLabel" type="Label" parent="HUD/TopBar/HBoxContainer"]
 layout_mode = 2
-=======
+
 [connection signal="ready" from="Deck" to="." method="_on_deck_ready"]
->>>>>>> dev
