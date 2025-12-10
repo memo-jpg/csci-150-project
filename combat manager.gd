@@ -31,7 +31,7 @@ func _ready():
 	#Temp value instantiation
 	playerNode.setMaxHP(300)
 	playerNode.setCurrentHP(100)
-	playerNode.global_position = Vector2(60,60)
+	playerNode.global_position = Vector2(200,200)
 	add_child(playerNode)
 	energyBar.max_value = playerNode.getMaxEnergy()
 	#TODO enemy spawning needs to be set by the outside map call
@@ -39,6 +39,7 @@ func _ready():
 	enemyNodes.append(enemyNode) #add enemy to our enemy array
 	enemyNode.position.x=800 #temp hardcoded positions
 	enemyNode.position.y=300
+	#enemy scale added
 	enemyNode.enemyActive.connect(_enemy_selected) #connect signal for when enemy is clicked
 	add_child(enemyNode) #display enemy
 	
