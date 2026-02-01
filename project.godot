@@ -27,6 +27,10 @@ Global="*res://mapDev/Global.gd"
 
 project/assembly_name="Project TBD"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
 [input]
 
 mouseClick={
