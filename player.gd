@@ -4,7 +4,7 @@ var hud : HUD
 
 var characterName : String = "Elliot"
 var shield : int = 0
-var maxHP : int = 87
+var maxHP : int = 100
 var currentHP : int = maxHP
 var maxEnergy : int = 3
 var currentEnergy : int = maxEnergy

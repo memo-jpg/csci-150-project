@@ -1,5 +1,6 @@
 class_name map_node extends Area2D
 
+# dont need this file/folder, in test_map_node 
 
 @export var nodeId : int
 @export var nodeName : String

@@ -2,14 +2,14 @@ extends GutTest
 # https://www.youtube.com/watch?v=h5HmdD0cAps
 # var
 # var map: Map
-var map_node = preload("res://unit_testing/map_node.gd")
-var node: map_node
+var mapNode = preload("res://mapDev/scripts/mapNode.gd") # preloas the objects script to test 
+var node: mapNode
 
 
 
 func before_each() -> void: # before each unit test
 	# hero = Hero.new()
-	node = map_node.new()
+	node = mapNode.new()
 	# add_child(hero)
 	add_child(node)
 	# await get_tree().process_frame
@@ -26,5 +26,11 @@ func after_each() -> void:
 #func test_isActive
 func test_isActive() -> void:
 	#assert_eq(hero.health, hero.max_health, "Hero should start with full health.")
-	assert_eq(node.isActive, false, "Expected init node to be false")
+	assert_eq(node.isActive, false, "Map node at initialization expected to be false")
+	
+	
+func test_isActive_fail() -> void:
+	#assert_eq(hero.health, hero.max_health, "Hero should start with full health.")
+	node.isActive = true
+	assert_eq(node.isActive, false, "Map node at initialization expected to be false")
 	
