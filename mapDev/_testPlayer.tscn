@@ -1,12 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfv86h8aibab"]
+[gd_scene format=3 uid="uid://cfv86h8aibab"]
 
 [ext_resource type="Script" uid="uid://bsb3cyh8mb63v" path="res://mapDev/scripts/_testPlayer.gd" id="1_xkfqm"]
 [ext_resource type="Texture2D" uid="uid://c2xjf5gmr7ghp" path="res://Sprites/Player_Idle.png" id="2_rhhi0"]
 
-[node name="_testPlayer" type="Node2D" groups=["game_events"]]
+[node name="_testPlayer" type="Node2D" unique_id=1305942045 groups=["game_events"]]
 script = ExtResource("1_xkfqm")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=661311306]
 z_index = 99
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_rhhi0")
