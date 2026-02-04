@@ -66,8 +66,9 @@ func start_player_turn():
 	for card in playerNode.gethand(): #iterates througn hand and creates card scenes for each
 		var tempCard = load_card(card)
 		tempCard.setID(cardPos) 
-		tempCard.position.y = 500
+		tempCard.position.y = 400
 		tempCard.position.x = 100+200*cardPos 
+		tempCard.scale *= 0.6
 		tempCard.cardActive.connect(_card_active) #card tells us when it is clicked
 		cardNodes.append(tempCard) #add card Node object to our array
 		cardPos+=1
