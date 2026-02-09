@@ -11,7 +11,7 @@ func before_each() -> void: # before each unit test
 	# hero = Hero.new()
 	node = mapNode.new()
 	# add_child(hero)
-	add_child(node)
+	add_child_autofree(node)
 	# await get_tree().process_frame
 	await get_tree().process_frame
 	pass

@@ -6,7 +6,7 @@ var saveLoadTest: saverLoader
 
 func before_each() -> void: # before each unit test
 	saveLoadTest = saverLoader.new()
-	add_child(saveLoadTest)
+	add_child_autofree(saveLoadTest)
 	await get_tree().process_frame
 	pass
 
