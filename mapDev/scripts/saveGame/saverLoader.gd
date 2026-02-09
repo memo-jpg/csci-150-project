@@ -21,16 +21,16 @@ func saveGame():
 
 func loadGame():
 	var allNodes = {}
-	
-	
-	var saved_game:savedGame = load("user://savegame.tres") as savedGame
-	
-	get_tree().call_group("game_events", "on_before_load_game")
-	
 	var mapNodeArr : Array = []
 	var playerRestored : Player = null
 	
+	if not FileAccess.file_exists("user://savegame.tres"):
+		allNodes["player"] = playerRestored
+		allNodes["mapNodes"] = mapNodeArr
+		return allNodes
 	
+	var saved_game:savedGame = load("user://savegame.tres") as savedGame
+	get_tree().call_group("game_events", "on_before_load_game")
 	
 	for item in saved_game.saved_data:
 		var scene = load(item.scene_path) as PackedScene
@@ -38,22 +38,24 @@ func loadGame():
 		
 		# handles mapNodes
 		if(item.scene_path == "res://mapDev/mapNode.tscn"):
-			
 			mapNodeArr.append(restored_node)
-			_map.add_child(restored_node)
+			if(_map):
+				_map.add_child(restored_node)
+			else: # TODO have loadGame only return data, have a function that operates the scenes(?)
+					restored_node.queue_free()
 			
-		
 		# handles playerRestore
 		elif(item.scene_path == "res://player.tscn"):
 			playerRestored = restored_node
-			_map.add_child(playerRestored)
+			if(_map):
+				_map.add_child(playerRestored)
+			else: # TODO have loadGame only return data, have a function that operates the scenes(?)
+				restored_node.queue_free() # temp fix for oprhans in unit testing
 		
 		if restored_node.has_method("on_load_game"):
 			restored_node.on_load_game(item)
-		
-		allNodes["player"] = playerRestored
-		allNodes["mapNodes"] = mapNodeArr
-		
+			
 	
-	
+	allNodes["player"] = playerRestored
+	allNodes["mapNodes"] = mapNodeArr
 	return allNodes

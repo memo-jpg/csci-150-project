@@ -22,9 +22,7 @@ func test_player_init_health() -> void:
 	assert_eq(playerTest.currentHP, 100, "Health initialization expected to be <= 100")
 	pass
 	
-func test_player_init_health_false() -> void:
-	playerTest.currentHP = 50
-	assert_eq(playerTest.currentHP, 100, "Health initialization expected to be <= 100")
+func test_player_init_location() -> void:
 	
+	assert_eq(playerTest.curNodeId, Global.curNodeId, "Player's node location is not the same as the Global variable, 0")
 	pass
-	

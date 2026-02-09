@@ -77,14 +77,17 @@ func _ready() -> void:
 	add_enemy_action_to_Actions(enemy_action.new("special", "confuse", 7, 0, 0))
 	add_enemy_action_to_Actions(enemy_action.new("special", "Meta", 8, 0, 0))
 	
-	for action in Actions:
-		action.display()
-	currentHp = maxHp
-	hpBar.max_value = maxHp
-	hpBar.value = currentHp
+	#for action in Actions:
+		#action.display()
+	#currentHp = maxHp
+	#hpBar.max_value = maxHp
+	#hpBar.value = currentHp
+	#
+	
 		
-func _process(delta: float) -> void:
-	hpBar.value = currentHp
+#func _process(delta: float) -> void:
+	#hpBar.value = currentHp
+	#pass
 
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:

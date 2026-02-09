@@ -29,8 +29,3 @@ func test_isActive() -> void:
 	assert_eq(node.isActive, false, "Map node at initialization expected to be false")
 	
 	
-func test_isActive_fail() -> void:
-	#assert_eq(hero.health, hero.max_health, "Hero should start with full health.")
-	node.isActive = true
-	assert_eq(node.isActive, false, "Map node at initialization expected to be false")
-	

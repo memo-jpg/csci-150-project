@@ -112,12 +112,6 @@ func handleScene():
 				
 		
 	
-func randNode():
-	if randf() < 0.5:
-		pass
-	else:
-		pass
-
 
 func generate_map():
 	
