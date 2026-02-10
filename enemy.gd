@@ -77,6 +77,7 @@ func _ready() -> void:
 	add_enemy_action_to_Actions(enemy_action.new("special", "confuse", 7, 0, 0))
 	add_enemy_action_to_Actions(enemy_action.new("special", "Meta", 8, 0, 0))
 	
+	
 	#for action in Actions:
 		#action.display()
 	#currentHp = maxHp

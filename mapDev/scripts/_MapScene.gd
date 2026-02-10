@@ -44,8 +44,15 @@ func handleScene():
 		else:
 			print("Player is null")
 			
-		
-		
+		#var prevNodeX = 0.0
+		#var prevNodeY = 0.0
+		#for node in placedNodes:
+			#prevNodeX = node.position.x
+			#prevNodeY = node.position.y
+			#print("x: %d, y: %d\n", prevNodeX, prevNodeY)
+		#
+	#
+
 		for node in placedNodes:
 			# print("Node pos: ", node.global_position)
 			if(node.nodeId == Global.curNodeId && Global.curNodeId <= placedNodes.size()):

@@ -20,7 +20,13 @@ func after_each() -> void:
 	pass
 	
 
+func test_enemy_actions_exist() -> void:
+	
+
+	assert_eq(enemyTest.Actions.size(), 9, "There was initially 9 actions added in the _ready for enemy.gd")
+
 func test_has_name() -> void:
+	enemyTest.name = "Enemy" # on init can change
 	assert_eq(enemyTest.name, "Enemy", "Name needs to be a string")
 	pass
 	

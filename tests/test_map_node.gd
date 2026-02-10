@@ -22,6 +22,10 @@ func after_each() -> void:
 	pass
 	
 
+func test_default_id() -> void:
+	
+	assert_eq(node.nodeId, -1, "Default node id is supposed to be -1")
+	
 
 #func test_isActive
 func test_isActive() -> void:
