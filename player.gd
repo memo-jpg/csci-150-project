@@ -133,7 +133,7 @@ func _ready() -> void:
 	#print("Energy: ", currentEnergy)
 	#print("position: ", positon)
 	#print("Hand Size: ", currentHandSize)
-	hud = get_tree().get_root().get_node("CombatScene/HUD")
+#	hud = get_tree().get_root().get_node("CombatScene/HUD")
 #	hud.update_all(self) #<<whenever something can be changed, call this guy <<
 
 # null instance on "hud.update_all(self)

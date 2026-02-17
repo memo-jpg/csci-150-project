@@ -80,14 +80,13 @@ func _ready() -> void:
 	
 	#for action in Actions:
 		#action.display()
-	#currentHp = maxHp
-	#hpBar.max_value = maxHp
-	#hpBar.value = currentHp
-	#
-	
+	currentHp = maxHp
+	hpBar.max_value = maxHp
+	hpBar.value = currentHp
 		
-#func _process(delta: float) -> void:
-	#hpBar.value = currentHp
+		
+func _process(delta: float) -> void:
+	hpBar.value = currentHp
 
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
