@@ -21,7 +21,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://mapDev/Global.gd"
+Global="*uid://c5p0odatqv0o5"
 
 [dotnet]
 

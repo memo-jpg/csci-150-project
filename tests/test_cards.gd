@@ -21,7 +21,7 @@ func after_each() -> void:
 #func test_isActive
 func test_cardName() -> void:
 	#assert_eq(hero.health, hero.max_health, "Hero should start with full health.")
-	# print(tempCard.cardName)
+	print(tempCard.cardName)
 	assert_eq(tempCard.cardName, "Default Card Name", "Name expected to be \"Default Card Name\"")
 	pass
 	

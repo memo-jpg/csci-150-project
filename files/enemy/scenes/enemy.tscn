@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://v3w01tkko2jo"]
+
+[ext_resource type="Script" uid="uid://n6cdmvuf3ihc" path="res://files/enemy/scripts/enemy.gd" id="1_7k104"]
+[ext_resource type="Texture2D" uid="uid://b57e4lstx3h3e" path="res://_assets/Sprites/Enemy1.png" id="2_l1gtm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
+size = Vector2(194, 126)
+
+[node name="Enemy" type="Node2D" unique_id=646297622]
+script = ExtResource("1_7k104")
+maxHp = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1659860394]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_l1gtm")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=897868797]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1403220020]
+position = Vector2(1, -1)
+shape = SubResource("RectangleShape2D_4gyqm")
+
+[node name="HP Bar" type="ProgressBar" parent="." unique_id=818461519]
+offset_left = -95.0
+offset_top = 65.0
+offset_right = 92.0
+offset_bottom = 92.0
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

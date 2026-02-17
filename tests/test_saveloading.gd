@@ -1,7 +1,7 @@
 extends GutTest
 
 # tests player health
-var saverLoader = preload("res://mapDev/scripts/saveGame/saverLoader.gd")
+var saverLoader = preload("res://saveGame/saverLoader.gd")
 var saveLoadTest: saverLoader
 
 func before_each() -> void: # before each unit test

@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dgynalek51xip"]
+
+[ext_resource type="Script" uid="uid://brg477cm4ry03" path="res://files/combat/scripts/combat manager.gd" id="1_raif2"]
+[ext_resource type="PackedScene" uid="uid://cm4eg124yumej" path="res://files/player/scenes/player.tscn" id="2_s0t75"]
+[ext_resource type="PackedScene" uid="uid://v3w01tkko2jo" path="res://files/enemy/scenes/enemy.tscn" id="3_kx3u1"]
+[ext_resource type="PackedScene" uid="uid://cikcd42n2lof4" path="res://files/map/scenes/card_scene.tscn" id="4_ga4lu"]
+
+[node name="Combat" type="Node2D" unique_id=843099266]
+script = ExtResource("1_raif2")
+player = ExtResource("2_s0t75")
+enemy = ExtResource("3_kx3u1")
+cards = ExtResource("4_ga4lu")
+
+[node name="End Combat (test)" type="Button" parent="." unique_id=74232243]
+offset_left = 893.0
+offset_top = 6.0
+offset_right = 1146.0
+offset_bottom = 112.0
+text = "End Combat Test"
+
+[node name="End Turn" type="Button" parent="." unique_id=1646283745]
+offset_left = 1022.0
+offset_top = 409.0
+offset_right = 1147.0
+offset_bottom = 462.0
+text = "End Turn"
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=913523606]
+offset_left = 506.0
+offset_top = 367.0
+offset_right = 616.0
+offset_bottom = 431.0
+
+[connection signal="pressed" from="End Combat (test)" to="." method="_on_end_combat_test_pressed"]
+[connection signal="pressed" from="End Turn" to="." method="_on_end_turn_pressed"]
