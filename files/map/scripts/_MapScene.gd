@@ -45,7 +45,7 @@ func handleScene():
 			print("Player is null")
 			
 		for node in placedNodes:
-			print("AT BUG(?)Node pos: ", node.global_position)
+			print("Node pos: ", node.global_position)
 			if(node.nodeId == Global.curNodeId && Global.curNodeId <= placedNodes.size()):
 				playerRestored.global_position = node.global_position # somethings wrong with player restored
 				playerRestored.global_position.y -= 55
