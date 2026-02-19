@@ -1,7 +1,7 @@
 extends GutTest
 
 # tests player health
-var Player = preload("res://player.gd")
+var Player = preload("res://files/player/scripts/player.gd")
 var playerTest: Player
 
 func before_each() -> void: # before each unit test
