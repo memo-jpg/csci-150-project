@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cm4eg124yumej"]
+[gd_scene load_steps=4 format=3 uid="uid://cm4eg124yumej"]
 
 [ext_resource type="Texture2D" uid="uid://c2xjf5gmr7ghp" path="res://Sprites/Player_Idle.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://be1ivd8v3o0nh" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://dyhoal8to6cg3" path="res://icon.svg" id="3_hqtel"]
-[ext_resource type="Script" uid="uid://bsxq4e70phb25" path="res://deck.gd" id="3_i3pqv"]
 
 [node name="Player" type="Node2D" groups=["game_events"]]
 script = ExtResource("1_onrkg")
@@ -16,6 +15,5 @@ texture = ExtResource("1_4flbx")
 visible = false
 position = Vector2(-69, 90)
 texture = ExtResource("3_hqtel")
-script = ExtResource("3_i3pqv")
 
 [connection signal="ready" from="Deck" to="." method="_on_deck_ready"]

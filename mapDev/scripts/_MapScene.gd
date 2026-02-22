@@ -45,9 +45,9 @@ func handleScene():
 		
 		for node in placedNodes:
 			print("Node pos: ", node.global_position)
-			if(node.nodeId == Global.curNodeId):
-				playerRestored.global_position = node.global_position
-				playerRestored.global_position.y -= 30
+#			if(node.nodeId == Global.curNodeId):
+#				playerRestored.global_position = node.global_position
+#				playerRestored.global_position.y -= 30
 				#node.isActive = true
 				
 		draw_lines(placedNodes)
