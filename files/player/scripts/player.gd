@@ -29,11 +29,6 @@ var gold: int = 0
 var deck_manager: DeckManager
 
 
-<<<<<<< HEAD:player.gd
-# =========================
-# Lifecycle
-# =========================
-=======
 var characterName : String = "Elliot"
 var shield : int = 0
 var maxHP : int = 100
@@ -154,7 +149,6 @@ func _init():
 	print("Hello World!")
 
 # Called when the node enters the scene tree for the FIRST time.
->>>>>>> f05144573c9836166d408bced6341f4b3ec962c7:files/player/scripts/player.gd
 func _ready() -> void:
 	currentHP = maxHP
 	currentEnergy = maxEnergy
@@ -171,14 +165,6 @@ func _ready() -> void:
 
 # null instance on "hud.update_all(self)
 
-<<<<<<< HEAD:player.gd
-# =========================
-# DAMAGE / HEALING API
-# =========================
-func apply_damage(amount: int) -> void:
-	if amount <= 0:
-		return
-=======
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	#rotation += angular_speed * delta
@@ -212,123 +198,9 @@ func on_save_game(saved_data:Array[savedData]):
 	saved_data.append(my_data)
 	
 	
->>>>>>> f05144573c9836166d408bced6341f4b3ec962c7:files/player/scripts/player.gd
 
 	var remaining := amount
 
-<<<<<<< HEAD:player.gd
-	# Apply to shield first
-	if shield > 0:
-		if remaining <= shield:
-			shield -= remaining
-			remaining = 0
-		else:
-			remaining -= shield
-			shield = 0
-
-	# Apply leftover to HP
-	if remaining > 0:
-		currentHP -= remaining
-
-	check_death()
-	update_hud()
-
-
-func take_raw_damage(amount: int) -> void:
-	if amount <= 0:
-		return
-
-	currentHP -= amount
-	check_death()
-	update_hud()
-
-
-func heal(amount: int) -> void:
-	if amount <= 0:
-		return
-
-	currentHP = min(currentHP + amount, maxHP)
-	update_hud()
-
-
-func add_shield(amount: int) -> void:
-	if amount <= 0:
-		return
-
-	shield += amount
-	update_hud()
-
-
-# =========================
-# Energy
-# =========================
-func setCurrentEnergy(value: int):
-	currentEnergy = clamp(value, 0, maxEnergy)
-	update_hud()
-
-func getCurrentEnergy() -> int:
-	return currentEnergy
-
-func getMaxEnergy() -> int:
-	return maxEnergy
-
-
-# =========================
-# HP
-# =========================
-func getCurrentHP() -> int:
-	return currentHP
-
-func getMaxHP() -> int:
-	return maxHP
-
-func setMaxHP(value: int):
-	maxHP = value
-
-func setCurrentHP(value: int):
-	currentHP = value
-
-
-# =========================
-# Death Handling
-# =========================
-func check_death() -> void:
-	if currentHP > 0:
-		return
-
-	currentHP = 0
-	print("Player has died")
-
-
-# =========================
-# HUD
-# =========================
-func update_hud() -> void:
-	if hud:
-		hud.update_all(self)
-
-
-# =========================
-# Deck Wrappers
-# =========================
-func build_combat_deck():
-	deck_manager.build_combat_deck()
-
-func draw_cards():
-	deck_manager.draw_cards(deck_manager.get_draw_limit())
-
-func get_hand() -> Array[CardData]:
-	return deck_manager.get_hand()
-
-func play_card(index: int) -> CardData:
-	return deck_manager.play_card(index)
-
-func discard_hand():
-	deck_manager.discard_hand()
-
-func add_card_to_deck(card: CardData):
-	deck_manager.add_card_to_deck(card)
-=======
 func on_load_game(saved_data:savedData):
 	var my_data:SavedPlayerData = saved_data as SavedPlayerData
 	
@@ -342,4 +214,3 @@ func on_load_game(saved_data:savedData):
 func _on_deck_ready() -> void:
 	var temp = get_node("./Deck")
 	deck = temp.cards
->>>>>>> f05144573c9836166d408bced6341f4b3ec962c7:files/player/scripts/player.gd

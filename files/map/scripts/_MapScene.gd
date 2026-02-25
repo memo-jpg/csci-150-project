@@ -46,12 +46,7 @@ func handleScene():
 			
 		for node in placedNodes:
 			print("Node pos: ", node.global_position)
-<<<<<<< HEAD:mapDev/scripts/_MapScene.gd
-#			if(node.nodeId == Global.curNodeId):
-#				playerRestored.global_position = node.global_position
-#				playerRestored.global_position.y -= 30
-				#node.isActive = true
-=======
+
 			if(node.nodeId == Global.curNodeId && Global.curNodeId <= placedNodes.size()):
 				playerRestored.global_position = node.global_position # somethings wrong with player restored
 				playerRestored.global_position.y -= 55
@@ -63,7 +58,6 @@ func handleScene():
 					
 		
 				
->>>>>>> f05144573c9836166d408bced6341f4b3ec962c7:files/map/scripts/_MapScene.gd
 				
 		draw_lines(placedNodes)
 		

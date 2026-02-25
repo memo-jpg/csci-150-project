@@ -32,23 +32,10 @@ func _ready():
 	playerNode = player.instantiate()
 	playerNode.setMaxHP(300)
 	playerNode.setCurrentHP(100)
-<<<<<<< HEAD:combat manager.gd
-	playerNode.global_position = Vector2(60, 60)
-=======
 	playerNode.global_position = Vector2(200,200)
->>>>>>> f05144573c9836166d408bced6341f4b3ec962c7:files/combat/scripts/combat manager.gd
 	add_child(playerNode)
 
 	energyBar.max_value = playerNode.getMaxEnergy()
-<<<<<<< HEAD:combat manager.gd
-
-	var enemyNode = enemy.instantiate()
-	enemyNodes.append(enemyNode)
-	enemyNode.position = Vector2(800, 300)
-	enemyNode.enemyActive.connect(_enemy_selected)
-	add_child(enemyNode)
-
-=======
 	#TODO enemy spawning needs to be set by the outside map call
 	var enemyNode = enemy.instantiate() #create enemy
 	enemyNodes.append(enemyNode) #add enemy to our enemy array
@@ -58,7 +45,6 @@ func _ready():
 	enemyNode.enemyActive.connect(_enemy_selected) #connect signal for when enemy is clicked
 	add_child(enemyNode) #display enemy
 	
->>>>>>> f05144573c9836166d408bced6341f4b3ec962c7:files/combat/scripts/combat manager.gd
 	print("Combat started.")
 	start_player_turn()
 
@@ -78,10 +64,6 @@ func start_player_turn():
 	energyBar.value = playerNode.getCurrentEnergy()
 
 	print("\n-- PLAYER TURN START --")
-<<<<<<< HEAD:combat manager.gd
-
-	playerNode.shield = 0
-=======
 	#print(playerNode.getdeck())
 	playerNode.draw_cards(playerNode.getdeck(), playerNode.gethand(), playerNode.getMaxHandSize())#draw cards at turn start
 	#print(playerNode.getdeck())
@@ -103,7 +85,6 @@ func start_player_turn():
 	#print(playerNode.gethand())
 	#print_tree()
 	playerNode.shield = 0 #shield expires at the start of turn
->>>>>>> f05144573c9836166d408bced6341f4b3ec962c7:files/combat/scripts/combat manager.gd
 	if handy_shield:
 		playerNode.shield += 4
 
@@ -301,12 +282,6 @@ func check_combat_state():
 		print("💀 Player defeated!")
 		return
 
-<<<<<<< HEAD:combat manager.gd
-	for enemy in enemyNodes:
-		if enemy.currentHp <= 0:
-			enemy.queue_free()
-			print("✅ Enemy defeated!")
-=======
 
 func _on_end_combat_test_pressed() -> void:
 	var prevScene = Global.prev_scene_path
@@ -320,4 +295,3 @@ func _on_end_combat_test_pressed() -> void:
 func _on_end_turn_pressed() -> void:
 	end_player_turn()
 	pass # Replace with function body.
->>>>>>> f05144573c9836166d408bced6341f4b3ec962c7:files/combat/scripts/combat manager.gd
