@@ -1,5 +1,32 @@
-class_name Player extends Node2D
-var hud : HUD
+class_name Player
+extends Node2D
+
+# =========================
+# References
+# =========================
+var hud: HUD
+var status_manager
+
+# =========================
+# Core stats
+# =========================
+var characterName: String = "Elliot"
+
+var maxHP: int = 87
+var currentHP: int = maxHP
+var shield: int = 0
+
+var maxEnergy: int = 3
+var currentEnergy: int = maxEnergy
+
+var maxHandSize: int = 5
+
+var gold: int = 0
+
+# =========================
+# Deck System
+# =========================
+var deck_manager: DeckManager
 
 
 var characterName : String = "Elliot"
@@ -123,18 +150,18 @@ func _init():
 
 # Called when the node enters the scene tree for the FIRST time.
 func _ready() -> void:
-	#When the player first enters combat 
-		#or any other scene for the FIRST time.
-	currentHP = getCurrentHP()
-	currentEnergy = getMaxEnergy()
-	positon = getPosition()
-	currentHandSize = getMaxHandSize()
-	#print("HP:", currentHP)
-	#print("Energy: ", currentEnergy)
-	#print("position: ", positon)
-	#print("Hand Size: ", currentHandSize)
-	hud = get_tree().get_root().get_node("CombatScene/HUD")
-#	hud.update_all(self) #<<whenever something can be changed, call this guy <<
+	currentHP = maxHP
+	currentEnergy = maxEnergy
+
+	deck_manager = DeckManager.new()
+	add_child(deck_manager)
+
+	hud = get_tree().get_root().get_node_or_null("CombatScene/HUD")
+
+	if has_node("StatusEffectManager"):
+		status_manager = get_node("StatusEffectManager")
+
+	update_hud()
 
 # null instance on "hud.update_all(self)
 
@@ -172,10 +199,7 @@ func on_save_game(saved_data:Array[savedData]):
 	
 	
 
-func on_before_load_game():
-	get_parent().remove_child(self)
-	queue_free()
-	
+	var remaining := amount
 
 func on_load_game(saved_data:savedData):
 	var my_data:SavedPlayerData = saved_data as SavedPlayerData
