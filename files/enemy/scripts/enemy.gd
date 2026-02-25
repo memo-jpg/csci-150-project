@@ -81,12 +81,12 @@ func _ready() -> void:
 	#for action in Actions:
 		#action.display()
 	currentHp = maxHp
-#	hpBar.max_value = maxHp // commented out for unit tests 
-#	hpBar.value = currentHp // commented out for unit tests 
+#	hpBar.max_value = maxHp # commented out for unit tests 
+#	hpBar.value = currentHp # commented out for unit tests 
 		
 		
 func _process(delta: float) -> void:
-	# hpBar.value = currentHp // commented out for unit tests 
+	# hpBar.value = currentHp # commented out for unit tests 
 	pass
 
 

@@ -2,3 +2,4 @@ res://files/combat/scenes/combat.tscn
 res://addons/gut/gui/editor_globals.gd
 res://addons/gut/gui/EditorRadioButton.tres
 res://_assets/projectResources/tileSet.tres
+res://files/enemy/scripts/enemy.gd
