@@ -1078,9 +1078,9 @@ tile_set = ExtResource("6_eavn3")
 
 [node name="End Combat (test)" type="Button" parent="." unique_id=74232243]
 offset_left = 893.0
-offset_top = 6.0
+offset_top = 24.0
 offset_right = 1146.0
-offset_bottom = 112.0
+offset_bottom = 130.0
 text = "End Combat Test"
 
 [node name="End Turn" type="Button" parent="." unique_id=1646283745]
