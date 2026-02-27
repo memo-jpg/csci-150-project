@@ -31,13 +31,13 @@ func _ready():
 	#Temp value instantiation
 	playerNode.setMaxHP(300)
 	playerNode.setCurrentHP(100)
-	playerNode.global_position = Vector2(200,200)
+	playerNode.global_position = Vector2(200,300)
 	add_child(playerNode)
 	energyBar.max_value = playerNode.getMaxEnergy()
 	#TODO enemy spawning needs to be set by the outside map call
 	var enemyNode = enemy.instantiate() #create enemy
 	enemyNodes.append(enemyNode) #add enemy to our enemy array
-	enemyNode.position.x=800 #temp hardcoded positions
+	enemyNode.position.x=900 #temp hardcoded positions
 	enemyNode.position.y=300
 	#enemy scale added
 	enemyNode.enemyActive.connect(_enemy_selected) #connect signal for when enemy is clicked
@@ -66,9 +66,9 @@ func start_player_turn():
 	for card in playerNode.gethand(): #iterates througn hand and creates card scenes for each
 		var tempCard = load_card(card)
 		tempCard.setID(cardPos) 
-		tempCard.position.y = 400
-		tempCard.position.x = 100+200*cardPos 
-		tempCard.scale *= 0.6
+		tempCard.position.y = 600
+		tempCard.position.x = 200*cardPos + 300
+		tempCard.scale *= 0.35
 		tempCard.cardActive.connect(_card_active) #card tells us when it is clicked
 		cardNodes.append(tempCard) #add card Node object to our array
 		cardPos+=1
@@ -89,12 +89,22 @@ func _card_active(cardIndex):
 		if(activeCard != null):
 			cardNodes[activeCard].scale.x-=.3
 			cardNodes[activeCard].scale.y-=.3
+			# POS Should go back down here if negative
+			cardNodes[activeCard].position.y += 100
+			cardNodes[activeCard].z_index -= 99
+			
 		cardNodes[cardIndex].scale.x += .3
 		cardNodes[cardIndex].scale.y += .3
+		# Increase the position to move the card up
+		cardNodes[cardIndex].position.y -= 100
+		cardNodes[cardIndex].z_index += 99
 		activeCard = cardIndex
 	else:
 		cardNodes[activeCard].scale.x-=.3
 		cardNodes[activeCard].scale.y-=.3
+		# otherwise lower the postiion back to the starting point 
+		cardNodes[activeCard].position.y += 100
+		cardNodes[activeCard].z_index -= 99
 		activeCard = null
 		
 func _enemy_selected(enemyIndex):
@@ -118,6 +128,7 @@ func end_player_turn():
 func start_enemy_turn(): #TODO someone double check my work here
 	turn = "enemy"
 	print("\n-- ENEMY TURN START --")
+	@warning_ignore("shadowed_variable")
 	for enemy in enemyNodes:
 		enemy_action(enemy.currentAction, enemy) #pass the enemy intention, if nothing it'll be random
 		enemy.currentAction+=1
