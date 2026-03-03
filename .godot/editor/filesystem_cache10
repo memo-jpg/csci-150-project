@@ -1,20 +1,20 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1771978359
+::res://::1772580992
 _MainScene.gd::GDScript::4361869151156122069::1771804212::0::1::::<>Node<><>0<>0<><>::
 _MainScene.tscn::PackedScene::1917826175869150393::1771804212::0::1::::<><><>0<>0<><>::uid://b3e6l240fuwfd::::res://_MainScene.gd<>uid://wmqx45sjpmnr::::res://files/map/scripts/_MapScene.gd<>uid://kxcfvxp55ryw::::res://_assets/projectResources/tileSet.tres<>uid://b8sqxgi3idirp::::res://_assets/projectResources/kenneyAssets/cityTileset/Tilemap/tilemap_packed.png<>uid://dksq6xjngymi5::::res://files/saveGame/saverLoader.gd
-CardData.gd::GDScript::1276333551692653702::1771356825::0::1::::CardData<>RefCounted<><>0<>0<><>::
-CardDatabase.gd::GDScript::6386497199080318381::1771356924::0::1::::CardDatabase<>Node<><>0<>0<><>::
+CardData.gd::GDScript::1276333551692653702::1772124840::0::1::::CardData<>RefCounted<><>0<>0<><>::
+CardDatabase.gd::GDScript::6386497199080318381::1772124840::0::1::::CardDatabase<>Node<><>0<>0<><>::
 cards.gd::GDScript::2174957379180415790::1771484404::0::1::::<>Node2D<><>0<>0<><>::
 DeckManager.gd::GDScript::723775721959160039::1771358141::0::1::::DeckManager<>Node<><>0<>0<><>::
-player.tscn::PackedScene::5675229437312141889::1771484824::0::1::::<><><>0<>0<><>::uid://c2xjf5gmr7ghp::::res://Sprites/Player_Idle.png<>uid://be1ivd8v3o0nh::::res://player.gd<>uid://dyhoal8to6cg3::::res://icon.svg
+player.tscn::PackedScene::5675229437312141889::1772125560::0::1::::<><><>0<>0<><>::uid://c2xjf5gmr7ghp::::res://_assets/Sprites/Player_Idle.png<>uid://be1ivd8v3o0nh::::res://files/player/scripts/player.gd<>uid://dyhoal8to6cg3::::res://_assets/icon.svg
 README.md::TextFile::-1::1763690227::0::1::::<><><>0<>0<><>::
 ::res://_assets/::1771805562
 cards.json::JSON::-1::1771804212::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D::8859095610187829352::1771804212::1771805562::1::::<><><>0<>0<>bcdcf2a278b5557be303c1f64e537c3e<>res://.godot/imported/icon.svg-22758c069640f609031a83eeb3da30c9.ctex::
 menuTexture.png::CompressedTexture2D::1994086572237997798::1771804212::1771805562::1::::<><><>0<>0<>16ae31d89ed60713e3e2570679217775<>res://.godot/imported/menuTexture.png-d94ff56a87aa01d63e8aa033b06dca88.ctex::
 testEnemy.png::CompressedTexture2D::7291032975616151980::1771804215::1771805562::1::::<><><>0<>0<>bcf7ef4bf78f621ad3a88fe1ab1f3947<>res://.godot/imported/testEnemy.png-4247dc5d0be20e4e4f00abcc68f44aae.ctex::
-::res://_assets/projectResources/::1771804215
-tileSet.tres::TileSet::749500626922431738::1771804215::0::1::::<><><>0<>0<><>::uid://b8sqxgi3idirp::::res://_assets/projectResources/kenneyAssets/cityTileset/Tilemap/tilemap_packed.png
+::res://_assets/projectResources/::1772152410
+tileSet.tres::TileSet::749500626922431738::1772152410::0::1::::<><><>0<>0<><>::uid://b8sqxgi3idirp::::res://_assets/projectResources/kenneyAssets/cityTileset/Tilemap/tilemap_packed.png
 ::res://_assets/projectResources/brackeys_platformer_assets/::1771804212
 LICENSE & CREDITS.txt::TextFile::-1::1771804212::0::1::::<><><>0<>0<><>::
 ::res://_assets/projectResources/brackeys_platformer_assets/fonts/::1771805525
@@ -1575,12 +1575,12 @@ LobsterTwo-BoldItalic.ttf::FontFile::3182965850633207044::1771804216::1771805524
 LobsterTwo-Italic.ttf::FontFile::7759867820021968437::1771804216::1771805524::1::::<><><>0<>0<>996d6c75f556b60eb6da0fffa0a54d4e<>res://.godot/imported/LobsterTwo-Italic.ttf-f93abf6c25390c85ad5fb6c4ee75159e.fontdata::
 LobsterTwo-Regular.ttf::FontFile::2115948870915788183::1771804216::1771805524::1::::<><><>0<>0<>8d1ca8c94ef93d21f94ba83f40f0d62a<>res://.godot/imported/LobsterTwo-Regular.ttf-f3fcfa01cd671c8da433dd875d0fe04b.fontdata::
 OFL.txt::TextFile::-1::1771804216::0::1::::<><><>0<>0<><>::
-::res://addons/gut/gui/::1771805561
+::res://addons/gut/gui/::1772573808
 about.gd::GDScript::488202083672295193::1771804216::0::1::::<>AcceptDialog<><>0<>1<><>::
 about.tscn::PackedScene::8284998557770768332::1771804216::0::1::::<><><>0<>0<><>::uid://g7qu8ihdt3pd::::res://addons/gut/gui/about.gd<>uid://bjkn8mhx2fmt1::::res://addons/gut/gui/GutLogo.tscn
 arrow.png::CompressedTexture2D::2222304255268796957::1771804216::1771805561::1::::<><><>0<>0<>c6670127146b5956636ca7e2cf440791<>res://.godot/imported/arrow.png-2b5b2d838b5b3467cf300ac2da1630d9.ctex::
-EditorRadioButton.tres::Theme::8460222933348692164::1771804216::0::1::::<><><>0<>0<><>::
-editor_globals.gd::GDScript::4861108855360548659::1771804216::0::1::::<>RefCounted<><>0<>1<><>::
+EditorRadioButton.tres::Theme::8460222933348692164::1772573808::0::1::::<><><>0<>0<><>::
+editor_globals.gd::GDScript::4861108855360548659::1772573808::0::1::::<>RefCounted<><>0<>1<><>::
 GutBottomPanel.gd::GDScript::8536994468377110612::1771804216::0::1::::<>Control<><>0<>1<><>::
 GutBottomPanel.tscn::PackedScene::4354655867367614688::1771804216::0::1::::<><><>0<>0<><>::uid://dtvnb0xatk0my::::res://addons/gut/gui/GutBottomPanel.gd<>uid://0yunjxtaa8iw::::res://addons/gut/gui/RunAtCursor.tscn<>uid://cr6tvdv0ve6cv::::res://addons/gut/gui/play.png<>uid://bvo0uao7deu0q::::res://addons/gut/icon.png<>uid://4gyyn12um08h::::res://addons/gut/gui/RunResults.tscn<>uid://ljc2viafngwd::::res://addons/gut/images/HSplitContainer.svg<>uid://bqmo4dj64c7yl::::res://addons/gut/gui/OutputText.tscn<>uid://bhew20crsywxr::::res://addons/gut/images/VSplitContainer.svg<>uid://dj5ve0bq7xa5j::::res://addons/gut/gui/ShortcutDialog.tscn<>uid://ckv5eh8xyrwbk::::res://addons/gut/gui/ShellOutOptions.tscn
 GutControl.gd::GDScript::5919874032655369281::1771804216::0::1::::<>Control<><>0<>1<><>::
@@ -1637,9 +1637,9 @@ yellow.png::CompressedTexture2D::1043265824178416429::1771804216::1771805561::1:
 ::res://files/combat/::1771804216
 ::res://files/combat/scenes/::1771804216
 combat.tscn::PackedScene::7630730084342458475::1771804216::0::1::::<><><>0<>0<><>::uid://brg477cm4ry03::::res://files/combat/scripts/combat manager.gd<>uid://cm4eg124yumej::::res://files/player/scenes/player.tscn<>uid://v3w01tkko2jo::::res://files/enemy/scenes/enemy.tscn<>uid://cikcd42n2lof4::::res://files/map/scenes/card_scene.tscn
-::res://files/combat/scripts/::1771804216
+::res://files/combat/scripts/::1772151348
 _Combat.gd::GDScript::3330701273283549634::1771804216::0::1::::<>Node2D<><>0<>0<><>::
-combat manager.gd::GDScript::3593836914680683430::1771813914::0::1::::<>Node<><>0<>0<><>::
+combat manager.gd::GDScript::3593836914680683430::1772151348::0::1::::<>Node<><>0<>0<><>::
 status_effect.gd::GDScript::8306578132676893507::1771804216::0::1::::StatusEffectManager<>Node<><>0<>0<><>::
 ::res://files/enemy/::1771804216
 ::res://files/enemy/scenes/::1771804216
@@ -1670,16 +1670,16 @@ settings.tscn::PackedScene::9166446299406273218::1771804216::0::1::::<><><>0<>0<
 main_menu.gd::GDScript::2701822060417535843::1771804216::0::1::::<>Node2D<><>0<>0<><>::
 settings.gd::GDScript::5233608887356386683::1771804216::0::1::::<>Control<><>0<>0<><>::
 ::res://files/player/::1771804216
-::res://files/player/scenes/::1771804216
-player.tscn::PackedScene::5675229437312141889::1771804216::0::1::::<><><>0<>0<><>::uid://be1ivd8v3o0nh::::res://files/player/scripts/player.gd<>uid://dj027n1webx8i::::res://_assets/Sprites/Hero1.png<>uid://dyhoal8to6cg3::::res://_assets/icon.svg<>uid://bsxq4e70phb25::::res://files/player/scripts/deck.gd<>uid://cbivhmcvfg0t5::::res://files/ui/scripts/hud.gd
-::res://files/player/scripts/::1771804216
-Cards.gd::GDScript::6779996270633988868::1771804216::0::1::::Cards<>Node2D<><>0<>0<><>::
+::res://files/player/scenes/::1772578240
+player.tscn::PackedScene::5675229437312141889::1772578240::0::1::::<><><>0<>0<><>::uid://kkuqllqc207l::::res://DeckManager.gd<>uid://dj027n1webx8i::::res://_assets/Sprites/Hero1.png<>uid://dyhoal8to6cg3::::res://_assets/icon.svg<>uid://cbivhmcvfg0t5::::res://files/ui/scripts/hud.gd
+::res://files/player/scripts/::1772125560
+Cards.gd::GDScript::6779996270633988868::1772124840::0::1::::Cards<>Node2D<><>0<>0<><>::
 deck.gd::GDScript::3698324078111913984::1771804216::0::1::::<>Node<><>0<>0<><>::
-player.gd::GDScript::2721373327005656373::1771813914::0::1::::Player<>Node2D<><>0<>0<><>::
-::res://files/saveGame/::1771804216
+player.gd::GDScript::2721373327005656373::1772125560::0::1::::Player<>Node2D<><>0<>0<><>::
+::res://files/saveGame/::1772574098
 savedGame.gd::GDScript::8010182428938465079::1771804216::0::1::::savedGame<>Resource<><>0<>0<><>::
 saved_data.gd::GDScript::2655053890637037302::1771804216::0::1::::savedData<>Resource<><>0<>0<><>::
-saverLoader.gd::GDScript::7899337341067947230::1771804216::0::1::::saverLoader<>Node<><>0<>0<><>::
+saverLoader.gd::GDScript::7899337341067947230::1772574098::0::1::::saverLoader<>Node<><>0<>0<><>::
 ::res://files/ui/::1771804216
 ::res://files/ui/scenes/::1771804216
 HUD.tscn::PackedScene::8914858478826404645::1771804216::0::1::::<><><>0<>0<><>::uid://cbivhmcvfg0t5::::res://files/ui/scripts/hud.gd

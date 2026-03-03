@@ -46,6 +46,8 @@ func loadGame():
 			
 		# handles playerRestore
 		elif(item.scene_path == "res://files/player/scenes/player.tscn"):
+			print("Scene path:", item.scene_path)
+			print("Restored type:", restored_node.get_class())
 			playerRestored = restored_node
 			if(_map):
 				_map.add_child(playerRestored)

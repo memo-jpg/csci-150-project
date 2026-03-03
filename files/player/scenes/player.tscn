@@ -1,13 +1,12 @@
 [gd_scene format=3 uid="uid://cm4eg124yumej"]
 
-[ext_resource type="Script" uid="uid://be1ivd8v3o0nh" path="res://files/player/scripts/player.gd" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://kkuqllqc207l" path="res://DeckManager.gd" id="1_nnij7"]
 [ext_resource type="Texture2D" uid="uid://dj027n1webx8i" path="res://_assets/Sprites/Hero1.png" id="2_sweqy"]
 [ext_resource type="Texture2D" uid="uid://dyhoal8to6cg3" path="res://_assets/icon.svg" id="3_hqtel"]
-[ext_resource type="Script" uid="uid://bsxq4e70phb25" path="res://files/player/scripts/deck.gd" id="3_i3pqv"]
 [ext_resource type="Script" uid="uid://cbivhmcvfg0t5" path="res://files/ui/scripts/hud.gd" id="5_sweqy"]
 
 [node name="Player" type="Node2D" unique_id=695888132 groups=["game_events"]]
-script = ExtResource("1_onrkg")
+script = ExtResource("1_nnij7")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1762752050]
 z_index = 99
@@ -15,11 +14,10 @@ position = Vector2(18, -10)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_sweqy")
 
-[node name="Deck" type="Sprite2D" parent="." unique_id=983102359]
+[node name="Deck2" type="Sprite2D" parent="." unique_id=321549645]
 visible = false
 position = Vector2(-69, 90)
 texture = ExtResource("3_hqtel")
-script = ExtResource("3_i3pqv")
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=669905012]
 script = ExtResource("5_sweqy")
@@ -58,4 +56,4 @@ layout_mode = 2
 [node name="EnergyLabel" type="Label" parent="HUD/TopBar/HBoxContainer" unique_id=2041690154]
 layout_mode = 2
 
-[connection signal="ready" from="Deck" to="." method="_on_deck_ready"]
+[connection signal="ready" from="Deck2" to="." method="_on_deck_ready"]

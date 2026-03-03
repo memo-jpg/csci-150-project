@@ -4,7 +4,7 @@ extends Node
 @export var enemy: PackedScene
 @export var card_scene: PackedScene   # visual card scene
 
-var playerNode: Player
+var playerNode
 var enemyNodes: Array[Node2D] = []
 var cardNodes: Array[Node2D] = []
 
@@ -64,39 +64,23 @@ func start_player_turn():
 	energyBar.value = playerNode.getCurrentEnergy()
 
 	print("\n-- PLAYER TURN START --")
-	#print(playerNode.getdeck())
-	playerNode.draw_cards(playerNode.getdeck(), playerNode.gethand(), playerNode.getMaxHandSize())#draw cards at turn start
-	#print(playerNode.getdeck())
-	var cardPos=0
-	cardNodes=[] # clear card array since this should be a fresh hand
-	for card in playerNode.gethand(): #iterates througn hand and creates card scenes for each
-		var tempCard = load_card(card)
-		tempCard.setID(cardPos) 
-		tempCard.position.y = 400
-		tempCard.position.x = 100+200*cardPos 
-		tempCard.scale *= 0.6
-		tempCard.cardActive.connect(_card_active) #card tells us when it is clicked
-		cardNodes.append(tempCard) #add card Node object to our array
-		cardPos+=1
-		#var newCard = cards.instantiate()
-		#newCard.texture = load(card.sprite)
-		#newCard.position.x = 90
-		#add_child(newCard)
-	#print(playerNode.gethand())
-	#print_tree()
-	playerNode.shield = 0 #shield expires at the start of turn
+
+	# Reset shield
+	playerNode.shield = 0
 	if handy_shield:
 		playerNode.shield += 4
 
-	playerNode.draw_cards()
+	# Draw cards from DeckManager
+	playerNode.deckManager.draw_cards(
+		playerNode.deckManager.get_draw_limit()
+	)
 
 	render_hand()
-
 
 func end_player_turn():
 	print("-- PLAYER TURN END --")
 
-	playerNode.discard_hand()
+	playerNode.deckManager.discard_hand()
 	clear_visual_hand()
 
 	start_enemy_turn()
@@ -128,7 +112,7 @@ func end_enemy_turn():
 func render_hand():
 	clear_visual_hand()
 
-	var hand = playerNode.get_hand()
+	var hand = playerNode.deckManager.get_hand()
 
 	for i in range(hand.size()):
 		var cardData: CardData = hand[i]
@@ -186,7 +170,7 @@ func attempt_play_card(index: int, enemyNode: Node2D) -> bool:
 	if turn != "player":
 		return false
 
-	var hand = playerNode.get_hand()
+	var hand = playerNode.deckManager.get_hand()
 	if index < 0 or index >= hand.size():
 		return false
 
@@ -201,12 +185,14 @@ func attempt_play_card(index: int, enemyNode: Node2D) -> bool:
 
 	resolve_card_effect(card, enemyNode)
 
-	playerNode.play_card(index)   # Handles discard/exhaust
+	playerNode.deckManager.play_card(index)
 
 	return true
 
 
 func resolve_card_effect(card: CardData, enemyNode: Node2D):
+
+	# ===== BASIC TYPES =====
 	match card.type:
 		"attack":
 			enemyNode.apply_damage_to_enemy(card.damage)
@@ -216,7 +202,26 @@ func resolve_card_effect(card: CardData, enemyNode: Node2D):
 
 		"status":
 			print("Status card used:", card.name)
-			# future extension
+
+	# ===== SPECIAL LOGIC =====
+	if card.special.is_empty():
+		return
+
+	# Skip enemy turn
+	if card.special.get("skip_enemy_turn", false):
+		print("Enemy turn skipped!")
+		turn = "player" #doesn't work right now
+
+	# Damage equal to current shield
+	if card.special.get("damage_equal_shield", false):
+		var dmg = playerNode.shield
+		print("Dealing damage equal to shield:", dmg)
+		enemyNode.apply_damage_to_enemy(dmg)
+
+	# Double damage
+	if card.special.get("double_damage", false):
+		print("Double damage applied")
+		enemyNode.apply_damage_to_enemy(card.damage)
 
 
 # =========================================================

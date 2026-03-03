@@ -37,7 +37,8 @@ func load_cards(file_path: String) -> void:
 			card_dict["shield"],
 			card_dict["energyCost"],
 			card_dict["sprite"],
-			card_dict.get("exhaust", false) # safe optional field
+			card_dict.get("exhaust", false),
+			card_dict.get("special", {})
 		)
 
 		card_templates[card.name] = card
@@ -59,3 +60,4 @@ func normalize_type(t: String) -> String:
 			return "status"
 		_:
 			return t.to_lower()
+		

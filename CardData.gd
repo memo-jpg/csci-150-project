@@ -9,7 +9,7 @@ var shield: int
 var energy: int
 var exhaust: bool
 var sprite: String
-
+var special: Dictionary = {}
 
 func _init(
 	_id: int,
@@ -19,7 +19,8 @@ func _init(
 	_shield: int,
 	_energy: int,
 	_sprite: String,
-	_exhaust: bool = false
+	_exhaust: bool = false,
+	_special: Dictionary = {}
 ) -> void:
 	id = _id
 	type = _type.to_lower()
@@ -29,6 +30,7 @@ func _init(
 	energy = _energy
 	sprite = _sprite
 	exhaust = _exhaust
+	special = _special
 
 
 func duplicate_instance() -> CardData:
@@ -40,5 +42,6 @@ func duplicate_instance() -> CardData:
 		shield,
 		energy,
 		sprite,
-		exhaust
-	)
+		exhaust,
+		special.duplicate()
+)
