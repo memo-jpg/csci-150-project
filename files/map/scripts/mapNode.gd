@@ -75,11 +75,11 @@ func on_save_game(saved_data:Array[savedData]):
 	"""
 	
 	if(my_data.nodeName == "COMBAT" && my_data.nodeId >= Global.curNodeId):
-		$mapNodeSprites.region_rect = Rect2(0, 400, 36, 24)
+		$mapNodeSprites.region_rect = Rect2(0, 0, 400, 400)
 	elif(my_data.nodeName == "SHOP" && my_data.nodeId >= Global.curNodeId):
-		$mapNodeSprites.region_rect = Rect2(410, 810, 36, 24)
+		$mapNodeSprites.region_rect = Rect2(410, 0, 400, 400)
 	elif(!my_data.isActive):
-		$mapNodeSprites.region_rect = Rect2(820, 1220, 36, 24)
+		$mapNodeSprites.region_rect = Rect2(820, 0, 400, 400)
 	
 	
 	saved_data.append(my_data)
@@ -107,13 +107,12 @@ func on_load_game(saved_data:savedData):
 	elif(!isActive):
 		$tileSet.region_rect = Rect2(549, 328, 36, 24)
 	"""
-	if(nodeName == "COMBAT" && nodeId >= Global.curNodeId):
-		$mapNodeSprites.region_rect = Rect2(0, 400, 36, 24)
-	elif(nodeName == "SHOP" && nodeId >= Global.curNodeId):
-		$mapNodeSprites.region_rect = Rect2(410, 810, 36, 24)
-	elif(!isActive):
-		$mapNodeSprites.region_rect = Rect2(820, 1220, 36, 24)
-	
+	if(my_data.nodeName == "COMBAT" && my_data.nodeId >= Global.curNodeId):
+		$mapNodeSprites.region_rect = Rect2(0, 0, 400, 400)
+	elif(my_data.nodeName == "SHOP" && my_data.nodeId >= Global.curNodeId):
+		$mapNodeSprites.region_rect = Rect2(400, 0, 400, 400)
+	elif(!my_data.isActive):
+		$mapNodeSprites.region_rect = Rect2(800, 0, 400, 400)
 	
 	# if my_data.isActive && my_data.nodeName == SHOP : show node
 
