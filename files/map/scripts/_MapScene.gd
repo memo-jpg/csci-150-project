@@ -14,14 +14,17 @@ var num_of_nodes: int = 10
 
 # create a var for player than can be sent to the loader and saved in the main scene so that position can be handled
 
+@onready var scene_transition = $SceneTransition/AnimationPlayer
 @onready var saver_loader: saverLoader = %SaverLoader
 # @onready var player: Player = %Player
 
 func _ready():
 	print("_MainScene _ready running")
+	scene_transition.get_parent().get_node("ColorRect").color.a = 255
+	scene_transition.play("fade_out")
 	
 	handleScene()
-	
+
 
 
 func handleScene():
@@ -50,7 +53,7 @@ func handleScene():
 				playerRestored.global_position = node.global_position # somethings wrong with player restored
 				playerRestored.global_position.y -= 55
 				playerRestored.scale *= 0.5
-				# playerRestored.z_index = 99
+				playerRestored.z_index = 99
 				node.isActive = true
 				
 			else: #(node.nodeId != Global.curNodeId):
@@ -96,6 +99,7 @@ func handleScene():
 			if(node.nodeId == Global.curNodeId && Global.curNodeId <= placedNodes.size()):
 				playerRestored.global_position = node.global_position
 				playerRestored.global_position.y -= 55
+				playerRestored.z_index = 99
 				node.isActive = true
 				
 			else: #(node.nodeId != Global.curNodeId):
@@ -164,6 +168,7 @@ func draw_lines(arrArg : Array):
 			line.add_point(nodeB.position)  # Add the position of node B
 			line.width = 2  # Line width
 			line.default_color = Color(0, 0, 0)  # White color for the line
+			
 			
 			# Add the line to the scene to visually connect the nodes
 			add_child(line)

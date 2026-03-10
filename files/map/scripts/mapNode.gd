@@ -29,6 +29,7 @@ func _init(argId: int = -1, argName: String = "noName", argNodeType: nodeTypes =
 	print(curNodeType)
 	
 
+@onready var scene_transition = $SceneTransition/AnimationPlayer
 
 func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
 	# if map_node is active, is clickable
@@ -40,6 +41,9 @@ func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
 		# Current scene becomes previous globally
 		Global.prev_scene_path = get_tree().current_scene.scene_file_path
 		
+		scene_transition.play("fade_in")
+		await get_tree().create_timer(0.5).timeout
+		
 		if(nodeName == "COMBAT"):
 			print("Combat Node is clicked") 
 			get_tree().change_scene_to_file("res://files/combat/scenes/combat.tscn") #Change to combat
@@ -50,6 +54,7 @@ func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
 			
 		Global.curNodeId += 1
 		
+
 		
 
 func on_save_game(saved_data:Array[savedData]):

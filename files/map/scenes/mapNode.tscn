@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cbyogbk21nva"]
 
 [ext_resource type="Script" uid="uid://dfncute6v0g8l" path="res://files/map/scripts/mapNode.gd" id="1_uma8q"]
+[ext_resource type="PackedScene" uid="uid://oc864vuqi064" path="res://files/menus/scenes/scene_transition.tscn" id="3_1yte8"]
 [ext_resource type="Texture2D" uid="uid://cdvswmdx14oh5" path="res://_assets/projectResources/mapNodes/mapNodeSprites.png" id="3_21y73"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_21y73"]
@@ -19,3 +20,5 @@ scale = Vector2(0.15, 0.15)
 texture = ExtResource("3_21y73")
 region_enabled = true
 region_rect = Rect2(0, 0, 1230, 400)
+
+[node name="SceneTransition" parent="." unique_id=2044027244 instance=ExtResource("3_1yte8")]

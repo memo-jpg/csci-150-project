@@ -3,7 +3,14 @@ extends Node
 @export var enemy: PackedScene
 @export var cards: PackedScene
 
+@onready var scene_transition = $SceneTransition/AnimationPlayer
 
+	#scene_transition.play("fade_in")
+	#await get_tree().create_timer(0.5).timeout
+
+	#scene_transition.get_parent().get_node("ColorRect").color.a = 255
+	#scene_transition.play("fade_out")
+	
 var playerNode
 var enemyNodes: Array[Node2D]
 var cardNodes: Array[Node2D]
@@ -26,6 +33,9 @@ var gold_totem = false # gain shield at turn start
 #========= Artifacts =============#
 
 func _ready():
+	# Scene transition
+	scene_transition.get_parent().get_node("ColorRect").color.a = 255
+	scene_transition.play("fade_out")
 	# Called when combat starts
 	playerNode = player.instantiate();
 	#Temp value instantiation
@@ -309,8 +319,15 @@ func check_combat_state():
 			# TODO,HANDLE DEATH
 		for enemy in enemyNodes:
 			if enemy.currentHp <= 0:
+				
+				# Paueses the game for 1.5s
+				scene_transition.play("fade_in")
+				await get_tree().create_timer(.5).timeout
+				
 				enemy.queue_free()
 				enemyNodes.pop_at(enemy.pos)
+				
+				
 				if !enemyNodes.size():
 					var prevScene = Global.prev_scene_path
 					if (prevScene != ""):
@@ -325,6 +342,10 @@ func check_combat_state():
 
 func _on_end_combat_test_pressed() -> void:
 	var prevScene = Global.prev_scene_path
+	
+	# Scene transition
+	scene_transition.play("fade_in")
+	await get_tree().create_timer(0.5).timeout
 	
 	if (prevScene != ""):
 		#Global.curNodeId += 1

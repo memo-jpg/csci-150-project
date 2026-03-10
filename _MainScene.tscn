@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://wmqx45sjpmnr" path="res://files/map/scripts/_MapScene.gd" id="3_drw4x"]
 [ext_resource type="TileSet" uid="uid://kxcfvxp55ryw" path="res://_assets/projectResources/tileSet.tres" id="4_ws67c"]
 [ext_resource type="Texture2D" uid="uid://b8sqxgi3idirp" path="res://_assets/projectResources/kenneyAssets/cityTileset/Tilemap/tilemap_packed.png" id="5_8ennv"]
+[ext_resource type="PackedScene" uid="uid://oc864vuqi064" path="res://files/menus/scenes/scene_transition.tscn" id="6_du2u0"]
 [ext_resource type="Script" uid="uid://dksq6xjngymi5" path="res://files/saveGame/saverLoader.gd" id="7_1qghs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1qghs"]
@@ -1081,6 +1082,8 @@ tile_set = SubResource("TileSet_l534r")
 visible = false
 tile_map_data = PackedByteArray("AAAXABAAAQAiABQAAAAXABEAAQAiABUAAAAYABAAAQAjABQAAAAYABEAAQAjABUAAAAZABAAAQAkABQAAAAZABEAAQAkABUAAAAeABQAAQAiABQAAAAeABUAAQAiABUAAAAfABQAAQAjABQAAAAfABUAAQAjABUAAAAgABQAAQAkABQAAAAgABUAAQAkABUAAAAmABgAAQAiABQAAAAmABkAAQAiABUAAAAnABgAAQAjABQAAAAnABkAAQAjABUAAAAoABgAAQAkABQAAAAoABkAAQAkABUAAAArABMAAQAiABQAAAArABQAAQAiABUAAAAsABMAAQAjABQAAAAsABQAAQAjABUAAAAtABMAAQAkABQAAAAtABQAAQAkABUAAAA1ABAAAQAiABQAAAA1ABEAAQAiABUAAAA2ABAAAQAjABQAAAA2ABEAAQAjABUAAAA3ABAAAQAkABQAAAA3ABEAAQAkABUAAABBABEAAQAjAAIAAABBABIAAQAjAAMAAABHABEAAQAjAAIAAABHABIAAQAjAAMAAABDABEAAQAVAA8AAABDABIAAQAVABAAAABEABEAAQAWAA8AAABEABIAAQAWABAAAABFABEAAQAXAA8AAABFABIAAQAXABAAAABDAA4AAQAXAAkAAABDAA8AAQAXAAoAAABDABAAAQAXAAsAAABEAA4AAQAYAAkAAABEAA8AAQAYAAoAAABEABAAAQAYAAsAAABFAA4AAQAZAAkAAABFAA8AAQAZAAoAAABFABAAAQAZAAsAAABCABAAAQAQAA4AAABCABEAAQAQAA8AAABCABIAAQAQABAAAABGABAAAQATAA4AAABGABEAAQATAA8AAABGABIAAQATABAAAAA7ABcAAQAiABQAAAA7ABgAAQAiABUAAAA8ABcAAQAjABQAAAA8ABgAAQAjABUAAAA9ABcAAQAkABQAAAA9ABgAAQAkABUAAAA=")
 tile_set = ExtResource("4_ws67c")
+
+[node name="SceneTransition" parent="_GameManager/_Map" unique_id=2044027244 instance=ExtResource("6_du2u0")]
 
 [node name="Camera2D" type="Camera2D" parent="_GameManager/_Map" unique_id=1112986086]
 position = Vector2(579, 324)
