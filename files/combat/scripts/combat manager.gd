@@ -320,7 +320,9 @@ func check_combat_state():
 		for enemy in enemyNodes:
 			if enemy.currentHp <= 0:
 				
-				# Paueses the game for 1.5s
+				# Paueses the game for .75s before fade in animation
+				# Could add a victory screen to this(?)
+				await get_tree().create_timer(.75).timeout
 				scene_transition.play("fade_in")
 				await get_tree().create_timer(.5).timeout
 				

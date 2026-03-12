@@ -3,11 +3,14 @@ const MAP_NODE = preload("res://files/map/scenes/mapNode.tscn")
 const PLAYER = preload("res://files/player/scenes/player.tscn")
 
 
-var spacing: int = 100
+var spacing: int = 115
 var start_x_pos: int = 50
 var start_y_pos: int = 300
 
 var num_of_nodes: int = 10
+
+var row_of_nodes: int = 10
+var col_of_nodes: int = 3
 
 #var placedNodes : Array = []
 #var playerRestored : PlayerTwo
@@ -99,6 +102,7 @@ func handleScene():
 			if(node.nodeId == Global.curNodeId && Global.curNodeId <= placedNodes.size()):
 				playerRestored.global_position = node.global_position
 				playerRestored.global_position.y -= 55
+				playerRestored.scale *= 0.5
 				playerRestored.z_index = 99
 				node.isActive = true
 				
