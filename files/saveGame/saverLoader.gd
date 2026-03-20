@@ -12,12 +12,45 @@ func saveGame():
 	var saved_game:savedGame = savedGame.new()
 	
 	var saved_data:Array[savedData] = []
+	
 	get_tree().call_group("game_events", "on_save_game", saved_data)
 	saved_game.saved_data = saved_data
+	
+	print("saved_game.saved_data: ", saved_game.saved_data, " in saveGame()!")
 	
 	ResourceSaver.save(saved_game, "user://savegame.tres")
 	
 
+func updateSaveGame(_dict):
+	var saved_game:savedGame = savedGame.new()
+	var saved_data:Array[savedData] = []
+	
+	var allNodes = {}
+	var mapNodeArr : Array = []
+	var playerRestored : Player = null
+	
+	# Create a saved_game object
+	# create array of saved data
+	# get node, get gree of game_events objects that have the on_save_game data array
+	# saved_game's saved_data object array = the saved_data array created locally
+	# Resource saver to saved game
+	
+	# Create a saved_game object
+	# create array of saved data
+	# get node, get gree of game_events objects that have the on_save_game data array
+	# saved_game's saved_data object array = the saved_data array created locally
+	# Resource saver to saved game
+	
+	if(_dict):		
+		print("Dictionary: ", _dict, " exists")
+		
+	else:
+		print("Dictionary does not exits")
+		
+	
+	print("updatedSaveGame from saverLoader.gd called")
+	pass
+	
 
 func loadGame():
 	var allNodes = {}
@@ -30,6 +63,7 @@ func loadGame():
 		return allNodes
 	
 	var saved_game:savedGame = load("user://savegame.tres") as savedGame
+	print("saved_game.saved_data: ", saved_game.saved_data, " in loadGame()!")
 	get_tree().call_group("game_events", "on_before_load_game")
 	
 	for item in saved_game.saved_data:

@@ -49,7 +49,7 @@ func handleScene():
 		if(playerRestored):
 			print("_MapScene:")
 			print(playerRestored)
-			print("Global.curNodeId: ", Global.curNodeId)
+			print("player.curNodeId: ", playerRestored.curNodeId)
 			print("player.name: ", playerRestored.name)
 			print("player.position: ", playerRestored.position)
 			#Global.curNodeId = playerRestored.curNodeId

@@ -365,6 +365,9 @@ func _on_end_turn_pressed() -> void:
 func handlePlayerVictory() -> void:
 		var loadedDict = saver_loader.loadGame() # takes array here and appens the map nodes to it
 		
+		
+		saver_loader.updateSaveGame(loadedDict)
+		
 		var playerRestored = loadedDict.get("player", null)
 		var placedNodes = loadedDict.get("mapNodes", [])
 		
