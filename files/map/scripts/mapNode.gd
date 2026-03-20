@@ -7,6 +7,7 @@ class_name mapNode
 @export var nodeName : String
 @export var nodeData : Array # rand array of ints to test
 @export var isActive : bool
+@export var isCompleted : bool
 
 #@export_enum("COMBAT:0","SHOP:1") var nodeType : int = -1
 enum nodeTypes {EMPTY, COMBAT, SHOP}
@@ -25,6 +26,7 @@ func _init(argId: int = -1, argName: String = "noName", argNodeType: nodeTypes =
 	curNodeType = argNodeType
 	nodeData = argData
 	isActive = false
+	isCompleted = false
 	
 	print(curNodeType)
 	
@@ -52,10 +54,13 @@ func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
 			print("Shop Node is clicked") 
 			get_tree().change_scene_to_file("res://files/combat/scenes/combat.tscn") #Change to shop
 			
-		Global.curNodeId += 1
+		
+		#Global.curNodeId += 1
+		
 		
 
-		
+@onready var saver_loader: saverLoader = %SaverLoader
+
 
 func on_save_game(saved_data:Array[savedData]):
 	
@@ -78,12 +83,15 @@ func on_save_game(saved_data:Array[savedData]):
 	elif(!isActive):
 		$tileSet.region_rect = Rect2(549, 328, 36, 24)
 	"""
-	
-	if(my_data.nodeName == "COMBAT" && my_data.nodeId >= Global.curNodeId):
+	#var loadedDict = saver_loader.loadGame() # takes array here and appens the map nodes to it
+	#var playerRestored = loadedDict.get("player", null)
+		
+		
+	if(my_data.nodeName == "COMBAT" && !my_data.isCompleted):
 		$mapNodeSprites.region_rect = Rect2(0, 0, 400, 400)
-	elif(my_data.nodeName == "SHOP" && my_data.nodeId >= Global.curNodeId):
+	elif(my_data.nodeName == "SHOP" && !my_data.isCompleted):
 		$mapNodeSprites.region_rect = Rect2(410, 0, 400, 400)
-	elif(!my_data.isActive):
+	elif(!my_data.isActive && my_data.isCompleted):
 		$mapNodeSprites.region_rect = Rect2(820, 0, 400, 400)
 	
 	
@@ -101,6 +109,7 @@ func on_load_game(saved_data:savedData):
 	nodeId = my_data.nodeId
 	nodeName = my_data.nodeName
 	isActive = my_data.isActive
+	isCompleted = my_data.isCompleted
 	nodeData = my_data.nodeData
 	#nodePos = my_data.nodePos
 	# $tileSet.region_rect = Rect2(200, 200, 30, 30)
@@ -112,12 +121,12 @@ func on_load_game(saved_data:savedData):
 	elif(!isActive):
 		$tileSet.region_rect = Rect2(549, 328, 36, 24)
 	"""
-	if(my_data.nodeName == "COMBAT" && my_data.nodeId >= Global.curNodeId):
+	if(my_data.nodeName == "COMBAT" && !my_data.isCompleted):
 		$mapNodeSprites.region_rect = Rect2(0, 0, 400, 400)
-	elif(my_data.nodeName == "SHOP" && my_data.nodeId >= Global.curNodeId):
-		$mapNodeSprites.region_rect = Rect2(400, 0, 400, 400)
-	elif(!my_data.isActive):
-		$mapNodeSprites.region_rect = Rect2(800, 0, 400, 400)
+	elif(my_data.nodeName == "SHOP" && !my_data.isCompleted):
+		$mapNodeSprites.region_rect = Rect2(410, 0, 400, 400)
+	elif(!my_data.isActive && isCompleted):
+		$mapNodeSprites.region_rect = Rect2(820, 0, 400, 400)
 	
 	# if my_data.isActive && my_data.nodeName == SHOP : show node
 

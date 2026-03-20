@@ -344,7 +344,8 @@ func check_combat_state():
 
 func _on_end_combat_test_pressed() -> void:
 	var prevScene = Global.prev_scene_path
-	
+	handlePlayerVictory()
+	await get_tree().create_timer(2.0).timeout
 	# Scene transition
 	scene_transition.play("fade_in")
 	await get_tree().create_timer(0.5).timeout
@@ -358,3 +359,23 @@ func _on_end_combat_test_pressed() -> void:
 func _on_end_turn_pressed() -> void:
 	end_player_turn()
 	pass # Replace with function body.
+
+@onready var saver_loader: saverLoader = %SaverLoader
+
+func handlePlayerVictory() -> void:
+		var loadedDict = saver_loader.loadGame() # takes array here and appens the map nodes to it
+		
+		var playerRestored = loadedDict.get("player", null)
+		var placedNodes = loadedDict.get("mapNodes", [])
+		
+		
+		if(playerRestored):
+			print("Player exists in combat manager.gd!")
+			playerRestored.curNodeId += 1
+			saver_loader.saveGame() # saving here saves nothing
+			#saver_loader.loadGame()
+		else:
+			print("Player is NULL in combat manager.gd")
+			
+		
+		pass

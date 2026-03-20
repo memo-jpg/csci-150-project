@@ -7,6 +7,7 @@
 [ext_resource type="TileSet" uid="uid://kxcfvxp55ryw" path="res://_assets/projectResources/tileSet.tres" id="6_eavn3"]
 [ext_resource type="PackedScene" uid="uid://oc864vuqi064" path="res://files/menus/scenes/scene_transition.tscn" id="7_rnged"]
 [ext_resource type="Texture2D" uid="uid://b8sqxgi3idirp" path="res://_assets/projectResources/kenneyAssets/cityTileset/Tilemap/tilemap_packed.png" id="7_vbr26"]
+[ext_resource type="Script" uid="uid://dksq6xjngymi5" path="res://files/saveGame/saverLoader.gd" id="8_eavn3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jhupi"]
 texture = ExtResource("7_vbr26")
@@ -1101,6 +1102,12 @@ offset_bottom = 429.0
 position = Vector2(575, 320)
 
 [node name="SceneTransition" parent="." unique_id=2044027244 instance=ExtResource("7_rnged")]
+
+[node name="Utilities" type="Node" parent="." unique_id=1544884707]
+
+[node name="SaverLoader" type="Node" parent="Utilities" unique_id=1703390766]
+unique_name_in_owner = true
+script = ExtResource("8_eavn3")
 
 [connection signal="pressed" from="End Combat (test)" to="." method="_on_end_combat_test_pressed"]
 [connection signal="pressed" from="End Turn" to="." method="_on_end_turn_pressed"]
