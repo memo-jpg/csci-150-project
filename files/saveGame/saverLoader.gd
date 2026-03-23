@@ -22,43 +22,21 @@ func saveGame():
 	
 
 func savePlayer():
-	#var saved_game:savedGame = savedGame.new()
+	var saved_game: savedGame = load("user://savegame.tres") as savedGame
 	
-	var saved_data:Array[savedData] = []
+	var saved_data: Array[savedData] = []
 	
-	var mapNodeArr : Array = []
-	var playerRestored : Player = null
-	
-	
-	var saved_game:savedGame = load("user://savegame.tres") as savedGame
-	print("saved_game.saved_data: ", saved_game.saved_data, " in savePlayer()!")
-	
+	# 1. Keep existing mapNode data from the file as-is
 	for item in saved_game.saved_data:
-		var scene = load(item.scene_path) as PackedScene
-		var restored_node = scene.instantiate()
-		
-		if(item.scene_path == "res://files/map/scenes/mapNode.tscn"):
+		if item.scene_path == "res://files/map/scenes/mapNode.tscn":
 			saved_data.append(item)
-			print("item: ", item, " in savePlayer()")
-			print("mapNode restored: ", restored_node, " in savePlayer()")
-			
-		
-		elif(item.scene_path == "res://files/player/scenes/player.tscn"):
-			playerRestored = restored_node
-			print("playerRestored.curNodeId = ", playerRestored.curNodeId ," before update in savePlayer()")
-			playerRestored.curNodeId += 1
-			print("playerRestored.curNodeId = ", playerRestored.curNodeId ," after update in savePlayer()")
-			
-		
 	
-	#saved_data.append(mapNodeArr)
+	# 2. Let live nodes (Player only, since we're in combat) write their data
 	get_tree().call_group("game_events", "on_save_game", saved_data)
+	
 	saved_game.saved_data = saved_data
 	print("saved_data: ", saved_data, " in savePlayer()")
-	
-	
 	ResourceSaver.save(saved_game, "user://savegame.tres")
-	
 
 
 func loadGame():

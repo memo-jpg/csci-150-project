@@ -345,8 +345,10 @@ func check_combat_state():
 
 
 func _on_end_combat_test_pressed() -> void:
-	var prevScene = Global.prev_scene_path
 	handlePlayerVictory()
+	var prevScene = Global.prev_scene_path
+	
+	
 	await get_tree().create_timer(0.5).timeout
 	# Scene transition
 	scene_transition.play("fade_in")
@@ -367,6 +369,11 @@ func _on_end_turn_pressed() -> void:
 @onready var saver_loader: saverLoader = %SaverLoader
 
 func handlePlayerVictory() -> void:
+	
+	var player = get_tree().get_first_node_in_group("game_events")
+	
+	if player is Player:
+		player.curNodeId += 1
 	
 	saver_loader.savePlayer()
 	
