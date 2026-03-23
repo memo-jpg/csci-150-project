@@ -307,6 +307,8 @@ func load_card(card: Object):
 	
 	add_child(newCard) 
 	return newCard
+
+
 # STATE CHECK
 func check_combat_state():
 		if playerNode.getCurrentHP() <= 0:
@@ -345,7 +347,7 @@ func check_combat_state():
 func _on_end_combat_test_pressed() -> void:
 	var prevScene = Global.prev_scene_path
 	handlePlayerVictory()
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(0.5).timeout
 	# Scene transition
 	scene_transition.play("fade_in")
 	await get_tree().create_timer(0.5).timeout
@@ -354,6 +356,8 @@ func _on_end_combat_test_pressed() -> void:
 		#Global.curNodeId += 1
 		#print("Global.curNodeId: ", Global.curNodeId)
 		get_tree().change_scene_to_file(prevScene)
+		
+	
 
 
 func _on_end_turn_pressed() -> void:
@@ -363,22 +367,6 @@ func _on_end_turn_pressed() -> void:
 @onready var saver_loader: saverLoader = %SaverLoader
 
 func handlePlayerVictory() -> void:
-		var loadedDict = saver_loader.loadGame() # takes array here and appens the map nodes to it
-		
-		
-		saver_loader.updateSaveGame(loadedDict)
-		
-		var playerRestored = loadedDict.get("player", null)
-		var placedNodes = loadedDict.get("mapNodes", [])
-		
-		
-		if(playerRestored):
-			print("Player exists in combat manager.gd!")
-			playerRestored.curNodeId += 1
-			saver_loader.saveGame() # saving here saves nothing
-			#saver_loader.loadGame()
-		else:
-			print("Player is NULL in combat manager.gd")
-			
-		
-		pass
+	
+	saver_loader.savePlayer()
+	

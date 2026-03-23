@@ -21,37 +21,28 @@ func saveGame():
 	ResourceSaver.save(saved_game, "user://savegame.tres")
 	
 
-func updateSaveGame(_dict):
-	var saved_game:savedGame = savedGame.new()
-	var saved_data:Array[savedData] = []
+func savePlayer():
+	#var saved_game:savedGame = savedGame.new()
 	
-	var allNodes = {}
-	var mapNodeArr : Array = []
+	var saved_data:Array[savedData] = []
 	var playerRestored : Player = null
 	
-	# Create a saved_game object
-	# create array of saved data
-	# get node, get gree of game_events objects that have the on_save_game data array
-	# saved_game's saved_data object array = the saved_data array created locally
-	# Resource saver to saved game
 	
-	# Create a saved_game object
-	# create array of saved data
-	# get node, get gree of game_events objects that have the on_save_game data array
-	# saved_game's saved_data object array = the saved_data array created locally
-	# Resource saver to saved game
+	var saved_game:savedGame = load("user://savegame.tres") as savedGame
+	print("saved_game.saved_data: ", saved_game.saved_data, " in savePlayer()!")
 	
-	if(_dict):		
-		print("Dictionary: ", _dict, " exists")
+	for item in saved_game.saved_data:
+		var scene = load(item.scene_path) as PackedScene
+		var restored_node = scene.instantiate()
 		
-	else:
-		print("Dictionary does not exits")
-		
+		if(item.scene_path == "res://files/player/scenes/player.tscn"):
+			playerRestored = restored_node
+			print("playerRestored.curNodeId = ", playerRestored.curNodeId ," before update in savePlayer()")
+			playerRestored.curNodeId += 1
+			print("playerRestored.curNodeId = ", playerRestored.curNodeId ," after update in savePlayer()")
+			ResourceSaver.save(saved_game, "user://savegame.tres")
+			
 	
-	print("updatedSaveGame from saverLoader.gd called")
-	pass
-	
-
 func loadGame():
 	var allNodes = {}
 	var mapNodeArr : Array = []
@@ -69,7 +60,6 @@ func loadGame():
 	for item in saved_game.saved_data:
 		var scene = load(item.scene_path) as PackedScene
 		var restored_node = scene.instantiate()
-		
 		# handles mapNodes
 		if(item.scene_path == "res://files/map/scenes/mapNode.tscn"):
 			mapNodeArr.append(restored_node)
@@ -88,8 +78,25 @@ func loadGame():
 		
 		if restored_node.has_method("on_load_game"):
 			restored_node.on_load_game(item)
-			
-	
+
 	allNodes["player"] = playerRestored
 	allNodes["mapNodes"] = mapNodeArr
 	return allNodes
+	'''
+		if(_map):
+			if(item.scene_path == "res://files/map/scenes/mapNode.tscn"):
+				mapNodeArr.append(restored_node)
+			elif(item.scene_path == "res://files/player/scenes/player.tscn"):
+				playerRestored = restored_node
+				
+		else:
+			restored_node.queue_free() # temp fix for oprhans in unit testing
+			
+		
+		
+		if restored_node.has_method("on_load_game"):
+			restored_node.on_load_game(item)
+			
+	
+			
+	'''
