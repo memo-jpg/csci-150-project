@@ -118,6 +118,9 @@ func generate_player():
 	add_child(newPlayer)
 	
 
+@warning_ignore("integer_division")
+var shop_index = randi_range(num_of_nodes / 2 + 1, num_of_nodes - 2)
+
 func generate_map_1d():
 	var tempArr : Array
 	
@@ -136,9 +139,6 @@ func generate_map_1d():
 			#var nodeName = "Node " + str(i)
 		
 		newNode.isCompleted = false
-		
-		@warning_ignore("integer_division")
-		var shop_index = randi_range(num_of_nodes / 2 + 1, num_of_nodes - 2)
 		
 		if(i == shop_index): 
 			newNode.setNodeName("SHOP")
