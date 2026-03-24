@@ -53,7 +53,6 @@ func handleScene():
 			print("player.name: ", playerRestored.name)
 			print("player.position: ", playerRestored.position)
 			#Global.curNodeId = playerRestored.curNodeId
-			print("player.curNodeId: ", playerRestored.curNodeId)
 			
 			playerRestored.scale *= 0.5
 			playerRestored.z_index = 99
@@ -62,28 +61,24 @@ func handleScene():
 			print("Player is null")
 			
 		for node in placedNodes:
-			print("Node pos: ", node.global_position)
-			if(node.nodeId == playerRestored.curNodeId && playerRestored.curNodeId <= placedNodes.size()):
-				playerRestored.global_position = node.global_position # somethings wrong with player restored
+			if node.nodeId == playerRestored.curNodeId - 1:
+				playerRestored.global_position = node.global_position
 				playerRestored.global_position.y -= 55
-				#playerRestored.scale *= 0.5
-				#playerRestored.z_index = 99
+				node.isActive = false
+				node.isCompleted = true
+			elif node.nodeId == playerRestored.curNodeId:
 				node.isActive = true
 				node.isCompleted = false
-				
-			else: #(node.nodeId != Global.curNodeId):
+			else:
 				node.isActive = false
-					
-					
+				node.isCompleted = false
 		
-				
-				
+		
 		draw_lines(placedNodes)
 		
-		saver_loader.saveGame()
+		#saver_loader.saveGame()
 		
 		
-
 	else: # New game case
 		print("Save file does NOT exist")
 		#Global.curNodeId = 0

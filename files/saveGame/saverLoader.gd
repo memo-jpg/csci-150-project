@@ -26,18 +26,36 @@ func savePlayer():
 	
 	var saved_data: Array[savedData] = []
 	
-	# 1. Keep existing mapNode data from the file as-is
+	# keep mapNode data from the file
 	for item in saved_game.saved_data:
 		if item.scene_path == "res://files/map/scenes/mapNode.tscn":
 			saved_data.append(item)
 	
-	# 2. Let live nodes (Player only, since we're in combat) write their data
+	# save player
 	get_tree().call_group("game_events", "on_save_game", saved_data)
 	
 	saved_game.saved_data = saved_data
 	print("saved_data: ", saved_data, " in savePlayer()")
 	ResourceSaver.save(saved_game, "user://savegame.tres")
 
+func loadPlayer() -> Player:
+	if not FileAccess.file_exists("user://savegame.tres"):
+		print("Save file 'savegame.tres' does not exist !")
+		return null
+		
+	var saved_game:savedGame = load("user://savegame.tres") as savedGame
+	print("saved_game.saved_data: ", saved_game.saved_data, " in loadPlayer()!")
+	
+	for item in saved_game.saved_data:
+		if(item.scene_path == "res://files/player/scenes/player.tscn"):
+			var scene = load(item.scene_path) as PackedScene
+			var playerRestored = scene.instantiate()
+			playerRestored.on_load_game(item)
+			return playerRestored
+			
+	
+	return null
+	
 
 func loadGame():
 	var allNodes = {}
@@ -74,25 +92,8 @@ func loadGame():
 		
 		if restored_node.has_method("on_load_game"):
 			restored_node.on_load_game(item)
-
+	
 	allNodes["player"] = playerRestored
 	allNodes["mapNodes"] = mapNodeArr
 	return allNodes
-	'''
-		if(_map):
-			if(item.scene_path == "res://files/map/scenes/mapNode.tscn"):
-				mapNodeArr.append(restored_node)
-			elif(item.scene_path == "res://files/player/scenes/player.tscn"):
-				playerRestored = restored_node
-				
-		else:
-			restored_node.queue_free() # temp fix for oprhans in unit testing
-			
-		
-		
-		if restored_node.has_method("on_load_game"):
-			restored_node.on_load_game(item)
-			
 	
-			
-	'''

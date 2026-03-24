@@ -37,7 +37,7 @@ func _ready():
 	scene_transition.get_parent().get_node("ColorRect").color.a = 255
 	scene_transition.play("fade_out")
 	# Called when combat starts
-	playerNode = player.instantiate();
+	playerNode = saver_loader.loadPlayer()
 	#Temp value instantiation
 	playerNode.setMaxHP(300)
 	playerNode.setCurrentHP(100)
@@ -321,8 +321,10 @@ func check_combat_state():
 			# TODO,HANDLE DEATH
 		for enemy in enemyNodes:
 			if enemy.currentHp <= 0:
+				handlePlayerVictory()
 				
-				# Paueses the game for .75s before fade in animation
+				
+				# Paueses the game for .50s before fade in animation
 				# Could add a victory screen to this(?)
 				await get_tree().create_timer(.75).timeout
 				scene_transition.play("fade_in")
