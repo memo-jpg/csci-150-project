@@ -118,6 +118,9 @@ func getdiscard():
 
 func Apply_shield_to_player(shld: int):
 	shield += shld
+	
+
+
 func _init():
 	print("Hello World!")
 

@@ -41,6 +41,7 @@ func _ready():
 	#Temp value instantiation
 	playerNode.setMaxHP(300)
 	playerNode.setCurrentHP(100)
+	#playerNode.z_index = 0
 	playerNode.global_position = Vector2(200,300)
 	add_child(playerNode)
 	energyBar.max_value = playerNode.getMaxEnergy()

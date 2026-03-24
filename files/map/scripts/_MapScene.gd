@@ -47,20 +47,21 @@ func handleScene():
 		var placedNodes = loadedDict.get("mapNodes", [])
 		
 		if(playerRestored):
-			print("_MapScene:")
+			print("_MapScene.gd playerRestored:")
 			print(playerRestored)
-			print("player.curNodeId: ", playerRestored.curNodeId)
-			print("player.name: ", playerRestored.name)
-			print("player.position: ", playerRestored.position)
-			#Global.curNodeId = playerRestored.curNodeId
 			
 			playerRestored.scale *= 0.5
 			playerRestored.z_index = 99
 			
-		else:
-			print("Player is null")
 			
+			
+		else:
+			print("Player is null is _MapScene.gd")
+			
+		
+		
 		for node in placedNodes:
+			
 			print("nodeId: ", node.nodeId, " | isActive: ", node.isActive, " | isCompleted: ", node.isCompleted, " | nodeName: ", node.nodeName)
 			if node.nodeId == playerRestored.curNodeId - 1:
 				playerRestored.global_position = node.global_position
@@ -76,12 +77,13 @@ func handleScene():
 				
 			else:
 				node.updateSprite()
-				
-		
+			
+			
 		
 		draw_lines(placedNodes)
 		
-		saver_loader.saveGame()
+		saver_loader.saveMapNodes()
+		#saver_loader.saveGame()
 		
 		
 	else: # New game case
@@ -93,6 +95,7 @@ func handleScene():
 		
 		# Generates the player but doesn't scale it down nor position it correctly if i remove the save vvv
 		saver_loader.saveGame()
+		#saver_loader.loadGame()
 		
 	
 	
@@ -113,7 +116,7 @@ func generate_player():
 	var newPlayer = PLAYER.instantiate()
 	newPlayer.position = Vector2(60, 300)
 	newPlayer.scale *= 0.5
-	newPlayer.curNodeId = -1
+	#newPlayer.curNodeId = 0
 	add_child(newPlayer)
 	
 

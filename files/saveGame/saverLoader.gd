@@ -23,12 +23,10 @@ func saveGame():
 
 func savePlayer():
 	var saved_game: savedGame = load("user://savegame.tres") as savedGame
-	
 	var saved_data: Array[savedData] = []
 	
 	# keep mapNode data from the file
 	for item in saved_game.saved_data:
-		
 		if item.scene_path == "res://files/map/scenes/mapNode.tscn":
 			saved_data.append(item)
 	
@@ -39,6 +37,23 @@ func savePlayer():
 	print("saved_data: ", saved_data, " in savePlayer()")
 	ResourceSaver.save(saved_game, "user://savegame.tres")
 
+func saveMapNodes():
+	var saved_game: savedGame = load("user://savegame.tres") as savedGame
+	var saved_data: Array[savedData] = []
+	
+	# keep mapNode data from the file
+	for item in saved_game.saved_data:
+		if item.scene_path == "res://files/player/scenes/player.tscn":
+			saved_data.append(item)
+	
+	var mapNodeMembers = get_tree().get_nodes_in_group("game_events")
+	for node in mapNodeMembers:
+		if node is mapNode:
+			node.on_save_game(saved_data)
+			print("saving nodeId: ", node.nodeId," | isActive: ", node.isActive, " | isCompleted: ", node.isCompleted, " | in saveMapNodes() !")
+	
+	saved_game.saved_data = saved_data
+	ResourceSaver.save(saved_game, "user://savegame.tres")
 
 func loadPlayer() -> Player:
 	if not FileAccess.file_exists("user://savegame.tres"):
