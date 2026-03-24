@@ -28,6 +28,7 @@ func savePlayer():
 	
 	# keep mapNode data from the file
 	for item in saved_game.saved_data:
+		
 		if item.scene_path == "res://files/map/scenes/mapNode.tscn":
 			saved_data.append(item)
 	
@@ -37,6 +38,7 @@ func savePlayer():
 	saved_game.saved_data = saved_data
 	print("saved_data: ", saved_data, " in savePlayer()")
 	ResourceSaver.save(saved_game, "user://savegame.tres")
+
 
 func loadPlayer() -> Player:
 	if not FileAccess.file_exists("user://savegame.tres"):

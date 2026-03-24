@@ -58,10 +58,10 @@ _data = {
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=2132871402]
 z_index = 999
-offset_left = -459.0
-offset_top = -509.0
-offset_right = 1933.7063
-offset_bottom = 776.0
+offset_left = -3420.0
+offset_top = -1121.0
+offset_right = 1665.1992
+offset_bottom = 1610.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 

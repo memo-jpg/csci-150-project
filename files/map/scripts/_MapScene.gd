@@ -61,22 +61,27 @@ func handleScene():
 			print("Player is null")
 			
 		for node in placedNodes:
+			print("nodeId: ", node.nodeId, " | isActive: ", node.isActive, " | isCompleted: ", node.isCompleted, " | nodeName: ", node.nodeName)
 			if node.nodeId == playerRestored.curNodeId - 1:
 				playerRestored.global_position = node.global_position
 				playerRestored.global_position.y -= 55
 				node.isActive = false
 				node.isCompleted = true
+				node.updateSprite()
+				
 			elif node.nodeId == playerRestored.curNodeId:
 				node.isActive = true
 				node.isCompleted = false
+				node.updateSprite()
+				
 			else:
-				node.isActive = false
-				node.isCompleted = false
+				node.updateSprite()
+				
 		
 		
 		draw_lines(placedNodes)
 		
-		#saver_loader.saveGame()
+		saver_loader.saveGame()
 		
 		
 	else: # New game case
@@ -88,39 +93,8 @@ func handleScene():
 		
 		# Generates the player but doesn't scale it down nor position it correctly if i remove the save vvv
 		saver_loader.saveGame()
-		'''
-		var loadedDict = saver_loader.loadGame() # Returns a dictionary
 		
-		var playerRestored = loadedDict.get("player", null)
-		var placedNodes = loadedDict.get("mapNodes", [])
-		
-		if(playerRestored):
-			print(playerRestored)
-			print("player.curNodeId: ", playerRestored.curNodeId)
-			print("player.name: ", playerRestored.name)
-			print("player.position: ", playerRestored.position)
-		else:
-			print("Player is null")
-			
-		
-		
-		for node in placedNodes:
-			print("Node pos: ", node.global_position)
-			if(node.nodeId == Global.curNodeId && Global.curNodeId <= placedNodes.size()):
-				playerRestored.global_position = node.global_position
-				playerRestored.global_position.y -= 55
-				playerRestored.scale *= 0.5
-				playerRestored.z_index = 99
-				node.isActive = true
-				
-			else: #(node.nodeId != Global.curNodeId):
-				node.isActive = false
-				
-		
-		draw_lines(placedNodes)
-		
-		saver_loader.saveGame()
-		 '''
+	
 	
 
 func generate_map_2d():
@@ -142,7 +116,6 @@ func generate_player():
 	newPlayer.curNodeId = -1
 	add_child(newPlayer)
 	
-	pass
 
 func generate_map_1d():
 	
@@ -158,20 +131,22 @@ func generate_map_1d():
 		newNode.setNodeId(nodeId)
 		if i == 0:
 			newNode.isActive = true
-		#var nodeName = "Node " + str(i)
-		newNode.setNodeName("COMBAT")
+			#var nodeName = "Node " + str(i)
+		
+		newNode.isCompleted = false
 		
 		@warning_ignore("integer_division")
 		if(Global.totShops < 1 && (i > num_of_nodes / 2 && i < num_of_nodes - 1) && randf() < 0.5): 
 			Global.totShops += 1
 			newNode.setNodeName("SHOP")
 		else:
-			pass
+			newNode.setNodeName("COMBAT")
+			
 		
 		# newNode.setCurNodeType("COMBAT")
 		# make it so COMBAT has more weight to be selected, maybe have shop in the middle for now ?
 		#newNode.setNodeType(COMBAT)
-		
+		newNode.updateSprite()
 		add_child(newNode)
 		
 		# newNode.data could hold an array of enemies that appear
