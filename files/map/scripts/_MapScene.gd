@@ -34,6 +34,7 @@ func _ready():
 	#generate_map_2d()
 	
 	handleScene()
+	
 
 
 
@@ -53,8 +54,6 @@ func handleScene():
 			playerRestored.scale *= 0.5
 			playerRestored.z_index = 99
 			
-			
-			
 		else:
 			print("Player is null is _MapScene.gd")
 			
@@ -62,7 +61,6 @@ func handleScene():
 		
 		for node in placedNodes:
 			
-			print("nodeId: ", node.nodeId, " | isActive: ", node.isActive, " | isCompleted: ", node.isCompleted, " | nodeName: ", node.nodeName)
 			if node.nodeId == playerRestored.curNodeId - 1:
 				playerRestored.global_position = node.global_position
 				playerRestored.global_position.y -= 55
@@ -121,6 +119,7 @@ func generate_player():
 	
 
 func generate_map_1d():
+	var tempArr : Array
 	
 	for i in range(num_of_nodes):
 		var newNode = MAP_NODE.instantiate()
@@ -146,15 +145,16 @@ func generate_map_1d():
 			newNode.setNodeName("COMBAT")
 			
 		
-		# newNode.setCurNodeType("COMBAT")
-		# make it so COMBAT has more weight to be selected, maybe have shop in the middle for now ?
-		#newNode.setNodeType(COMBAT)
+		
 		newNode.updateSprite()
+		tempArr.append(newNode)
 		add_child(newNode)
 		
-		# newNode.data could hold an array of enemies that appear
 		
-		
+	
+	draw_lines(tempArr)
+	
+	
 
 
 
