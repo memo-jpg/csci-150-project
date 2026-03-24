@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0g7t4b14skfr"
-path="res://.godot/imported/Deck_Icon-Concept2.png-3792a8874648c5863415ee515d95149c.ctex"
+uid="uid://burbc36g2orpk"
+path="res://.godot/imported/cardPlaying_temp_Shield3.png-4dd59dfae0785271ef75bfd411c26f0f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://_assets/Sprites/Cards/Deck_Icon-Concept2.png"
-dest_files=["res://.godot/imported/Deck_Icon-Concept2.png-3792a8874648c5863415ee515d95149c.ctex"]
+source_file="res://_assets/Sprites/Cards/cardPlaying_temp_Shield3.png"
+dest_files=["res://.godot/imported/cardPlaying_temp_Shield3.png-4dd59dfae0785271ef75bfd411c26f0f.ctex"]
 
 [params]
 

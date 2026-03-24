@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0g7t4b14skfr"
-path="res://.godot/imported/Deck_Icon-Concept2.png-3792a8874648c5863415ee515d95149c.ctex"
+uid="uid://d3p76yf26wuxv"
+path="res://.godot/imported/cardPlaying_temp_Attack-GodFist_temp.png-83c43047bdd64aae9808f7d4e200c501.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://_assets/Sprites/Cards/Deck_Icon-Concept2.png"
-dest_files=["res://.godot/imported/Deck_Icon-Concept2.png-3792a8874648c5863415ee515d95149c.ctex"]
+source_file="res://_assets/Sprites/Cards/cardPlaying_temp_Attack-GodFist_temp.png"
+dest_files=["res://.godot/imported/cardPlaying_temp_Attack-GodFist_temp.png-83c43047bdd64aae9808f7d4e200c501.ctex"]
 
 [params]
 

@@ -28,21 +28,167 @@
 			"damage": 2, 
 			"shield": 0,
 			"energyCost": 1,
-<<<<<<< HEAD:cards.json
-			"sprite": "res://Sprites/Cards/cardPlaying_PoisonFinal.png"
+			"sprite": "res://_assets/Sprites/Cards/cardPlaying_PoisonFinal.png"
 		},
 		{
 			"id": 3,
 			"type": "atk",
 			"cardName": "God Fist",
-			"description": "Deals 8 damage",
+			"description": "Deals 8 damage, applies 'confuse' onto the enemy for 2 turns",
 			"damage": 8,
 			"shield": 1,
 			"energyCost": 2,
-			"sprite": ""
-=======
-			"sprite": "res://_assets/Sprites/Cards/cardPlaying_PoisonFinal.png"
->>>>>>> f05144573c9836166d408bced6341f4b3ec962c7:_assets/cards.json
-		}    
+			"sprite": "res://_assets/Sprites/Cards/cardPlaying_Attack-GodFist_temp.png"
+		},
+		{
+			"id": 4,
+			"type": "def",
+			"cardName": "Lanayru's Absurdly Sturdy Shield",
+			"description": "Grants 10 temporary shield",
+			"damage": 0,
+			"shield": 10,
+			"energyCost": 0,
+			"sprite": "res://_assets/Sprites/Cards/cardPlaying_temp_Shield2.png"
+		},
+		{
+			"id": 5,
+			"type": "status",
+			"cardName": "Ixion's Wheel",
+			"description": "Ticks 3 fire damage per turn for however long duration is",
+			"damage": 3, 
+			"shield": 0,
+			"energyCost": 1,
+			"sprite": "res://_assets/Sprites/Cards/cardPlaying_IxionWheel_temp.png"
+		},
+		{
+			"id": 6,
+			"type": "atk",
+			"cardName": "Panta Rhei",
+			"description": "Deals 4 wind damage to all enemies",
+			"damage": 4,
+			"shield": 0,
+			"energyCost": 2,
+			"sprite": "res://_assets/Sprites/Cards/cardPlaying_temp_Attack3.png"
+		},
+		{
+			"id": 7,
+			"type": "def",
+			"cardName": "Bare Handle",
+			"description": "Grants 2 temporary shield",
+			"damage": 0,
+			"shield": 2,
+			"energyCost": 1,
+			"sprite": "res://_assets/Sprites/Cards/cardPlaying_temp_Shield3.png"
+		},
+		{
+			"id": 8,
+			"type": "status",
+			"cardName": "Confuse Ray",
+			"description": "Applies 'confuse' onto the enemy for 4 turns.",
+			"damage": 0, 
+			"shield": 0,
+			"energyCost": 2,
+			"sprite": "res://_assets/Sprites/Cards/cardPlaying_temp_confusion.png"
+		},
+		{
+			"id": 9,
+			"type": "atk",
+			"cardName": "Dragon Punch",
+			"description": "Sure You Can do 7 damage and gain 1 shield.",
+			"damage": 7,
+			"shield": 1,
+			"energyCost": 2,
+			"sprite": "res://_assets/Sprites/Cards/cardPlaying_temp_DragonPunch.png"
+		},
+		{
+			"id": 10,
+			"type": "def",
+			"cardName":	"Ultra Shield",
+			"description": "Grants 20 temporary shield",
+			"damage": 0,
+			"shield": 20,
+			"energyCost": 3,
+			"sprite": "res://_assets/Sprites/Cards/cardPlaying_temp_UltraShield.png"
+		},
+		{
+			"id": 11,
+			"type": "status",
+			"cardName": "_",
+			"description": "_",
+			"damage": 0,
+			"shield": 0,
+			"energyCost": 0,
+			"sprite": "res://_assets/Sprites/Cards/..."
+		},
+		{
+			"id": 12,
+			"type": "atk",
+			"cardName": "Earth",
+			"description": "Deals 6 damage and applies 'confuse' for 1 turn",
+			"damage": 6,
+			"shield": 0,
+			"energyCost": 1,
+			"sprite": "res://_assets/Sprites/Cards/cardPlaying_temp_Earth.png"
+		},
+		{
+			"id": 13,
+			"type": "def",
+			"cardName": "Resolve",
+			"description": "Grants 2 temporary shield",
+			"damage": 0,
+			"shield": 2,
+			"energyCost": 0,
+			"sprite": "res://_assets/Sprites/Cards/cardPlaying_temp_Resolve.png"
+		},
+		{
+			"id": 14,
+			"type": "atk",
+			"cardName": "Fire",
+			"description": "Deals 5 damage, applies 'burn' to the enemy",
+			"damage": 5,
+			"shield": 0,
+			"energyCost": 2,
+			"sprite": "res://_assets/Sprites/Cards/cardPlaying_temp_Fire.png"
+		},
+		{
+			"id": 15,
+			"type": "def",
+			"cardName": "_",
+			"description": "_",
+			"damage": 0,
+			"shield": 0,
+			"energyCost": 0,
+			"sprite": "res://_assets/Sprites/Cards/..."
+		},
+		{
+			"id": 16,
+			"type": "atk",
+			"cardName": "Water",
+			"description": "Deals 6 damage",
+			"damage": 6,
+			"shield": 0,
+			"energyCost": 1,
+			"sprite": "res://_assets/Sprites/Cards/cardPlaying_temp_Water.png"
+		},
+		{
+			"id": 17,
+			"type": "def",
+			"cardName": "_",
+			"description": "_",
+			"damage": 0,
+			"shield": 0,
+			"energyCost": 0,
+			"sprite": "res://_assets/Sprites/Cards/..."
+		},
+		{
+			"id": 18,
+			"type": "atk",
+			"cardName": "Wind",
+			"description": "Deals 5 damage, applies 'confuse' to the enemy",
+			"damage": 5,
+			"shield": 0,
+			"energyCost": 2,
+			"sprite": "res://_assets/Sprites/Cards/cardPlaying_temp_Wind.png"
+		}
 	]
 }
