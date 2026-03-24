@@ -1,7 +1,7 @@
 extends GutTest
 
 
-var Enemy = preload("res://enemy.gd")
+var Enemy = preload("res://files/enemy/scripts/enemy.gd")
 var enemyTest : Enemy
 
 

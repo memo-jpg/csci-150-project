@@ -49,6 +49,7 @@ func handleScene():
 			if(node.nodeId == Global.curNodeId && Global.curNodeId <= placedNodes.size()):
 				playerRestored.global_position = node.global_position # somethings wrong with player restored
 				playerRestored.global_position.y -= 55
+				playerRestored.scale *= 0.5
 				node.isActive = true
 				
 			else: #(node.nodeId != Global.curNodeId):

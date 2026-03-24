@@ -1,6 +1,6 @@
 extends GutTest
 
-var Cards = preload("res://mapDev/Cards.gd")
+var Cards = preload("res://files/player/scripts/Cards.gd")
 var tempCard: Cards
 
 
