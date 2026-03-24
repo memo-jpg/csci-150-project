@@ -16,7 +16,7 @@ func saveGame():
 	get_tree().call_group("game_events", "on_save_game", saved_data)
 	saved_game.saved_data = saved_data
 	
-	print("saved_game.saved_data: ", saved_game.saved_data, " in saveGame()!")
+	#print("saved_game.saved_data: ", saved_game.saved_data, " in saveGame()!")
 	
 	ResourceSaver.save(saved_game, "user://savegame.tres")
 	
@@ -34,7 +34,7 @@ func savePlayer():
 	get_tree().call_group("game_events", "on_save_game", saved_data)
 	
 	saved_game.saved_data = saved_data
-	print("saved_data: ", saved_data, " in savePlayer()")
+	#print("saved_data: ", saved_data, " in savePlayer()")
 	ResourceSaver.save(saved_game, "user://savegame.tres")
 
 func saveMapNodes():
@@ -61,7 +61,7 @@ func loadPlayer() -> Player:
 		return null
 		
 	var saved_game:savedGame = load("user://savegame.tres") as savedGame
-	print("saved_game.saved_data: ", saved_game.saved_data, " in loadPlayer()!")
+	#print("saved_game.saved_data: ", saved_game.saved_data, " in loadPlayer()!")
 	
 	for item in saved_game.saved_data:
 		if(item.scene_path == "res://files/player/scenes/player.tscn"):

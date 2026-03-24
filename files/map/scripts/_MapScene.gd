@@ -138,8 +138,9 @@ func generate_map_1d():
 		newNode.isCompleted = false
 		
 		@warning_ignore("integer_division")
-		if(Global.totShops < 1 && (i > num_of_nodes / 2 && i < num_of_nodes - 1) && randf() < 0.5): 
-			Global.totShops += 1
+		var shop_index = randi_range(num_of_nodes / 2 + 1, num_of_nodes - 2)
+		
+		if(i == shop_index): 
 			newNode.setNodeName("SHOP")
 		else:
 			newNode.setNodeName("COMBAT")
