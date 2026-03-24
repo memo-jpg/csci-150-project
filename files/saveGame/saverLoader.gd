@@ -85,7 +85,7 @@ func loadGame():
 		return allNodes
 	
 	var saved_game:savedGame = load("user://savegame.tres") as savedGame
-	print("saved_game.saved_data: ", saved_game.saved_data, " in loadGame()!")
+	#print("saved_game.saved_data: ", saved_game.saved_data, " in loadGame()!")
 	get_tree().call_group("game_events", "on_before_load_game")
 	
 	for item in saved_game.saved_data:
