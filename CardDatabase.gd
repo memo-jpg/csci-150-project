@@ -1,10 +1,11 @@
 class_name CardDatabase
 extends Node
 
-var card_templates: Dictionary = {}
+#var card_templates: Dictionary = {}
+var cards : Dictionary = {}
 
 func _ready():
-	load_cards("res://cards.json")
+	load_cards("res://_assets/cards.json")
 
 
 func load_cards(file_path: String) -> void:
@@ -41,13 +42,15 @@ func load_cards(file_path: String) -> void:
 			card_dict.get("special", {})
 		)
 
-		card_templates[card.name] = card
+		cards[card.name] = card
+#		card_templates[card.name] = card
 
-	print("Loaded ", card_templates.size(), " card templates.")
+#	print("Loaded ", card_templates.size(), " card templates.")
+	print("Loaded ", cards.size(), " card templates.")
 
 
 func get_template(card_name: String) -> CardData:
-	return card_templates.get(card_name)
+	return cards.get(card_name)
 
 
 func normalize_type(t: String) -> String:

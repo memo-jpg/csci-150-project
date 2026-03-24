@@ -9,7 +9,7 @@ var currentAction: int
 var statusEffect
 var currentshield: int
 var Actions: Array = []
-
+var moveset: Array = [] #the moves the enemy is allowed to use
 @onready var hpBar = get_node("HP Bar")
 
 func setHp(newHp):
@@ -83,6 +83,7 @@ func _ready() -> void:
 	currentHp = maxHp
 	hpBar.max_value = maxHp
 	hpBar.value = currentHp
+	moveset = [1, 2, 3, 4, 7]  # abilities of the default monster
 		
 		
 func _process(delta: float) -> void:

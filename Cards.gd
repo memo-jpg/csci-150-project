@@ -33,8 +33,8 @@ func update_visuals():
 	else:
 		descLabel.text = data.description
 
-	if data.sprite_path != "":
-		spriteNode.texture = load(data.sprite_path)
+	if data.sprite != "":
+		spriteNode.texture = load(data.sprite)
 
 
 func _input_event(viewport, event, shape_idx):
