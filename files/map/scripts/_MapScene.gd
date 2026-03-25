@@ -5,7 +5,7 @@ const PLAYER = preload("res://files/player/scenes/player.tscn")
 
 var spacing: int = 100
 var start_x_pos: int = 50 + 115 # 115 is old spacing
-var start_y_pos: int = 300
+var start_y_pos: int = 600
 
 var num_of_nodes: int = 10
 
@@ -88,6 +88,7 @@ func handleScene():
 		print("Save file does NOT exist")
 		#Global.curNodeId = 0
 		generate_map_1d()
+		#generate_map_2d()
 		
 		generate_player()
 		
@@ -99,14 +100,40 @@ func handleScene():
 	
 
 func generate_map_2d():
-	
-	for rows in range(row_of_nodes):
-		for cols in range(col_of_nodes):
-			print("node[",rows,"][",cols,"]")
-			#var newNode = MAP_NODE.instantiate()
-			var xPos = start_x_pos + (rows * spacing)
-			var yPos = (cols + col_spacing)
+
+	for row_num in range(row_of_nodes):
+		for col_num in range(col_of_nodes):
+			print("node[",row_num,"][",col_num,"]")
 			
+			var newNode = MAP_NODE.instantiate()
+			var xPos = start_x_pos + (col_num * spacing)
+			var yPos = start_y_pos + (row_num + col_spacing)
+			
+			newNode.setNodePos(xPos, yPos)
+			newNode.position = newNode.getNodePos()
+			
+			var nodeId = col_num
+			newNode.setNodeId(nodeId)
+			
+			if col_num == 0:
+				newNode.isActive = true
+				#var nodeName = "Node " + str(i)
+			
+			newNode.isCompleted = false
+			
+			if(col_num == shop_index): 
+				newNode.setNodeName("SHOP")
+			else:
+				newNode.setNodeName("COMBAT")
+				
+			
+			
+			newNode.updateSprite()
+			#tempMapArr.append(newNode)
+			add_child(newNode)
+		
+		
+	
 
 func generate_player():
 	
@@ -122,7 +149,7 @@ func generate_player():
 var shop_index = randi_range(num_of_nodes / 2 + 1, num_of_nodes - 2)
 
 func generate_map_1d():
-	var tempArr : Array
+	var tempMapArr : Array
 	
 	for i in range(num_of_nodes):
 		var newNode = MAP_NODE.instantiate()
@@ -148,12 +175,12 @@ func generate_map_1d():
 		
 		
 		newNode.updateSprite()
-		tempArr.append(newNode)
+		tempMapArr.append(newNode)
 		add_child(newNode)
 		
 		
 	
-	draw_lines(tempArr)
+	draw_lines(tempMapArr)
 	
 	
 
