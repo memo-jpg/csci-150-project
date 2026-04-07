@@ -78,7 +78,7 @@ func start_player_turn():
 		var tempCard = load_card(card)
 		tempCard.setID(cardPos) 
 		tempCard.position.y = 600
-		tempCard.position.x = 200*cardPos + 300
+		tempCard.position.x = 200*cardPos + 175
 		tempCard.scale *= 0.35
 		tempCard.cardActive.connect(_card_active) #card tells us when it is clicked
 		cardNodes.append(tempCard) #add card Node object to our array
