@@ -77,7 +77,7 @@
 			"description": "Grants 2 temporary shield",
 			"damage": 0,
 			"shield": 2,
-			"energyCost": 0,
+			"energyCost": 1,
 			"sprite": "res://_assets/Sprites/Cards/cardPlaying_temp_Shield3.png"
 		},
 		{
@@ -118,27 +118,77 @@
 			"damage": 0,
 			"shield": 0,
 			"energyCost": 0,
-			"sprite": "_"
+			"sprite": "res://_assets/Sprites/Cards/..."
 		},
 		{
 			"id": 12,
 			"type": "atk",
-			"cardName": "_",
-			"description": "_",
-			"damage": 0,
+			"cardName": "Earth",
+			"description": "Deals 6 damage and applies 'confuse' for 1 turn",
+			"damage": 6,
 			"shield": 0,
-			"energyCost": 0,
-			"sprite": "_"
+			"energyCost": 1,
+			"sprite": "res://_assets/Sprites/Cards/cardPlaying_temp_Earth.png"
 		},
 		{
 			"id": 13,
+			"type": "def",
+			"cardName": "Resolve",
+			"description": "Grants 2 temporary shield",
+			"damage": 0,
+			"shield": 2,
+			"energyCost": 0,
+			"sprite": "res://_assets/Sprites/Cards/cardPlaying_temp_Resolve.png"
+		},
+		{
+			"id": 14,
+			"type": "atk",
+			"cardName": "Fire",
+			"description": "Deals 5 damage, applies 'burn' to the enemy",
+			"damage": 5,
+			"shield": 0,
+			"energyCost": 2,
+			"sprite": "res://_assets/Sprites/Cards/cardPlaying_temp_Fire.png"
+		},
+		{
+			"id": 15,
 			"type": "def",
 			"cardName": "_",
 			"description": "_",
 			"damage": 0,
 			"shield": 0,
 			"energyCost": 0,
-			"sprite": "_"
+			"sprite": "res://_assets/Sprites/Cards/..."
+		},
+		{
+			"id": 16,
+			"type": "atk",
+			"cardName": "Water",
+			"description": "Deals 6 damage",
+			"damage": 6,
+			"shield": 0,
+			"energyCost": 1,
+			"sprite": "res://_assets/Sprites/Cards/cardPlaying_temp_Water.png"
+		},
+		{
+			"id": 17,
+			"type": "def",
+			"cardName": "_",
+			"description": "_",
+			"damage": 0,
+			"shield": 0,
+			"energyCost": 0,
+			"sprite": "res://_assets/Sprites/Cards/..."
+		},
+		{
+			"id": 18,
+			"type": "atk",
+			"cardName": "Wind",
+			"description": "Deals 5 damage, applies 'confuse' to the enemy",
+			"damage": 5,
+			"shield": 0,
+			"energyCost": 2,
+			"sprite": "res://_assets/Sprites/Cards/cardPlaying_temp_Wind.png"
 		}
 	]
 }

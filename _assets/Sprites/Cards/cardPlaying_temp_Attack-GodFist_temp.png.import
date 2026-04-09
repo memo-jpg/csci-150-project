@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dh4bhvox8bhcm"
-path="res://.godot/imported/cardPlaying_temp_DragonPunch.png-17b5905fb04b36ebdc0898c4246e9e11.ctex"
+uid="uid://d3p76yf26wuxv"
+path="res://.godot/imported/cardPlaying_temp_Attack-GodFist_temp.png-83c43047bdd64aae9808f7d4e200c501.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://_assets/Sprites/Cards/cardPlaying_temp_DragonPunch.png"
-dest_files=["res://.godot/imported/cardPlaying_temp_DragonPunch.png-17b5905fb04b36ebdc0898c4246e9e11.ctex"]
+source_file="res://_assets/Sprites/Cards/cardPlaying_temp_Attack-GodFist_temp.png"
+dest_files=["res://.godot/imported/cardPlaying_temp_Attack-GodFist_temp.png-83c43047bdd64aae9808f7d4e200c501.ctex"]
 
 [params]
 
