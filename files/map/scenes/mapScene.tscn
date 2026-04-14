@@ -1,7 +1,7 @@
-[gd_scene format=4 uid="uid://cj8nnrtt0giys"]
+[gd_scene format=4 uid="uid://dxlx32l4k5u1q"]
 
 [ext_resource type="TileSet" uid="uid://kxcfvxp55ryw" path="res://_assets/projectResources/tileSet.tres" id="1_jhupi"]
-[ext_resource type="Script" uid="uid://wmqx45sjpmnr" path="res://files/map/scripts/_MapScene.gd" id="1_jplie"]
+[ext_resource type="Script" uid="uid://dguam0e3cuci4" path="res://files/map/scripts/_MapScene.gd" id="1_jplie"]
 [ext_resource type="Texture2D" uid="uid://b8sqxgi3idirp" path="res://_assets/projectResources/kenneyAssets/cityTileset/Tilemap/tilemap_packed.png" id="2_jhupi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jhupi"]
