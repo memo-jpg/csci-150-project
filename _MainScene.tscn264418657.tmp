@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://2lak1mf2od02"]
 
 [ext_resource type="Script" uid="uid://b3e6l240fuwfd" path="res://_MainScene.gd" id="1_k5q3u"]
-[ext_resource type="Script" uid="uid://dguam0e3cuci4" path="res://files/map/scripts/_MapScene.gd" id="3_drw4x"]
+[ext_resource type="Script" uid="uid://wmqx45sjpmnr" path="res://files/map/scripts/_MapScene.gd" id="3_drw4x"]
 [ext_resource type="TileSet" uid="uid://kxcfvxp55ryw" path="res://_assets/projectResources/tileSet.tres" id="4_ws67c"]
 [ext_resource type="Texture2D" uid="uid://b8sqxgi3idirp" path="res://_assets/projectResources/kenneyAssets/cityTileset/Tilemap/tilemap_packed.png" id="5_8ennv"]
 [ext_resource type="PackedScene" uid="uid://oc864vuqi064" path="res://files/menus/scenes/scene_transition.tscn" id="6_du2u0"]

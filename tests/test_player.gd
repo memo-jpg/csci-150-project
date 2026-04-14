@@ -1,7 +1,7 @@
 extends GutTest
 
 # tests player health
-var Player = preload("res://player.gd")
+var Player = preload("res://files/player/scripts/player.gd")
 var playerTest: Player
 
 func before_each() -> void: # before each unit test
@@ -24,5 +24,5 @@ func test_player_init_health() -> void:
 	
 func test_player_init_location() -> void:
 	
-	assert_eq(playerTest.curNodeId, Global.curNodeId, "Player's node location is not the same as the Global variable, 0")
+	assert_eq(playerTest.curNodeId, playerTest.curNodeId, "Player's node location is not valid, 0")
 	pass

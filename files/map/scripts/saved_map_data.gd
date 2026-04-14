@@ -5,5 +5,6 @@ extends savedData
 @export var nodeName : String
 @export var nodeData : Array
 @export var isActive : bool
+@export var isCompleted : bool
 
 @export var nodePos : Vector2

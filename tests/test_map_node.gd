@@ -2,7 +2,7 @@ extends GutTest
 # https://www.youtube.com/watch?v=h5HmdD0cAps
 # var
 # var map: Map
-var mapNode = preload("res://mapDev/scripts/mapNode.gd") # preloas the objects script to test 
+var mapNode = preload("res://files/map/scripts/mapNode.gd") # preloas the objects script to test 
 var node: mapNode
 
 

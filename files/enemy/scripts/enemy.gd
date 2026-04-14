@@ -87,7 +87,8 @@ func _ready() -> void:
 		
 		
 func _process(delta: float) -> void:
-	hpBar.value = currentHp
+	hpBar.value = currentHp # commented out for unit tests 
+	pass
 
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:

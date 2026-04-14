@@ -12,12 +12,67 @@ func saveGame():
 	var saved_game:savedGame = savedGame.new()
 	
 	var saved_data:Array[savedData] = []
+	
 	get_tree().call_group("game_events", "on_save_game", saved_data)
 	saved_game.saved_data = saved_data
+	
+	#print("saved_game.saved_data: ", saved_game.saved_data, " in saveGame()!")
 	
 	ResourceSaver.save(saved_game, "user://savegame.tres")
 	
 
+func savePlayer():
+	var saved_game: savedGame = load("user://savegame.tres") as savedGame
+	var saved_data: Array[savedData] = []
+	
+	# keep mapNode data from the file
+	for item in saved_game.saved_data:
+		if item.scene_path == "res://files/map/scenes/mapNode.tscn":
+			saved_data.append(item)
+	
+	# save player
+	get_tree().call_group("game_events", "on_save_game", saved_data)
+	
+	saved_game.saved_data = saved_data
+	#print("saved_data: ", saved_data, " in savePlayer()")
+	ResourceSaver.save(saved_game, "user://savegame.tres")
+
+func saveMapNodes():
+	var saved_game: savedGame = load("user://savegame.tres") as savedGame
+	var saved_data: Array[savedData] = []
+	
+	# keep mapNode data from the file
+	for item in saved_game.saved_data:
+		if item.scene_path == "res://files/player/scenes/player.tscn":
+			saved_data.append(item)
+	
+	var mapNodeMembers = get_tree().get_nodes_in_group("game_events")
+	for node in mapNodeMembers:
+		if node is mapNode:
+			node.on_save_game(saved_data)
+			print("saving nodeId: ", node.nodeId," | isActive: ", node.isActive, " | isCompleted: ", node.isCompleted, " | in saveMapNodes() !")
+	
+	saved_game.saved_data = saved_data
+	ResourceSaver.save(saved_game, "user://savegame.tres")
+
+func loadPlayer() -> Player:
+	if not FileAccess.file_exists("user://savegame.tres"):
+		print("Save file 'savegame.tres' does not exist !")
+		return null
+		
+	var saved_game:savedGame = load("user://savegame.tres") as savedGame
+	#print("saved_game.saved_data: ", saved_game.saved_data, " in loadPlayer()!")
+	
+	for item in saved_game.saved_data:
+		if(item.scene_path == "res://files/player/scenes/player.tscn"):
+			var scene = load(item.scene_path) as PackedScene
+			var playerRestored = scene.instantiate()
+			playerRestored.on_load_game(item)
+			return playerRestored
+			
+	
+	return null
+	
 
 func loadGame():
 	var allNodes = {}
@@ -30,12 +85,12 @@ func loadGame():
 		return allNodes
 	
 	var saved_game:savedGame = load("user://savegame.tres") as savedGame
+	#print("saved_game.saved_data: ", saved_game.saved_data, " in loadGame()!")
 	get_tree().call_group("game_events", "on_before_load_game")
 	
 	for item in saved_game.saved_data:
 		var scene = load(item.scene_path) as PackedScene
 		var restored_node = scene.instantiate()
-		
 		# handles mapNodes
 		if(item.scene_path == "res://files/map/scenes/mapNode.tscn"):
 			mapNodeArr.append(restored_node)
@@ -56,8 +111,8 @@ func loadGame():
 		
 		if restored_node.has_method("on_load_game"):
 			restored_node.on_load_game(item)
-			
 	
 	allNodes["player"] = playerRestored
 	allNodes["mapNodes"] = mapNodeArr
 	return allNodes
+	

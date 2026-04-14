@@ -1,24 +1,21 @@
 [gd_scene format=3 uid="uid://cikcd42n2lof4"]
 
-[ext_resource type="Script" uid="uid://dkkrp34by7hms" path="res://files/map/scripts/card_scene.gd" id="1_h41vf"]
+[ext_resource type="Script" uid="uid://c3ujsvq5ewbro" path="res://files/player/scripts/Cards.gd" id="1_nmbkq"]
+[ext_resource type="Texture2D" uid="uid://b53u5jyc7pdg7" path="res://_assets/Sprites/Cards/cardPlaying_AttackFinal.png" id="2_g51qw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1mof2"]
-size = Vector2(92, 170)
+size = Vector2(484, 641)
 
-[node name="cardScene" type="Node2D" unique_id=754245930]
-script = ExtResource("1_h41vf")
+[node name="cardScene" type="Node2D" unique_id=1479818203]
+script = ExtResource("1_nmbkq")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1155633937]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1307359245]
+texture = ExtResource("2_g51qw")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=582456150]
+[node name="Area2D" type="Area2D" parent="." unique_id=1741843866]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1164365606]
+position = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_1mof2")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=136609417]
-
-[node name="NameLabel" type="Label" parent="." unique_id=111111111]
-
-[node name="CostLabel" type="Label" parent="." unique_id=222222222]
-
-[node name="DescriptionLabel" type="Label" parent="." unique_id=333333333]
-
-[connection signal="input_event" from="Area2D" to="." method="_input_event"]
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

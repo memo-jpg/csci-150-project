@@ -1,5 +1,4 @@
 extends Node
-
 @export var player: PackedScene
 @export var enemy: PackedScene
 @export var card_scene: PackedScene
@@ -12,29 +11,48 @@ var shield_label: Label
 var gold_label: Label
 var activeCardIndex: int = -1
 var turn: String = "player"
+@export var cards: PackedScene
 
-var expecting_meta_input = false
+@onready var scene_transition = $SceneTransition/AnimationPlayer
+
+	#scene_transition.play("fade_in")
+	#await get_tree().create_timer(0.5).timeout
+
+	#scene_transition.get_parent().get_node("ColorRect").color.a = 255
+	#scene_transition.play("fade_out")
+	
+var playerNode
+var enemyNodes: Array[Node2D]
+var cardNodes: Array[Node2D]
+
+var activeCard = null
+var turn: String = "player"  # can be "player" or "enemy" might not be needed since enemies 
+#don't technically have a turn
+
+var expecting_meta_input = false # possibly implementing meta elements
 var meta_damage = 10
 var turn_counter = 0
 
 @onready var energyBar = get_node("ProgressBar")
-# ========= Artifacts ========= #
-var protection_charm = false
-var protien_bar = false
-var handy_shield = false
-var gold_totem = false
-# ============================== #
 
+#========= Artifacts =============#
+var protection_charm = false #reduce all sources of damage
+var protien_bar = false # extra energy at turn start
+var handy_shield = false # gain shield at turn start
+var gold_totem = false # gain shield at turn start
+#========= Artifacts =============#
 
-# =========================================================
-# READY
-# =========================================================
 func _ready():
-	playerNode = player.instantiate()
+	# Scene transition
+	scene_transition.get_parent().get_node("ColorRect").color.a = 255
+	scene_transition.play("fade_out")
+	# Called when combat starts
+	playerNode = saver_loader.loadPlayer()
+	#Temp value instantiation
 	playerNode.setMaxHP(300)
 	playerNode.setCurrentHP(100)
-	playerNode.global_position = Vector2(200, 300)
-	add_child(playerNode)
+####################### FROM Combat_changes merge BEG
+
 	hp_label = Label.new()
 	hp_label.position = Vector2(20, 50)
 	add_child(hp_label)
@@ -42,6 +60,21 @@ func _ready():
 	shield_label = Label.new()
 	shield_label.position = Vector2(20, 70)
 	add_child(shield_label)
+####################### FROM Combat_changes merge BEG
+####################### FROM mapDev merge BEG
+	#playerNode.z_index = 0
+	playerNode.global_position = Vector2(200,300)
+	add_child(playerNode)
+	energyBar.max_value = playerNode.getMaxEnergy()
+	#TODO enemy spawning needs to be set by the outside map call
+	var enemyNode = enemy.instantiate() #create enemy
+	enemyNodes.append(enemyNode) #add enemy to our enemy array
+	enemyNode.position.x=900 #temp hardcoded positions
+	enemyNode.position.y=300
+	#enemy scale added
+	enemyNode.enemyActive.connect(_enemy_selected) #connect signal for when enemy is clicked
+	add_child(enemyNode) #display enemy
+####################### FROM mapDev merge END
 	
 	gold_label = Label.new()
 	gold_label.position = Vector2(20, 90)
@@ -71,6 +104,8 @@ func _ready():
 		push_warning("⚠️ Missing player or enemy reference in CombatManager!")
 
 	print("Combat started.")
+	if not playerNode or not enemy: #debug
+		push_warning("⚠️ Missing player or enemy reference in CombatManager!")
 	start_player_turn()
 
 
@@ -80,20 +115,41 @@ func _ready():
 func start_player_turn():
 	refresh_hud()
 	turn_counter += 1
-	turn = "player"
-
+	turn = "player" #probably not needed
 	if protien_bar:
-		playerNode.setCurrentEnergy(playerNode.getMaxEnergy() + 2)
+		playerNode.setCurrentEnergy(playerNode.getMaxEnergy()+2) #recover extra energy
 	else:
-		playerNode.setCurrentEnergy(playerNode.getMaxEnergy())
-
-	energyBar.value = playerNode.getCurrentEnergy()
-
+		playerNode.setCurrentEnergy(playerNode.getMaxEnergy()) #recover energy
+		energyBar.value=playerNode.getCurrentEnergy()
 	print("\n-- PLAYER TURN START --")
 
 	playerNode.shield = 0
+####################### FROM mapDev merge BEG
+	#print(playerNode.getdeck())
+	playerNode.draw_cards(playerNode.getdeck(), playerNode.gethand(), playerNode.getMaxHandSize())#draw cards at turn start
+	#print(playerNode.getdeck())
+	var cardPos=0
+	cardNodes=[] # clear card array since this should be a fresh hand
+	for card in playerNode.gethand(): #iterates througn hand and creates card scenes for each
+		var tempCard = load_card(card)
+		tempCard.setID(cardPos) 
+		tempCard.position.y = 600
+		tempCard.position.x = 200*cardPos + 175
+		tempCard.scale *= 0.35
+		tempCard.cardActive.connect(_card_active) #card tells us when it is clicked
+		cardNodes.append(tempCard) #add card Node object to our array
+		cardPos+=1
+		#var newCard = cards.instantiate()
+		#newCard.texture = load(card.sprite)
+		#newCard.position.x = 90
+		#add_child(newCard)
+	#print(playerNode.gethand())
+	#print_tree()
+	playerNode.shield = 0 #shield expires at the start of turn
+####################### FROM mapDev merge END
 	if handy_shield:
 		playerNode.shield += 4
+	#TODO # low priority but I should create a draw cards with no arguments to call later probably
 
 	playerNode.deckManager.draw_cards(
 		playerNode.deckManager.get_draw_limit()
@@ -114,11 +170,55 @@ func end_player_turn():
 	print("-- PLAYER TURN END --")
 	playerNode.deckManager.discard_hand()
 	clear_visual_hand()
+
+
+####################### FROM mapDev merge BEG
+func _card_active(cardIndex):
+	#print(cardIndex)
+	if(activeCard!=cardIndex):
+		if(activeCard != null):
+			cardNodes[activeCard].scale.x-=.3
+			cardNodes[activeCard].scale.y-=.3
+			# POS Should go back down here if negative
+			cardNodes[activeCard].position.y += 100
+			cardNodes[activeCard].z_index -= 99
+			
+		cardNodes[cardIndex].scale.x += .3
+		cardNodes[cardIndex].scale.y += .3
+		# Increase the position to move the card up
+		cardNodes[cardIndex].position.y -= 100
+		cardNodes[cardIndex].z_index += 99
+		activeCard = cardIndex
+	else:
+		cardNodes[activeCard].scale.x-=.3
+		cardNodes[activeCard].scale.y-=.3
+		# otherwise lower the postiion back to the starting point 
+		cardNodes[activeCard].position.y += 100
+		cardNodes[activeCard].z_index -= 99
+		activeCard = null
+		
+func _enemy_selected(enemyIndex):
+	if(activeCard!=null):
+		#print(cardNodes[activeCard].getType())
+		if(cardNodes[activeCard].getType()=='atk'):
+			if(use_card(cardNodes[activeCard],enemyNodes[enemyIndex])):
+				playerNode.discard_card(playerNode.hand,playerNode.discard,activeCard)
+				cardNodes[activeCard].queue_free()
+				cardNodes.pop_at(activeCard)
+				activeCard=null
+				
+	check_combat_state()
+func end_player_turn():
+	print("-- PLAYER TURN END --")
+	playerNode.hand_to_discard(playerNode.gethand(), playerNode.getdiscard())
+	for card in cardNodes:
+		card.queue_free()
 	start_enemy_turn()
 	refresh_hud()
+####################### FROM mapDev merge END
 
 
-func start_enemy_turn():
+func start_enemy_turn(): #TODO someone double check my work here
 	turn = "enemy"
 	print("\n-- ENEMY TURN START --")
 	refresh_hud()
@@ -132,7 +232,6 @@ func start_enemy_turn():
 
 	end_enemy_turn()
 
-
 func end_enemy_turn():
 	print("-- ENEMY TURN END --")
 	for enemy in enemyNodes:
@@ -140,12 +239,16 @@ func end_enemy_turn():
 		refresh_hud()
 	start_player_turn()
 
+# CARD LOGIC
+func use_card(card, enemyNode):
+	print('in use card func')
+	if turn != "player":
+		print("Can't use cards during enemy turn!")
+		return 0
 
-# =========================================================
-# HAND RENDERING
-# =========================================================
-func render_hand():
-	clear_visual_hand()
+	if playerNode.getCurrentEnergy() < card.getEnergyCost():
+		print("Not enough energy!")
+		return 0
 
 	var hand = playerNode.deckManager.get_hand()
 
@@ -271,10 +374,9 @@ func resolve_card_effect(card: CardData, enemyNode: Node2D):
 # =========================================================
 func apply_damage_to_player(damage: int):
 	if protection_charm:
-		damage -= 5
-
+		damage = damage - 5
 	if damage <= 0:
-		return
+		return # No damage to apply
 
 	var damage_remaining = damage
 
@@ -298,19 +400,21 @@ func apply_block_to_player(amount: int):
 	print("Applied block of ", amount)
 
 
-# =========================================================
+func apply_block_to_player(amount: int):
+	playerNode.shield += amount
+	print("Applied block of ", amount)
+
 # ENEMY ACTIONS
-# =========================================================
-func trigger_meta_damage(damage: int):
+func trigger_meta_damage(damage: int): #prepare meta
 	print("Type X to avoid damage!")
 	expecting_meta_input = true
 	meta_damage = damage
 
-
-func _input(event):
+func _input(event): #use this to implement meta damage anywhere
 	if expecting_meta_input and event is InputEventKey and event.pressed:
-		if event.keycode == KEY_X:
+		if event.scancode == KEY_X: #TODO #I'm not sure how to make this flexible and pass the key req
 			print("You dodged the damage!")
+			expecting_meta_input = false
 		else:
 			print("Wrong key!")
 			apply_damage_to_player(meta_damage)
@@ -352,18 +456,57 @@ func enemy_action(intent: int, enemy: Node2D):
 	check_combat_state()
 	refresh_hud()
 
+func load_card(card: Object):
+	var newCard = cards.instantiate()
+	newCard.setName(card.cardName)
+	newCard.setType(card.type)
+	newCard.setDamage(card.damage)
+	newCard.setShield(card.shield)
+	newCard.setEnergyCost(card.energyCost)
+	#TODO set card info
+	#print_tree()
+	var cardSprite = newCard.find_child('Sprite2D')
+	cardSprite.texture = load(card.sprite)
+	
+	add_child(newCard) 
+	return newCard
 
-# =========================================================
+
 # STATE CHECK
-# =========================================================
 func check_combat_state():
-	if playerNode.getCurrentHP() <= 0:
-		print("💀 Player defeated!")
-		turn_counter = 0
-		var prevScene = Global.prev_scene_path
-		if prevScene != "":
-			get_tree().change_scene_to_file(prevScene)
-		return
+		if playerNode.getCurrentHP() <= 0:
+			print("💀 Player defeated!")
+			var prevScene = Global.prev_scene_path
+			if (prevScene != ""):
+				get_tree().change_scene_to_file(prevScene)
+			#check if player died first
+			turn_counter = 0 
+			# TODO,HANDLE DEATH
+		for enemy in enemyNodes:
+			if enemy.currentHp <= 0:
+				handlePlayerVictory()
+				
+				
+				# Paueses the game for .50s before fade in animation
+				# Could add a victory screen to this(?)
+				await get_tree().create_timer(.75).timeout
+				scene_transition.play("fade_in")
+				await get_tree().create_timer(.5).timeout
+				
+				enemy.queue_free()
+				enemyNodes.pop_at(enemy.pos)
+				
+				
+				if !enemyNodes.size():
+					var prevScene = Global.prev_scene_path
+					if (prevScene != ""):
+						get_tree().change_scene_to_file(prevScene)
+				print("✅ Enemy defeated!")
+				if gold_totem:
+					playerNode.gold += randi_range(50, 75)
+				else:
+					playerNode.gold += randi_range(25, 50)
+			# TODO
 
 	for i in range(enemyNodes.size() - 1, -1, -1):
 		var enemyNode = enemyNodes[i]
@@ -389,10 +532,35 @@ func check_combat_state():
 # BUTTONS
 # =========================================================
 func _on_end_combat_test_pressed() -> void:
+	handlePlayerVictory()
 	var prevScene = Global.prev_scene_path
-	if prevScene != "":
+	
+	
+	await get_tree().create_timer(0.5).timeout
+	# Scene transition
+	scene_transition.play("fade_in")
+	await get_tree().create_timer(0.5).timeout
+	
+	if (prevScene != ""):
+		#Global.curNodeId += 1
+		#print("Global.curNodeId: ", Global.curNodeId)
 		get_tree().change_scene_to_file(prevScene)
+		
+	
 
 
 func _on_end_turn_pressed() -> void:
 	end_player_turn()
+	pass # Replace with function body.
+
+@onready var saver_loader: saverLoader = %SaverLoader
+
+func handlePlayerVictory() -> void:
+	
+	var player = get_tree().get_first_node_in_group("game_events")
+	
+	if player is Player:
+		player.curNodeId += 1
+	
+	saver_loader.savePlayer()
+	
