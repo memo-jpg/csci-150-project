@@ -1,5 +1,4 @@
-class_name Player
-extends Node2D
+class_name Player extends Node2D
 # =============================
 # Core Stats
 # =============================
@@ -109,8 +108,6 @@ func _ready():
 # Save / Load
 # =============================
 
-var curNodeId : int
-
 func on_save_game(saved_data:Array[savedData]):
 	var my_data = SavedPlayerData.new()
 	my_data.scene_path = scene_file_path
@@ -126,11 +123,11 @@ func on_before_load_game():
 	queue_free()
 	
 
-func on_before_load_game():
-	get_parent().remove_child(self)
-	queue_free()
+
 func _on_deck_ready():
 	pass
+
+
 func on_load_game(saved_data:savedData):
 	var my_data:SavedPlayerData = saved_data as SavedPlayerData
 	global_position = my_data.position

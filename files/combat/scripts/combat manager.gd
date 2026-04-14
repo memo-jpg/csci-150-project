@@ -21,12 +21,10 @@ var turn: String = "player"
 	#scene_transition.get_parent().get_node("ColorRect").color.a = 255
 	#scene_transition.play("fade_out")
 	
-var playerNode
-var enemyNodes: Array[Node2D]
-var cardNodes: Array[Node2D]
+
 
 var activeCard = null
-var turn: String = "player"  # can be "player" or "enemy" might not be needed since enemies 
+#var turn: String = "player"  # can be "player" or "enemy" might not be needed since enemies 
 #don't technically have a turn
 
 var expecting_meta_input = false # possibly implementing meta elements
@@ -48,11 +46,19 @@ func _ready():
 	scene_transition.play("fade_out")
 	# Called when combat starts
 	playerNode = saver_loader.loadPlayer()
-	#Temp value instantiation
 	playerNode.setMaxHP(300)
 	playerNode.setCurrentHP(100)
-####################### FROM Combat_changes merge BEG
-
+	playerNode.global_position = Vector2(200,300)
+	add_child(playerNode)
+	var enemyNode = enemy.instantiate()
+	enemyNodes.append(enemyNode)
+	enemyNode.position.x = 900
+	enemyNode.position.y = 300
+	enemyNode.enemyActive.connect(_enemy_selected)
+	add_child(enemyNode)
+	
+	energyBar.max_value = playerNode.getMaxEnergy()
+	
 	hp_label = Label.new()
 	hp_label.position = Vector2(20, 50)
 	add_child(hp_label)
@@ -60,22 +66,7 @@ func _ready():
 	shield_label = Label.new()
 	shield_label.position = Vector2(20, 70)
 	add_child(shield_label)
-####################### FROM Combat_changes merge BEG
-####################### FROM mapDev merge BEG
-	#playerNode.z_index = 0
-	playerNode.global_position = Vector2(200,300)
-	add_child(playerNode)
-	energyBar.max_value = playerNode.getMaxEnergy()
-	#TODO enemy spawning needs to be set by the outside map call
-	var enemyNode = enemy.instantiate() #create enemy
-	enemyNodes.append(enemyNode) #add enemy to our enemy array
-	enemyNode.position.x=900 #temp hardcoded positions
-	enemyNode.position.y=300
-	#enemy scale added
-	enemyNode.enemyActive.connect(_enemy_selected) #connect signal for when enemy is clicked
-	add_child(enemyNode) #display enemy
-####################### FROM mapDev merge END
-	
+### code block was here
 	gold_label = Label.new()
 	gold_label.position = Vector2(20, 90)
 	add_child(gold_label)
@@ -93,12 +84,6 @@ func _ready():
 
 	playerNode.deckManager.build_combat_deck()
 
-	var enemyNode = enemy.instantiate()
-	enemyNodes.append(enemyNode)
-	enemyNode.position.x = 900
-	enemyNode.position.y = 300
-	enemyNode.enemyActive.connect(_enemy_selected)
-	add_child(enemyNode)
 
 	if not playerNode or not enemyNode:
 		push_warning("⚠️ Missing player or enemy reference in CombatManager!")
@@ -107,6 +92,23 @@ func _ready():
 	if not playerNode or not enemy: #debug
 		push_warning("⚠️ Missing player or enemy reference in CombatManager!")
 	start_player_turn()
+
+'''
+####################### FROM mapDev merge BEG ^^^^
+	#playerNode.z_index = 0
+	playerNode.global_position = Vector2(200,300)
+	add_child(playerNode)
+	energyBar.max_value = playerNode.getMaxEnergy()
+	#TODO enemy spawning needs to be set by the outside map call
+	var enemyNode = enemy.instantiate() #create enemy
+	enemyNodes.append(enemyNode) #add enemy to our enemy array
+	enemyNode.position.x=900 #temp hardcoded positions
+	enemyNode.position.y=300
+	#enemy scale added
+	enemyNode.enemyActive.connect(_enemy_selected) #connect signal for when enemy is clicked
+	add_child(enemyNode) #display enemy
+####################### FROM mapDev merge END
+'''
 
 
 # =========================================================
@@ -124,6 +126,19 @@ func start_player_turn():
 	print("\n-- PLAYER TURN START --")
 
 	playerNode.shield = 0
+	if handy_shield:
+		playerNode.shield += 4
+	#TODO # low priority but I should create a draw cards with no arguments to call later probably
+
+	playerNode.deckManager.draw_cards(
+		playerNode.deckManager.get_draw_limit()
+	)
+	refresh_hud()
+	render_hand()
+
+
+
+'''
 ####################### FROM mapDev merge BEG
 	#print(playerNode.getdeck())
 	playerNode.draw_cards(playerNode.getdeck(), playerNode.gethand(), playerNode.getMaxHandSize())#draw cards at turn start
@@ -147,15 +162,10 @@ func start_player_turn():
 	#print_tree()
 	playerNode.shield = 0 #shield expires at the start of turn
 ####################### FROM mapDev merge END
-	if handy_shield:
-		playerNode.shield += 4
-	#TODO # low priority but I should create a draw cards with no arguments to call later probably
+'''
 
-	playerNode.deckManager.draw_cards(
-		playerNode.deckManager.get_draw_limit()
-	)
-	refresh_hud()
-	render_hand()
+
+
 
 func refresh_hud():
 	if hp_label:
@@ -171,7 +181,7 @@ func end_player_turn():
 	playerNode.deckManager.discard_hand()
 	clear_visual_hand()
 
-
+'''
 ####################### FROM mapDev merge BEG
 func _card_active(cardIndex):
 	#print(cardIndex)
@@ -216,7 +226,7 @@ func end_player_turn():
 	start_enemy_turn()
 	refresh_hud()
 ####################### FROM mapDev merge END
-
+'''
 
 func start_enemy_turn(): #TODO someone double check my work here
 	turn = "enemy"
@@ -239,16 +249,12 @@ func end_enemy_turn():
 		refresh_hud()
 	start_player_turn()
 
-# CARD LOGIC
-func use_card(card, enemyNode):
-	print('in use card func')
-	if turn != "player":
-		print("Can't use cards during enemy turn!")
-		return 0
 
-	if playerNode.getCurrentEnergy() < card.getEnergyCost():
-		print("Not enough energy!")
-		return 0
+# =========================================================
+# HAND RENDERING
+# =========================================================
+func render_hand():
+	clear_visual_hand()
 
 	var hand = playerNode.deckManager.get_hand()
 
@@ -275,23 +281,29 @@ func clear_visual_hand():
 # =========================================================
 # CARD SELECTION
 # =========================================================
-func _card_selected(index):
-	if activeCardIndex == index:
-		cardNodes[index].scale = Vector2.ONE
-		cardNodes[index].position.y += 100
-		cardNodes[index].z_index -= 99
-		activeCardIndex = -1
-		return
-
-	if activeCardIndex != -1:
-		cardNodes[activeCardIndex].scale = Vector2.ONE
-		cardNodes[activeCardIndex].position.y += 100
-		cardNodes[activeCardIndex].z_index -= 99
-
-	cardNodes[index].scale = Vector2(1.3, 1.3)
-	cardNodes[index].position.y -= 100
-	cardNodes[index].z_index += 99
-	activeCardIndex = index
+func _card_selected(cardIndex):
+	#print(cardIndex)
+	if(activeCard!=cardIndex):
+		if(activeCard != null):
+			cardNodes[activeCard].scale.x-=.3
+			cardNodes[activeCard].scale.y-=.3
+			# POS Should go back down here if negative
+			cardNodes[activeCard].position.y += 100
+			cardNodes[activeCard].z_index -= 99
+			
+		cardNodes[cardIndex].scale.x += .3
+		cardNodes[cardIndex].scale.y += .3
+		# Increase the position to move the card up
+		cardNodes[cardIndex].position.y -= 100
+		cardNodes[cardIndex].z_index += 99
+		activeCard = cardIndex
+	else:
+		cardNodes[activeCard].scale.x-=.3
+		cardNodes[activeCard].scale.y-=.3
+		# otherwise lower the postiion back to the starting point 
+		cardNodes[activeCard].position.y += 100
+		cardNodes[activeCard].z_index -= 99
+		activeCard = null
 
 
 func _enemy_selected(enemyIndex):
@@ -399,11 +411,6 @@ func apply_block_to_player(amount: int):
 	playerNode.shield += amount
 	print("Applied block of ", amount)
 
-
-func apply_block_to_player(amount: int):
-	playerNode.shield += amount
-	print("Applied block of ", amount)
-
 # ENEMY ACTIONS
 func trigger_meta_damage(damage: int): #prepare meta
 	print("Type X to avoid damage!")
@@ -474,39 +481,39 @@ func load_card(card: Object):
 
 # STATE CHECK
 func check_combat_state():
-		if playerNode.getCurrentHP() <= 0:
-			print("💀 Player defeated!")
-			var prevScene = Global.prev_scene_path
-			if (prevScene != ""):
-				get_tree().change_scene_to_file(prevScene)
-			#check if player died first
-			turn_counter = 0 
-			# TODO,HANDLE DEATH
-		for enemy in enemyNodes:
-			if enemy.currentHp <= 0:
-				handlePlayerVictory()
-				
-				
-				# Paueses the game for .50s before fade in animation
-				# Could add a victory screen to this(?)
-				await get_tree().create_timer(.75).timeout
-				scene_transition.play("fade_in")
-				await get_tree().create_timer(.5).timeout
-				
-				enemy.queue_free()
-				enemyNodes.pop_at(enemy.pos)
-				
-				
-				if !enemyNodes.size():
-					var prevScene = Global.prev_scene_path
-					if (prevScene != ""):
-						get_tree().change_scene_to_file(prevScene)
-				print("✅ Enemy defeated!")
-				if gold_totem:
-					playerNode.gold += randi_range(50, 75)
-				else:
-					playerNode.gold += randi_range(25, 50)
-			# TODO
+	if playerNode.getCurrentHP() <= 0:
+		print("💀 Player defeated!")
+		var prevScene = Global.prev_scene_path
+		if (prevScene != ""):
+			get_tree().change_scene_to_file(prevScene)
+		#check if player died first
+		turn_counter = 0 
+		# TODO,HANDLE DEATH
+	for enemy in enemyNodes:
+		if enemy.currentHp <= 0:
+			handlePlayerVictory()
+			
+			
+			# Paueses the game for .50s before fade in animation
+			# Could add a victory screen to this(?)
+			await get_tree().create_timer(.75).timeout
+			scene_transition.play("fade_in")
+			await get_tree().create_timer(.5).timeout
+			
+			enemy.queue_free()
+			enemyNodes.pop_at(enemy.pos)
+			
+			
+			if !enemyNodes.size():
+				var prevScene = Global.prev_scene_path
+				if (prevScene != ""):
+					get_tree().change_scene_to_file(prevScene)
+			print("✅ Enemy defeated!")
+			if gold_totem:
+				playerNode.gold += randi_range(50, 75)
+			else:
+				playerNode.gold += randi_range(25, 50)
+		# TODO
 
 	for i in range(enemyNodes.size() - 1, -1, -1):
 		var enemyNode = enemyNodes[i]
