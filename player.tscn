@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c2xjf5gmr7ghp" path="res://_assets/Sprites/Player_Idle.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://be1ivd8v3o0nh" path="res://files/player/scripts/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://dyhoal8to6cg3" path="res://_assets/icon.svg" id="3_hqtel"]
-[ext_resource type="Script" uid="uid://kkuqllqc207l" path="res://files/player/scripts/DeckManager.gd" id="4_hqtel"]
+[ext_resource type="Script" path="res://files/player/scripts/DeckManager.gd" id="4_hqtel"]
 
 [node name="Player" type="Node2D" unique_id=1382066349 groups=["game_events"]]
 script = ExtResource("1_onrkg")
