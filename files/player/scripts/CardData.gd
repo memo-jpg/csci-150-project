@@ -4,6 +4,7 @@ extends RefCounted
 var id: int
 var type: String
 var name: String
+var description : String
 var damage: int
 var shield: int
 var energy: int
@@ -15,6 +16,7 @@ func _init(
 	_id: int,
 	_type: String,
 	_name: String,
+	_description: String,
 	_damage: int,
 	_shield: int,
 	_energy: int,
@@ -25,6 +27,7 @@ func _init(
 	id = _id
 	type = _type.to_lower()
 	name = _name
+	description = _description
 	damage = _damage
 	shield = _shield
 	energy = _energy
@@ -38,6 +41,7 @@ func duplicate_instance() -> CardData:
 		id,
 		type,
 		name,
+		description,
 		damage,
 		shield,
 		energy,

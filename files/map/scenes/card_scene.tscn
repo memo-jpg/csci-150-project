@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cikcd42n2lof4"]
 
-[ext_resource type="Script" uid="uid://c3ujsvq5ewbro" path="res://files/player/scripts/Cards.gd" id="1_nmbkq"]
+[ext_resource type="Script" uid="uid://58th3gr5lq2a" path="res://files/player/scripts/Cards.gd" id="1_nmbkq"]
 [ext_resource type="Texture2D" uid="uid://b53u5jyc7pdg7" path="res://_assets/Sprites/Cards/cardPlaying_AttackFinal.png" id="2_g51qw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1mof2"]
@@ -17,5 +17,23 @@ texture = ExtResource("2_g51qw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1164365606]
 position = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_1mof2")
+
+[node name="NameLabel" type="Label" parent="." unique_id=111111111]
+offset_left = -202.0
+offset_top = -306.0
+offset_right = 54.0
+offset_bottom = -269.0
+
+[node name="CostLabel" type="Label" parent="." unique_id=222222222]
+offset_left = 178.0
+offset_top = -308.0
+offset_right = 221.0
+offset_bottom = -251.0
+
+[node name="DescriptionLabel" type="Label" parent="." unique_id=333333333]
+offset_left = -188.0
+offset_top = 53.0
+offset_right = 168.0
+offset_bottom = 214.0
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

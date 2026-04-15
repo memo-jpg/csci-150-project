@@ -34,6 +34,7 @@ func load_cards(file_path: String) -> void:
 			card_dict["id"],
 			normalized_type,
 			card_dict["cardName"],
+			card_dict["description"],
 			card_dict["damage"],
 			card_dict["shield"],
 			card_dict["energyCost"],
