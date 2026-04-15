@@ -7,6 +7,7 @@
 size = Vector2(484, 641)
 
 [node name="cardScene" type="Node2D" unique_id=1479818203]
+scale = Vector2(0.45, 0.45)
 script = ExtResource("1_nmbkq")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1307359245]

@@ -37,6 +37,7 @@ func update_visuals():
 		spriteNode.texture = load(data.sprite)
 
 
-func _input_event(viewport, event, shape_idx):
+func _on_area_2d_input_event(_viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
+		print("CARDS.GD input event clicked")
 		cardActive.emit(index)

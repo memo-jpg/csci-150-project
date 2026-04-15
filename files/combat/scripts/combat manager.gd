@@ -264,7 +264,7 @@ func render_hand():
 		var visual = card_scene.instantiate()
 		visual.data = cardData
 		visual.set_index(i)
-		visual.position = Vector2(100 + 200 * i, 500)
+		visual.position = Vector2(100 + 200 * i, 600)
 		visual.cardActive.connect(_card_selected)
 
 		add_child(visual)
@@ -282,29 +282,26 @@ func clear_visual_hand():
 # CARD SELECTION
 # =========================================================
 func _card_selected(cardIndex):
-	#print(cardIndex)
-	if(activeCard!=cardIndex):
-		if(activeCard != null):
-			cardNodes[activeCard].scale.x-=.3
-			cardNodes[activeCard].scale.y-=.3
-			# POS Should go back down here if negative
-			cardNodes[activeCard].position.y += 100
-			cardNodes[activeCard].z_index -= 99
-			
-		cardNodes[cardIndex].scale.x += .3
-		cardNodes[cardIndex].scale.y += .3
-		# Increase the position to move the card up
-		cardNodes[cardIndex].position.y -= 100
-		cardNodes[cardIndex].z_index += 99
-		activeCard = cardIndex
-	else:
-		cardNodes[activeCard].scale.x-=.3
-		cardNodes[activeCard].scale.y-=.3
-		# otherwise lower the postiion back to the starting point 
-		cardNodes[activeCard].position.y += 100
-		cardNodes[activeCard].z_index -= 99
+	if activeCard == cardIndex:
+		_reset_card_visuals(activeCard)
 		activeCard = null
+		return
+	
+	
+	if activeCard != null:
+		_reset_card_visuals(activeCard)
+			
+	
+	cardNodes[cardIndex].scale = Vector2(.85,.85) 
+	cardNodes[cardIndex].position.y -= 200
+	cardNodes[cardIndex].z_index = 100 
+	activeCard = cardIndex
 
+func _reset_card_visuals(cardIndex):
+	if cardIndex != null and cardIndex < cardNodes.size():
+		cardNodes[cardIndex].scale = Vector2(.45, .45) # Reset to exactly 100%
+		cardNodes[cardIndex].position.y += 200
+		cardNodes[cardIndex].z_index = 0
 
 func _enemy_selected(enemyIndex):
 	if activeCardIndex == -1:
