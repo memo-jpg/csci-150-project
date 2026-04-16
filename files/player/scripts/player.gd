@@ -4,10 +4,10 @@ class_name Player extends Node2D
 # =============================
 var characterName : String = "Elliot"
 var shield : int = 0
-var maxHP : int = 87
-var currentHP : int = 87
+var maxHP : int = 100
+var currentHP : int = maxHP
 var maxEnergy : int = 3
-var currentEnergy : int = 3
+var currentEnergy : int = maxEnergy
 var maxHandSize : int = 5
 var deck: Dictionary = {}
 var curNodeId : int
@@ -104,6 +104,8 @@ func _ready():
 	else:
 		deckManager = DeckManager.new()
 		add_child(deckManager)
+
+
 # =============================
 # Save / Load
 # =============================
