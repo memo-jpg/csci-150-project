@@ -398,11 +398,14 @@ func check_combat_state():
 		if prevScene != "":
 			get_tree().change_scene_to_file(prevScene)
 		return
-
+	
+	
 	for i in range(enemyNodes.size() - 1, -1, -1):
 		var enemyNode = enemyNodes[i]
 		print("Enemy HP check: ", enemyNode.currentHp) #TODO debug, remove this
 		if enemyNode.currentHp <= 0:
+			handlePlayerVictory()
+			
 			print("✅ Enemy defeated!")
 			if gold_totem:
 				playerNode.gold += randi_range(50, 75)
@@ -411,7 +414,8 @@ func check_combat_state():
 			print("Gold awarded: ", playerNode.gold)
 			enemyNode.queue_free()
 			enemyNodes.remove_at(i)
-
+			
+	
 	if enemyNodes.is_empty():
 		print("All enemies defeated! Returning to map.")
 		var prevScene = Global.prev_scene_path
