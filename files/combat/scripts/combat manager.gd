@@ -176,7 +176,7 @@ func render_hand():
 		var visual = card_scene.instantiate()
 		visual.data = cardData
 		visual.set_index(i)
-		visual.position = Vector2(100 + 200 * i, 600)
+		visual.position = Vector2(200 + 200 * i, 600)
 		visual.cardActive.connect(_card_selected)
 
 		add_child(visual)
@@ -194,6 +194,9 @@ func clear_visual_hand():
 # CARD SELECTION
 # =========================================================
 func _card_selected(cardIndex):
+	if cardIndex < 0 or cardIndex >= cardNodes.size():
+		return
+	
 	if activeCardIndex == cardIndex:
 		_reset_card_visuals(activeCardIndex)
 		activeCardIndex = -1

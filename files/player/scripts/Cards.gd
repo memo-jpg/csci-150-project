@@ -29,7 +29,7 @@ func update_visuals():
 	
 	costLabel.text = str(data.energy)
 	costLabel.add_theme_color_override("font_color", Color.GOLD)
-	costLabel.add_theme_font_size_override("font_size", 32)
+	costLabel.add_theme_font_size_override("font_size", 36)
 	
 	
 	if data.type == "attack":
