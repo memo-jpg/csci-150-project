@@ -1095,14 +1095,15 @@ text = "End Turn"
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=913523606]
 offset_left = 10.0
-offset_top = 365.0
+offset_top = 125.0
 offset_right = 120.0
-offset_bottom = 429.0
+offset_bottom = 189.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2052941238]
 position = Vector2(575, 320)
 
 [node name="SceneTransition" parent="." unique_id=2044027244 instance=ExtResource("7_rnged")]
+position = Vector2(82, -110)
 
 [node name="Utilities" type="Node" parent="." unique_id=1544884707]
 

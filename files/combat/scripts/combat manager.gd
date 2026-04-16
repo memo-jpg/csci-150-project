@@ -182,7 +182,7 @@ func render_hand():
 		var visual = card_scene.instantiate()
 		visual.data = cardData
 		visual.set_index(i)
-		visual.position = Vector2(200 + 200 * i, 600)
+		visual.position = Vector2(200 + 125 * i, 600)
 		visual.cardActive.connect(_card_selected)
 
 		add_child(visual)
