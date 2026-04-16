@@ -136,8 +136,14 @@ func refresh_hud():
 
 func end_player_turn():
 	print("-- PLAYER TURN END --")
+	_reset_card_visuals(activeCardIndex)
+	activeCardIndex = -1
+	
 	playerNode.deckManager.discard_hand()
 	clear_visual_hand()
+	
+	start_enemy_turn()
+	refresh_hud()
 
 
 func start_enemy_turn(): #TODO someone double check my work here
