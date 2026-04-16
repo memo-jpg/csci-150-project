@@ -1,7 +1,7 @@
 class_name saverLoader
 extends Node
 
-@onready var _map: Node2D = %_Map
+#@onready var _map: Node2D = %_Map
 # @onready var _map: Node2D = $"../../_GameManager/_Map"
 # @onready var _game_manager: Node = %_GameManager
 
@@ -74,7 +74,9 @@ func loadPlayer() -> Player:
 	return null
 	
 
-func loadGame():
+
+# Passing 'map_GD_node' if a node in godot's node tree is passed
+func loadGame(map_GD_node: Node2D = null): 
 	var allNodes = {}
 	var mapNodeArr : Array = []
 	var playerRestored : Player = null
@@ -94,8 +96,8 @@ func loadGame():
 		# handles mapNodes
 		if(item.scene_path == "res://files/map/scenes/mapNode.tscn"):
 			mapNodeArr.append(restored_node)
-			if(_map):
-				_map.add_child(restored_node)
+			if(map_GD_node):
+				map_GD_node.add_child(restored_node)
 			else: # TODO have loadGame only return data, have a function that operates the scenes(?)
 					restored_node.queue_free()
 			
@@ -104,8 +106,8 @@ func loadGame():
 			print("Scene path:", item.scene_path)
 			print("Restored type:", restored_node.get_class())
 			playerRestored = restored_node
-			if(_map):
-				_map.add_child(playerRestored)
+			if(map_GD_node):
+				map_GD_node.add_child(playerRestored)
 			else: # TODO have loadGame only return data, have a function that operates the scenes(?)
 				restored_node.queue_free() # temp fix for oprhans in unit testing
 		

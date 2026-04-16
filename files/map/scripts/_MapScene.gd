@@ -42,7 +42,7 @@ func handleScene():
 	if(FileAccess.file_exists("user://savegame.tres")):
 		print("Save file exists")
 		
-		var loadedDict = saver_loader.loadGame() # takes array here and appens the map nodes to it
+		var loadedDict = saver_loader.loadGame(%_Map) # takes array here and appens the map nodes to it
 		
 		var playerRestored = loadedDict.get("player", null)
 		var placedNodes = loadedDict.get("mapNodes", [])

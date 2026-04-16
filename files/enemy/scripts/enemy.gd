@@ -86,11 +86,11 @@ func _ready() -> void:
 	moveset = [1, 2, 3, 4, 7]  # abilities of the default monster
 		
 		
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	hpBar.value = currentHp # commented out for unit tests 
 	pass
 
 
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if (event.is_action_pressed("mouseClick")):
 		enemyActive.emit(pos)

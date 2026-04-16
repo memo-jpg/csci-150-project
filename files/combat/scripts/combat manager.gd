@@ -151,10 +151,10 @@ func start_enemy_turn(): #TODO someone double check my work here
 	print("\n-- ENEMY TURN START --")
 	refresh_hud()
 
-	for enemy in enemyNodes:
+	for enemyNode in enemyNodes:
 		var move_index = enemy.currentAction % enemy.moveset.size()
 		var action_index = enemy.moveset[move_index]
-		enemy_action(action_index, enemy)
+		enemy_action(action_index, enemyNode)
 		enemy.currentAction += 1
 		await get_tree().create_timer(1.0).timeout
 
@@ -162,8 +162,8 @@ func start_enemy_turn(): #TODO someone double check my work here
 
 func end_enemy_turn():
 	print("-- ENEMY TURN END --")
-	for enemy in enemyNodes:
-		enemy.currentshield = 0
+	for enemyNode in enemyNodes:
+		enemyNode.currentshield = 0
 		refresh_hud()
 	start_player_turn()
 
@@ -350,12 +350,12 @@ func _input(event):
 		expecting_meta_input = false
 
 
-func enemy_action(intent: int, enemy: Node2D):
+func enemy_action(intent: int, enemyArg: Node2D):
 	var action
 	if intent == -1:
-		action = enemy.Actions[randi() % enemy.Actions.size()]
+		action = enemyArg.Actions[randi() % enemy.Actions.size()]
 	else:
-		action = enemy.Actions[intent]
+		action = enemyArg.Actions[intent]
 
 	var dmg = action.damage
 	var shld = action.shield
@@ -447,10 +447,10 @@ func _on_end_turn_pressed() -> void:
 
 func handlePlayerVictory() -> void:
 	
-	var player = get_tree().get_first_node_in_group("game_events")
+	var tempPlayer = get_tree().get_first_node_in_group("game_events")
 	
-	if player is Player:
-		player.curNodeId += 1
+	if tempPlayer is Player:
+		tempPlayer.curNodeId += 1
 	
 	saver_loader.savePlayer()
 	

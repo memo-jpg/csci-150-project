@@ -58,7 +58,7 @@ func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
 		
 		
 
-@onready var saver_loader: saverLoader = %SaverLoader
+@onready var saver_loader: saverLoader
 
 
 func on_save_game(saved_data:Array[savedData]):
