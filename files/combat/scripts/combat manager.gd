@@ -50,7 +50,8 @@ func _ready():
 	# Called when combat starts
 	playerNode = saver_loader.loadPlayer()
 	playerNode.setMaxHP(300)
-	playerNode.setCurrentHP(100)
+	playerNode.setCurrentHP(playerNode.getMaxHP())
+	playerNode.setCurrentEnergy(playerNode.getMaxEnergy())
 	playerNode.global_position = Vector2(200,300)
 	add_child(playerNode)
 	var enemyNode = enemy.instantiate()
@@ -152,10 +153,10 @@ func start_enemy_turn(): #TODO someone double check my work here
 	refresh_hud()
 
 	for enemyNode in enemyNodes:
-		var move_index = enemy.currentAction % enemy.moveset.size()
-		var action_index = enemy.moveset[move_index]
+		var move_index = enemyNode.currentAction % enemyNode.moveset.size() 
+		var action_index = enemyNode.moveset[move_index]
 		enemy_action(action_index, enemyNode)
-		enemy.currentAction += 1
+		enemyNode.currentAction += 1
 		await get_tree().create_timer(1.0).timeout
 
 	end_enemy_turn()
@@ -350,12 +351,12 @@ func _input(event):
 		expecting_meta_input = false
 
 
-func enemy_action(intent: int, enemyArg: Node2D):
+func enemy_action(intent: int, enemyNode: Node2D):
 	var action
 	if intent == -1:
-		action = enemyArg.Actions[randi() % enemy.Actions.size()]
+		action = enemyNode.Actions[randi() % enemyNode.Actions.size()]
 	else:
-		action = enemyArg.Actions[intent]
+		action = enemyNode.Actions[intent]
 
 	var dmg = action.damage
 	var shld = action.shield
@@ -366,7 +367,7 @@ func enemy_action(intent: int, enemyArg: Node2D):
 			print("Enemy attacks for ", dmg)
 			apply_damage_to_player(dmg)
 			print("Enemy guards for ", shld)
-			enemy.apply_shield_to_enemy(shld)
+			enemyNode.apply_shield_to_enemy(shld)
 
 		"special":
 			match action.name:
