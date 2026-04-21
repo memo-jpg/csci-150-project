@@ -4,16 +4,16 @@ const PLAYER = preload("res://files/player/scenes/player.tscn")
 
 
 var spacing: int = 100
-var start_x_pos: int = 50 + 115 # 115 is old spacing
-var start_y_pos: int = 600
+var start_x_pos: int = 50 + 100 # 115 is old spacing
+var start_y_pos: int = 250
 
 var num_of_nodes: int = 10
 
 
-var row_spacing: int = 115
-var col_spacing: int = 20
-var row_of_nodes: int = 10
-var col_of_nodes: int = 3
+var col_spacing: int = 100
+var row_spacing: int = 70
+var col_of_nodes: int = 10
+var row_of_nodes: int = 3
 # nodeArr[10][3], 10 rows of nodes
 # if nodeArr[X][0] 
 
@@ -87,8 +87,8 @@ func handleScene():
 	else: # New game case
 		print("Save file does NOT exist")
 		#Global.curNodeId = 0
-		generate_map_1d()
-		#generate_map_2d()
+		#generate_map_1d()
+		generate_map_2d()
 		
 		generate_player()
 		
@@ -103,15 +103,21 @@ func generate_map_2d():
 
 	for row_num in range(row_of_nodes):
 		for col_num in range(col_of_nodes):
-			print("node[",row_num,"][",col_num,"]")
+			print("")
+			
 			
 			var newNode = MAP_NODE.instantiate()
-			var xPos = start_x_pos + (col_num * spacing)
-			var yPos = start_y_pos + (row_num + col_spacing)
+			var xPos = start_x_pos + (col_num * col_spacing)
+			var yPos = start_y_pos + (row_num * row_spacing)
+			
+			print("node[",row_num,"][",col_num,"]: pos[",xPos,"][",yPos,"]")
+			
 			
 			newNode.setNodePos(xPos, yPos)
 			newNode.position = newNode.getNodePos()
 			
+			
+			# maybe make the nodeID the "row_num" + "col_num" as string id so [row][col] [2][1] would be id 21
 			var nodeId = col_num
 			newNode.setNodeId(nodeId)
 			
