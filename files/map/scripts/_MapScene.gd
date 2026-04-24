@@ -59,17 +59,11 @@ func handleScene():
 		
 		
 		for node in placedNodes:
-			
-			if node.nodeId == playerRestored.curNodeId - 1:
+			if node.nodeId == playerRestored.curNodeId:
 				playerRestored.global_position = node.global_position
 				playerRestored.global_position.y -= 55
 				node.isActive = false
 				node.isCompleted = true
-				node.updateSprite()
-				
-			elif node.nodeId == playerRestored.curNodeId:
-				node.isActive = true
-				node.isCompleted = false
 				node.updateSprite()
 				
 			else:
@@ -92,7 +86,7 @@ func handleScene():
 			node.node_selected.connect(_on_node_selected)
 		
 		var player_col = playerRestored.curNodeId % col_of_nodes
-		
+		activate_column(player_col + 1)
 		draw_lines(placedNodes)
 		
 		saver_loader.saveMapNodes()
@@ -161,6 +155,8 @@ func generate_map_2d():
 	
 
 func _on_node_selected(nodeId: int):
+	
+	print("nodeId Selected: ", nodeId, " | in _MapScene.gd")
 	if playerRestored == null: 
 		return
 	
@@ -181,6 +177,7 @@ func _on_node_selected(nodeId: int):
 	if target_node == null:
 		return
 		
+	
 	var prev_row = playerRestored.curNodeId / col_of_nodes
 	var prev_col = playerRestored.curNodeId % col_of_nodes
 	var prev_node = node_grid[prev_row][prev_col]
@@ -204,6 +201,8 @@ func _on_node_selected(nodeId: int):
 	
 	scene_transition.play("fade_in")
 	await get_tree().create_timer(0.5).timeout
+	
+	print("node_grid: ", nodeId, " | in _MapScene.gd")
 	
 	if(target_node.nodeName == "COMBAT"):
 		print("Combat Node is clicked") 
