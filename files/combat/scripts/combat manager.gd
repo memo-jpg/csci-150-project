@@ -455,7 +455,8 @@ func handlePlayerVictory() -> void:
 	var tempPlayer = get_tree().get_first_node_in_group("game_events")
 	
 	if tempPlayer is Player:
-		tempPlayer.curNodeId += 1
+		#tempPlayer.curNodeId += 1
+		pass
 	
 	saver_loader.savePlayer()
 	

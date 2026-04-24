@@ -32,31 +32,14 @@ func _init(argId: int = -1, argName: String = "noName", argNodeType: nodeTypes =
 
 @onready var scene_transition = $SceneTransition/AnimationPlayer
 
+signal node_selected(nodeId)
+
 func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
-	# if map_node is active, is clickable
+	print("_input_event fired, isActive: ", isActive, " nodeId: ", nodeId)
 	if (event.is_action_pressed("mouseClick") && isActive): # && nodeName == COMBAT
-		print("Node is clicked") 
-		print(getLevelInfo())
-		print(getNodeId())
+		emit_signal("node_selected", nodeId)
 		
-		# Current scene becomes previous globally
-		Global.prev_scene_path = get_tree().current_scene.scene_file_path
-		
-		scene_transition.play("fade_in")
-		await get_tree().create_timer(0.5).timeout
-		
-		if(nodeName == "COMBAT"):
-			print("Combat Node is clicked") 
-			get_tree().change_scene_to_file("res://files/combat/scenes/combat.tscn") #Change to combat
-			
-		elif(nodeName == "SHOP"):
-			print("Shop Node is clicked") 
-			get_tree().change_scene_to_file("res://files/combat/scenes/combat.tscn") #Change to shop
-			
-		
-		#Global.curNodeId += 1
-		
-		
+
 
 @onready var saver_loader: saverLoader
 
@@ -102,6 +85,7 @@ func updateSprite():
 		$mapNodeSprites.region_rect = Rect2(0, 0, 400, 400)
 	elif nodeName == "SHOP":
 		$mapNodeSprites.region_rect = Rect2(410, 0, 400, 400)
+	$mapNodeSprites.modulate.a = 1.0 if isActive else 0.3
 
 func setNodeId(argId : int):
 	nodeId = argId
