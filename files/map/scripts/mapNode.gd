@@ -35,10 +35,10 @@ func _init(argId: int = -1, argName: String = "noName", argNodeType: nodeTypes =
 signal node_selected(nodeId)
 
 func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
-	print("_input_event fired, isActive: ", isActive, " nodeId: ", nodeId)
 	if (event.is_action_pressed("mouseClick") && isActive): # && nodeName == COMBAT
 		emit_signal("node_selected", nodeId)
-		
+		print("_input_event fired, isActive: ", isActive, " nodeId: ", nodeId)
+
 
 
 @onready var saver_loader: saverLoader

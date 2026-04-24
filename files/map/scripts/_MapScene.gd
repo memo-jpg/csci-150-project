@@ -166,7 +166,12 @@ func _on_node_selected(nodeId: int):
 	
 	var clicked_col = nodeId % col_of_nodes
 	var clicked_row = nodeId / col_of_nodes
-	var player_col = playerRestored.curNodeId % col_of_nodes
+	var player_col
+	
+	if playerRestored.curNodeId == -1:
+		player_col = -1
+	else:
+		player_col = playerRestored.curNodeId % col_of_nodes
 	
 	# one column ahead
 	if clicked_col != player_col + 1:
@@ -226,7 +231,7 @@ func generate_player():
 	var newPlayer = PLAYER.instantiate()
 	newPlayer.position = Vector2(60, 300)
 	newPlayer.scale *= 0.5
-	#newPlayer.curNodeId = 0
+	newPlayer.curNodeId = -1
 	playerRestored = newPlayer
 	add_child(newPlayer)
 	
