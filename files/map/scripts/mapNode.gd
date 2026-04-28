@@ -8,6 +8,7 @@ class_name mapNode
 @export var nodeData : Array # rand array of ints to test
 @export var isActive : bool
 @export var isCompleted : bool
+@export var isPathNode : bool
 
 #@export_enum("COMBAT:0","SHOP:1") var nodeType : int = -1
 enum nodeTypes {EMPTY, COMBAT, SHOP}
@@ -27,6 +28,7 @@ func _init(argId: int = -1, argName: String = "noName", argNodeType: nodeTypes =
 	nodeData = argData
 	isActive = false
 	isCompleted = false
+	isPathNode = true
 	
 	
 
@@ -56,6 +58,7 @@ func on_save_game(saved_data:Array[savedData]):
 	my_data.nodeData = nodeData
 	my_data.nodePos = global_position
 	my_data.isCompleted = isCompleted
+	my_data.isPathNode = isPathNode
 	
 	
 	saved_data.append(my_data)
@@ -74,6 +77,7 @@ func on_load_game(saved_data:savedData):
 	isActive = my_data.isActive
 	isCompleted = my_data.isCompleted
 	nodeData = my_data.nodeData
+	isPathNode = my_data.isPathNode
 	
 	
 
