@@ -83,13 +83,14 @@ func on_load_game(saved_data:savedData):
 
 # figure out where to draw lines later
 func updateSprite():
+	z_index = 1
 	if isCompleted:
 		$mapNodeSprites.region_rect = Rect2(820, 0, 400, 400)
 	elif nodeName == "COMBAT":
 		$mapNodeSprites.region_rect = Rect2(0, 0, 400, 400)
 	elif nodeName == "SHOP":
 		$mapNodeSprites.region_rect = Rect2(410, 0, 400, 400)
-	$mapNodeSprites.modulate.a = 1.0 if isActive else 0.3
+
 
 func setNodeId(argId : int):
 	nodeId = argId

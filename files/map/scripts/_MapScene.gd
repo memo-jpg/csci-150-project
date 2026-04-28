@@ -90,7 +90,7 @@ func handleScene():
 			
 		var player_col = playerRestored.curNodeId % col_of_nodes
 		activate_column(player_col + 1)
-		draw_lines(placedNodes)
+		draw_lines_2d()
 		
 		saver_loader.saveMapNodes()
 		#saver_loader.saveGame()
@@ -110,14 +110,14 @@ var active_nodes = {}
 
 func generate_paths():
 	for col in range(col_of_nodes):
-		var active_count = randi_range(1, row_of_nodes)
+		var active_count = randi_range(1, row_of_nodes - 1) # active nodes between 1-2
 		var rows = range(row_of_nodes)
 		rows = Array(rows)
 		rows.shuffle()
 		var active_rows = rows.slice(0, active_count)
 		
 		for row in range(row_of_nodes):
-			var nodeId = row * col_of_nodes + col
+			var nodeId = row * col_of_nodes + col # row(2) * (10 cols) + col(3) = 23 or [2][3]
 			active_nodes[nodeId] = row in active_rows
 
 
@@ -173,8 +173,8 @@ func generate_map_2d():
 		
 		
 	
-	#draw_lines(node_grid)
 	activate_column(0)
+	draw_lines_2d()
 	
 
 func _on_node_selected(nodeId: int):
@@ -184,8 +184,6 @@ func _on_node_selected(nodeId: int):
 	print("nodeId Selected: ", nodeId, " | in _MapScene.gd")
 	if playerRestored == null: 
 		return
-	else:
-		playerRestored.z_index = 99
 	
 	
 	var clicked_col = nodeId % col_of_nodes
@@ -258,6 +256,7 @@ func generate_player():
 	# Creating player and setting position and curNodeId
 	var newPlayer = PLAYER.instantiate()
 	newPlayer.position = Vector2(60, 300)
+	newPlayer.z_index = 99
 	newPlayer.scale *= 0.5
 	newPlayer.curNodeId = -1
 	playerRestored = newPlayer
@@ -299,13 +298,13 @@ func generate_map_1d():
 		
 		
 	
-	draw_lines(tempMapArr)
+	draw_lines_2d()
 	
 	
 
 
 
-func draw_lines(arrArg : Array):
+func draw_lines_1d(arrArg : Array):
 	if(arrArg.size() > 0):
 		for i in range(len(arrArg) - 1):
 			var nodeA = arrArg[i]
@@ -321,3 +320,27 @@ func draw_lines(arrArg : Array):
 			
 			# Add the line to the scene to visually connect the nodes
 			add_child(line)
+			
+			
+
+func draw_lines_2d():
+	for row in range(row_of_nodes):
+		for col in range(col_of_nodes - 1):
+			var nodeA = node_grid[row][col]
+			if nodeA == null or not nodeA.isPathNode:
+				continue
+			
+			for next_row in range(row_of_nodes):
+				var nodeB = node_grid[next_row][col + 1]
+				if nodeB == null or not nodeB.isPathNode:
+					continue
+				var line = Line2D.new()  # Create a new Line2D
+				line.add_point(nodeA.position)  # Add the position of node A
+				line.add_point(nodeB.position)  # Add the position of node B
+				line.width = 3  # Line width
+				line.default_color = Color(0, 0, 0)  # White color for the line
+				line.z_index = -55
+				
+				# Add the line to the scene to visually connect the nodes
+				add_child(line)
+			

@@ -1065,6 +1065,7 @@ unique_name_in_owner = true
 script = ExtResource("3_drw4x")
 
 [node name="mapVisual" type="Node2D" parent="_GameManager/_Map" unique_id=1080869848]
+z_index = -999
 
 [node name="groundLayer" type="TileMapLayer" parent="_GameManager/_Map/mapVisual" unique_id=550729617]
 use_parent_material = true
