@@ -1,36 +1,22 @@
 extends Area2D
-
 class_name mapNode
 
+@export var nodeId: int = -1
+@export var nodeName: String = "noName"
+@export var nodeData: Array = [0, 1, 2, 3]
+@export var isActive: bool = false
+@export var isCompleted: bool = false
+@export var isPathNode: bool = true
+@export var curNodeType: int = 0
+@export var nodePos: Vector2
 
-@export var nodeId : int
-@export var nodeName : String
-@export var nodeData : Array # rand array of ints to test
-@export var isActive : bool
-@export var isCompleted : bool
-@export var isPathNode : bool
 
-#@export_enum("COMBAT:0","SHOP:1") var nodeType : int = -1
-enum nodeTypes {EMPTY, COMBAT, SHOP}
-@export var curNodeType : int
 
-@export var nodePos : Vector2
 
 func _ready():
 	pass
 	
 
-
-func _init(argId: int = -1, argName: String = "noName", argNodeType: nodeTypes = nodeTypes.EMPTY, argData: Array = [0, 1, 2, 3]):
-	nodeId = argId
-	nodeName = argName
-	curNodeType = argNodeType
-	nodeData = argData
-	isActive = false
-	isCompleted = false
-	isPathNode = true
-	
-	
 
 @onready var scene_transition = $SceneTransition/AnimationPlayer
 
@@ -95,8 +81,6 @@ func updateSprite():
 func setNodeId(argId : int):
 	nodeId = argId
 
-func setNodeType(argNodeType : nodeTypes):
-	curNodeType = argNodeType
 
 func setNodeName(argName : String):
 	nodeName = str(argName)

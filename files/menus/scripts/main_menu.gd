@@ -15,3 +15,18 @@ func _on_play_pressed() -> void:
 func _on_settings_pressed() -> void:
 	var childNode = settingsScene.instantiate()
 	add_child(childNode)
+
+
+func _on_del_save_pressed() -> void:
+	var file_path = "user://savegame.tres"
+	
+	if FileAccess.file_exists(file_path):
+		var error = DirAccess.remove_absolute(file_path)
+	
+		if error == OK:
+			print("File deleted successfully")
+		else:
+			print("Error deleting file: ", error)
+	else:
+		print("File does not exist")
+	

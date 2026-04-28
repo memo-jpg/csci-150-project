@@ -30,5 +30,13 @@ offset_right = 708.0
 offset_bottom = 422.0
 text = "Settings"
 
+[node name="DeleteSave" type="Button" parent="." unique_id=1813148545]
+offset_left = 871.0
+offset_top = 45.0
+offset_right = 1127.0
+offset_bottom = 97.0
+text = "Delete Save"
+
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]
+[connection signal="button_down" from="DeleteSave" to="." method="_on_del_save_pressed"]

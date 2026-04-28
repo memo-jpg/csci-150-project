@@ -87,6 +87,10 @@ func handleScene():
 			#newNode.isPathNode = active_nodes.get(nodeId, false)
 			if not node.isPathNode:
 				node.modulate.a = 0.0
+			elif node.isCompleted:
+				node.modulate.a = 1.0
+			else:
+				node.modulate.a = 0.5
 			
 		var player_col = playerRestored.curNodeId % col_of_nodes
 		activate_column(player_col + 1)
@@ -110,7 +114,7 @@ var active_nodes = {}
 
 func generate_paths():
 	for col in range(col_of_nodes):
-		var active_count = randi_range(1, row_of_nodes - 1) # active nodes between 1-2
+		var active_count = randi_range(1, row_of_nodes - 1) # active nodes between 1 and row_of_nodes
 		var rows = range(row_of_nodes)
 		rows = Array(rows)
 		rows.shuffle()
@@ -150,6 +154,8 @@ func generate_map_2d():
 			newNode.isPathNode = active_nodes.get(nodeId, false)
 			if not newNode.isPathNode:
 				newNode.modulate.a = 0.0
+			else:
+				newNode.modulate.a = 0.5
 			
 			if col_num == 0:
 				newNode.isActive = true
@@ -179,8 +185,6 @@ func generate_map_2d():
 
 func _on_node_selected(nodeId: int):
 	
-	
-	
 	print("nodeId Selected: ", nodeId, " | in _MapScene.gd")
 	if playerRestored == null: 
 		return
@@ -205,9 +209,13 @@ func _on_node_selected(nodeId: int):
 		return
 		
 	
-	var prev_row = playerRestored.curNodeId / col_of_nodes
-	var prev_col = playerRestored.curNodeId % col_of_nodes
-	var prev_node = node_grid[prev_row][prev_col]
+	
+	var prev_node = null
+	if playerRestored.curNodeId != -1:
+		var prev_row = playerRestored.curNodeId / col_of_nodes
+		var prev_col = playerRestored.curNodeId % col_of_nodes
+		prev_node = node_grid[prev_row][prev_col]
+	
 	if prev_node:
 		prev_node.isActive = false
 		prev_node.isCompleted = true
@@ -248,6 +256,7 @@ func activate_column(col: int):
 		var node = node_grid[row][col]
 		if node != null and node.isPathNode:
 			node.isActive = true
+			node.modulate.a = 1.0
 			node.updateSprite()
 		
 
