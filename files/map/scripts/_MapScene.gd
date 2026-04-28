@@ -31,13 +31,14 @@ func _ready():
 	scene_transition.get_parent().get_node("ColorRect").color.a = 255
 	scene_transition.play("fade_out")
 	
-	
 	handleScene()
 	
 
 
 
 func handleScene():
+	print("handleScene() function called in _MapScene.gd")
+	
 	if(FileAccess.file_exists("user://savegame.tres")):
 		print("Save file exists")
 		
@@ -58,7 +59,7 @@ func handleScene():
 			
 		
 		
-		
+		# Resizes node grid in case it got changed
 		node_grid.clear()
 		node_grid.resize(row_of_nodes)
 		for row in range(row_of_nodes):
@@ -84,7 +85,7 @@ func handleScene():
 			else:
 				node.updateSprite()
 			
-			#newNode.isPathNode = active_nodes.get(nodeId, false)
+			# hide, show, or transparent nodes
 			if not node.isPathNode:
 				node.modulate.a = 0.0
 			elif node.isCompleted:
