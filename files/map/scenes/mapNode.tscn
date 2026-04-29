@@ -4,24 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://oc864vuqi064" path="res://files/menus/scenes/scene_transition.tscn" id="3_1yte8"]
 [ext_resource type="Texture2D" uid="uid://cdvswmdx14oh5" path="res://_assets/projectResources/mapNodes/mapNodeSprites.png" id="3_21y73"]
 
-[sub_resource type="Gradient" id="Gradient_21y73"]
-offsets = PackedFloat32Array(0.094339624, 1)
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_1yte8"]
-gradient = SubResource("Gradient_21y73")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_21y73"]
 size = Vector2(400, 400)
 
 [node name="Area2D" type="Area2D" unique_id=918351731 groups=["game_events"]]
 script = ExtResource("1_uma8q")
-
-[node name="centerDark" type="Sprite2D" parent="." unique_id=545300018]
-visible = false
-texture = SubResource("GradientTexture2D_1yte8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1112749428]
 scale = Vector2(0.15, 0.15)

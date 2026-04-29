@@ -72,7 +72,6 @@ func updateSprite():
 	z_index = 1
 	if isCompleted:
 		$mapNodeSprites.region_rect = Rect2(820, 0, 400, 400)
-		$centerDark.visible = true
 	elif nodeName == "COMBAT":
 		$mapNodeSprites.region_rect = Rect2(0, 0, 400, 400)
 	elif nodeName == "SHOP":

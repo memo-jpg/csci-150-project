@@ -94,8 +94,17 @@ func handleScene():
 				node.modulate.a = 0.5
 			
 		var player_col = playerRestored.curNodeId % col_of_nodes
-		activate_column(player_col + 1)
 		draw_lines_2d()
+		for col in range(player_col + 1):
+			if line_nodes.has(col):
+				for line in line_nodes[col]:
+					line.visible = true
+					
+				
+			
+		
+		
+		activate_column(player_col + 1)
 		
 		saver_loader.saveMapNodes()
 		#saver_loader.saveGame()
@@ -260,6 +269,10 @@ func activate_column(col: int):
 			node.modulate.a = 1.0
 			node.updateSprite()
 		
+	
+	if line_nodes.has(col):
+		for line in line_nodes[col]:
+			line.visible = true
 
 func generate_player():
 	
@@ -333,7 +346,10 @@ func draw_lines_1d(arrArg : Array):
 			
 			
 
+var line_nodes = {}
+
 func draw_lines_2d():
+	line_nodes.clear()
 	for row in range(row_of_nodes):
 		for col in range(col_of_nodes - 1):
 			var nodeA = node_grid[row][col]
@@ -351,6 +367,11 @@ func draw_lines_2d():
 				line.default_color = Color(0, 0, 0)  # White color for the line
 				line.z_index = -55
 				
+				line.visible = false
 				# Add the line to the scene to visually connect the nodes
 				add_child(line)
+				
+				if not line_nodes.has(col):
+					line_nodes[col] = []
+				line_nodes[col].append(line)
 			
