@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://cm4eg124yumej"]
+
+[ext_resource type="Script" uid="uid://be1ivd8v3o0nh" path="res://files/player/scripts/player.gd" id="1_fyt8f"]
+[ext_resource type="Texture2D" uid="uid://dj027n1webx8i" path="res://_assets/Sprites/Hero1.png" id="2_sweqy"]
+[ext_resource type="Texture2D" uid="uid://dyhoal8to6cg3" path="res://_assets/icon.svg" id="3_hqtel"]
+[ext_resource type="Script" uid="uid://kkuqllqc207l" path="res://files/player/scripts/DeckManager.gd" id="5_nnij7"]
+[ext_resource type="Script" uid="uid://cbivhmcvfg0t5" path="res://files/ui/scripts/hud.gd" id="5_sweqy"]
+
+[node name="Player" type="Node2D" unique_id=695888132 groups=["game_events"]]
+script = ExtResource("1_fyt8f")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1762752050]
+position = Vector2(18, -10)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_sweqy")
+
+[node name="Deck" type="Sprite2D" parent="." unique_id=321549645]
+visible = false
+position = Vector2(-69, 90)
+texture = ExtResource("3_hqtel")
+script = ExtResource("5_nnij7")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=669905012]
+script = ExtResource("5_sweqy")
+
+[node name="TopBar" type="Control" parent="HUD" unique_id=1451125080]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -94.0
+offset_right = 33.0
+offset_bottom = -649.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/TopBar" unique_id=1632924470]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 12.0
+offset_right = 66.0
+offset_bottom = 52.0
+
+[node name="HPLabel" type="Label" parent="HUD/TopBar/HBoxContainer" unique_id=1680192361]
+layout_mode = 2
+text = "these are all place holders, once their called they will update"
+
+[node name="NameLabel" type="Label" parent="HUD/TopBar/HBoxContainer" unique_id=1973885357]
+layout_mode = 2
+
+[node name="GoldLabel" type="Label" parent="HUD/TopBar/HBoxContainer" unique_id=55894247]
+layout_mode = 2
+
+[node name="ShieldLabel" type="Label" parent="HUD/TopBar/HBoxContainer" unique_id=2083955277]
+layout_mode = 2
+
+[node name="EnergyLabel" type="Label" parent="HUD/TopBar/HBoxContainer" unique_id=2041690154]
+layout_mode = 2
+
+[node name="DeckManager" type="Node" parent="." unique_id=1748946453]
+script = ExtResource("5_nnij7")
+
+[connection signal="ready" from="Deck" to="." method="_on_deck_ready"]

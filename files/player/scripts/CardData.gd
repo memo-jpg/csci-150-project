@@ -1,0 +1,55 @@
+class_name CardData
+extends RefCounted
+
+var id: int
+var type: String
+var name: String
+var description: String
+var damage: int
+var shield: int
+var energy: int
+var exhaust: bool
+var sprite: String
+var special: Dictionary = {}
+var rarity: String = "common"   # common | uncommon | rare | legendary
+
+func _init(
+	_id: int,
+	_type: String,
+	_name: String,
+	_description: String,
+	_damage: int,
+	_shield: int,
+	_energy: int,
+	_sprite: String,
+	_exhaust: bool = false,
+	_special: Dictionary = {},
+	_rarity: String = "common"
+) -> void:
+	id = _id
+	type = _type.to_lower()
+	name = _name
+	description = _description
+	damage = _damage
+	shield = _shield
+	energy = _energy
+	sprite = _sprite
+	exhaust = _exhaust
+	special = _special
+	rarity = _rarity
+
+
+func duplicate_instance() -> CardData:
+	return CardData.new(
+		id,
+		type,
+		name,
+		description,
+		damage,
+		shield,
+		energy,
+		sprite,
+		exhaust,
+		special.duplicate(),
+		rarity
+	)

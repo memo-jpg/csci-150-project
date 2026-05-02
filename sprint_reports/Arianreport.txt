@@ -1,0 +1,7 @@
+I didn't know we were writing here so I'll do mine seperate:
+I developed cards and the deck features and made the example cards. I made combat manager and made shield work for enemies and player, aswell as making it so
+they can both take and deal damage, I developed enemy intentions for a singular enemy; similar to how cards function
+I made the shop and the HUD scenes
+I coded alot but it was pretty buggy apperantly, calvin debugged most of it so big ups to him
+I added a bunch of features that are a WIP, like meta damage(where you must perform an action or take a damage) I developed artifacts but they are flat stat
+increases or changes right now so I did not include them.
