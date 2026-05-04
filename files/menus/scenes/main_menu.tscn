@@ -32,6 +32,7 @@ offset_bottom = 422.0
 text = "Settings"
 
 [node name="DeleteSave" type="Button" parent="." unique_id=1813148545]
+visible = false
 offset_left = 871.0
 offset_top = 45.0
 offset_right = 1127.0

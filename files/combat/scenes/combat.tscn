@@ -1064,7 +1064,7 @@ cards = ExtResource("4_ga4lu")
 [node name="mapVisual" type="Node2D" parent="_MapScene" unique_id=227513543]
 
 [node name="Sprite2D" type="Sprite2D" parent="_MapScene/mapVisual" unique_id=1406936535]
-position = Vector2(295, -21)
+position = Vector2(-47, -423.99997)
 scale = Vector2(1.2462963, 1.2462963)
 texture = ExtResource("5_vbr26")
 
@@ -1088,6 +1088,7 @@ tile_map_data = PackedByteArray("AAAXABAAAQAiABQAAAAXABEAAQAiABUAAAAYABAAAQAjABQ
 tile_set = ExtResource("6_eavn3")
 
 [node name="End Combat (test)" type="Button" parent="." unique_id=74232243]
+visible = false
 offset_left = 893.0
 offset_top = 24.0
 offset_right = 1146.0

@@ -15,18 +15,6 @@ var turn: String = "player"
 
 @onready var scene_transition = $SceneTransition/AnimationPlayer
 
-	#scene_transition.play("fade_in")
-	#await get_tree().create_timer(0.5).timeout
-
-	#scene_transition.get_parent().get_node("ColorRect").color.a = 255
-	#scene_transition.play("fade_out")
-	
-
-
-#var activeCard = null
-#var turn: String = "player"  # can be "player" or "enemy" might not be needed since enemies 
-#don't technically have a turn
-
 var expecting_meta_input = false # possibly implementing meta elements
 var meta_damage = 10
 var turn_counter = 0
@@ -215,7 +203,7 @@ func _card_selected(cardIndex):
 		_reset_card_visuals(activeCardIndex)
 		
 	
-	cardNodes[cardIndex].scale = Vector2(.75, .75)
+	cardNodes[cardIndex].scale = Vector2(.65, .65)
 	cardNodes[cardIndex].position.y -= 100
 	cardNodes[cardIndex].z_index = 100
 	activeCardIndex = cardIndex
@@ -406,6 +394,9 @@ func check_combat_state():
 		var enemyNode = enemyNodes[i]
 		print("Enemy HP check: ", enemyNode.currentHp) #TODO debug, remove this
 		if enemyNode.currentHp <= 0:
+			await get_tree().create_timer(1.0).timeout
+			scene_transition.play("fade_in")
+			await get_tree().create_timer(0.5).timeout
 			handlePlayerVictory()
 			
 			print("✅ Enemy defeated!")
@@ -433,7 +424,7 @@ func _on_end_combat_test_pressed() -> void:
 	var prevScene = Global.prev_scene_path
 	
 	
-	await get_tree().create_timer(0.5).timeout
+	#await get_tree().create_timer(0.5).timeout
 	# Scene transition
 	scene_transition.play("fade_in")
 	await get_tree().create_timer(0.5).timeout
