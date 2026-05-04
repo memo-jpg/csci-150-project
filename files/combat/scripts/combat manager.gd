@@ -46,7 +46,9 @@ var gold_totem = false # gain shield at turn start
 func _ready():
 	# Scene transition
 	scene_transition.get_parent().get_node("ColorRect").color.a = 255
+	await get_tree().create_timer(0.25).timeout
 	scene_transition.play("fade_out")
+	
 	# Called when combat starts
 	playerNode = saver_loader.loadPlayer()
 	playerNode.setMaxHP(300)

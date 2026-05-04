@@ -1099,6 +1099,7 @@ position = Vector2(579, 324)
 [node name="_Combat" type="Node2D" parent="." unique_id=1084948857]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=285061278]
+visible = false
 offset = Vector2(400, 400)
 transform = Transform2D(1, 0, 0, 1, 400, 400)
 
