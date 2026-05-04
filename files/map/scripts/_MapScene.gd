@@ -4,7 +4,7 @@ const PLAYER = preload("res://files/player/scenes/player.tscn")
 
 
 var spacing: int = 100
-var start_x_pos: int = 50 + 100 # 115 is old spacing
+var start_x_pos: int = 150 # 115 is old spacing
 var start_y_pos: int = 250
 
 var num_of_nodes: int = 10
@@ -51,7 +51,7 @@ func handleScene():
 			print("_MapScene.gd playerRestored:")
 			print(playerRestored)
 			
-			playerRestored.scale *= 0.5
+			playerRestored.scale *= 0.25
 			playerRestored.z_index = 99
 			
 		else:
@@ -77,7 +77,7 @@ func handleScene():
 			node.node_selected.connect(_on_node_selected)
 			if node.nodeId == playerRestored.curNodeId:
 				playerRestored.global_position = node.global_position
-				playerRestored.global_position.y -= 55
+				playerRestored.global_position.y -= 25
 				node.isActive = false
 				node.isCompleted = true
 				node.updateSprite()
@@ -189,8 +189,9 @@ func generate_map_2d():
 		
 		
 	
-	activate_column(0)
+	
 	draw_lines_2d()
+	activate_column(0)
 	
 
 func _on_node_selected(nodeId: int):
@@ -233,7 +234,7 @@ func _on_node_selected(nodeId: int):
 		
 	playerRestored.curNodeId = nodeId
 	playerRestored.global_position = target_node.global_position
-	playerRestored.global_position.y -= 55
+	playerRestored.global_position.y -= 25
 	
 	activate_column(clicked_col + 1)
 	
@@ -280,7 +281,7 @@ func generate_player():
 	var newPlayer = PLAYER.instantiate()
 	newPlayer.position = Vector2(60, 300)
 	newPlayer.z_index = 99
-	newPlayer.scale *= 0.5
+	newPlayer.scale *= 0.25
 	newPlayer.curNodeId = -1
 	playerRestored = newPlayer
 	add_child(newPlayer)

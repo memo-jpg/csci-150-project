@@ -11,11 +11,11 @@ size = Vector2(400, 400)
 script = ExtResource("1_uma8q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1112749428]
-scale = Vector2(0.15, 0.15)
+scale = Vector2(0.1, 0.1)
 shape = SubResource("RectangleShape2D_21y73")
 
 [node name="mapNodeSprites" type="Sprite2D" parent="." unique_id=460613531]
-scale = Vector2(0.15, 0.15)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("3_21y73")
 region_enabled = true
 region_rect = Rect2(0, 0, 1230, 400)
