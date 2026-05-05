@@ -50,6 +50,7 @@ func _ready():
 
 	# Fade in from black
 	scene_transition.get_parent().get_node("ColorRect").color.a = 255
+	await get_tree().create_timer(0.25).timeout
 	scene_transition.play("fade_out")
 
 	# Arena background

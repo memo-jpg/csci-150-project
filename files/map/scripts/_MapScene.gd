@@ -32,6 +32,7 @@ var optional_boss_cols: Array[int] = [3, 5, 7]
 func _ready():
 	print("_MapScene _ready running")
 	scene_transition.get_parent().get_node("ColorRect").color.a = 255
+	await get_tree().create_timer(0.25).timeout
 	scene_transition.play("fade_out")
 	handleScene()
 
