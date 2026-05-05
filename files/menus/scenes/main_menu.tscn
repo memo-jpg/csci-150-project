@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bugf5mcd68lm7"]
 
-[ext_resource type="Texture2D" uid="uid://3n7kxtkpabow" path="res://_assets/menuTexture.png" id="1_06t4h"]
 [ext_resource type="Script" uid="uid://beq1u5p887w56" path="res://files/menus/scripts/main_menu.gd" id="1_fu7sn"]
 [ext_resource type="PackedScene" uid="uid://d3ukbcg4ttgb7" path="res://files/menus/scenes/settings.tscn" id="2_fu7sn"]
+[ext_resource type="Texture2D" uid="uid://css5dmassje1u" path="res://_assets/TitleScreen_CityScape.png" id="3_36h3q"]
 [ext_resource type="PackedScene" uid="uid://oc864vuqi064" path="res://files/menus/scenes/scene_transition.tscn" id="4_36h3q"]
 
 [node name="Main Menu" type="Node2D" unique_id=1310378109]
@@ -11,9 +11,9 @@ settingsScene = ExtResource("2_fu7sn")
 mapScene = "res://_MainScene.tscn"
 
 [node name="Menu Image" type="Sprite2D" parent="." unique_id=486582887]
-position = Vector2(572, 325.49997)
-scale = Vector2(0.74348956, 0.6739583)
-texture = ExtResource("1_06t4h")
+position = Vector2(580, 320)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_36h3q")
 
 [node name="SceneTransition" parent="." unique_id=2044027244 instance=ExtResource("4_36h3q")]
 
@@ -22,6 +22,7 @@ offset_left = 455.0
 offset_top = 288.0
 offset_right = 709.0
 offset_bottom = 348.0
+text = "Play"
 
 [node name="Settings" type="Button" parent="." unique_id=236426682]
 offset_left = 452.0
