@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dfncute6v0g8l" path="res://files/map/scripts/mapNode.gd" id="1_uma8q"]
 [ext_resource type="PackedScene" uid="uid://oc864vuqi064" path="res://files/menus/scenes/scene_transition.tscn" id="3_1yte8"]
 [ext_resource type="Texture2D" uid="uid://cdvswmdx14oh5" path="res://_assets/projectResources/mapNodes/mapNodeSprites.png" id="3_21y73"]
+[ext_resource type="AudioStream" uid="uid://dqocmfiyjxy5u" path="res://_assets/Sounds/Cyber Circuit... - Digital Dimension Zone (Sonic Rerush Official Soundtrack).mp3" id="4_1yte8"]
 
 [sub_resource type="Gradient" id="Gradient_21y73"]
 offsets = PackedFloat32Array(0.094339624, 1)
@@ -34,3 +35,9 @@ region_enabled = true
 region_rect = Rect2(0, 0, 1230, 400)
 
 [node name="SceneTransition" parent="." unique_id=2044027244 instance=ExtResource("3_1yte8")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=321610981]
+stream = ExtResource("4_1yte8")
+volume_db = -10.495
+autoplay = true
+parameters/looping = true

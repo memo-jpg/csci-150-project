@@ -234,6 +234,7 @@ func _enemy_selected(enemyIndex):
 
 	if success:
 		render_hand()
+		#probably play attack sfx here?
 
 	check_combat_state()
 
@@ -272,12 +273,15 @@ func resolve_card_effect(card: CardData, enemyNode: Node2D):
 	match card.type:
 		"attack":
 			enemyNode.apply_damage_to_enemy(card.damage)
+			#maybe play attack sfx here?
 
 		"defense":
 			apply_block_to_player(card.shield)
+			#maybe play defense sfx here?
 
 		"status":
 			print("Status card used:", card.name)
+			#play _ sfx here?
 	
 	# ===== SPECIAL LOGIC =====
 	if card.special.is_empty():

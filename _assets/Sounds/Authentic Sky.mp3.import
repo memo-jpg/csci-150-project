@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cvvr77pb1gihy"
+path="res://.godot/imported/Authentic Sky.mp3-790e26ae8f3a99639e87ced30c475ddb.mp3str"
+
+[deps]
+
+source_file="res://_assets/Sounds/Authentic Sky.mp3"
+dest_files=["res://.godot/imported/Authentic Sky.mp3-790e26ae8f3a99639e87ced30c475ddb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

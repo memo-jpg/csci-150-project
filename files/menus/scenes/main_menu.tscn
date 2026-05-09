@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://beq1u5p887w56" path="res://files/menus/scripts/main_menu.gd" id="1_fu7sn"]
 [ext_resource type="PackedScene" uid="uid://d3ukbcg4ttgb7" path="res://files/menus/scenes/settings.tscn" id="2_fu7sn"]
 [ext_resource type="PackedScene" uid="uid://oc864vuqi064" path="res://files/menus/scenes/scene_transition.tscn" id="4_36h3q"]
+[ext_resource type="AudioStream" uid="uid://cvvr77pb1gihy" path="res://_assets/Sounds/Authentic Sky.mp3" id="5_g5pud"]
 
 [node name="Main Menu" type="Node2D" unique_id=1310378109]
 script = ExtResource("1_fu7sn")
@@ -36,6 +37,11 @@ offset_top = 45.0
 offset_right = 1127.0
 offset_bottom = 97.0
 text = "Delete Save"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1617077930]
+stream = ExtResource("5_g5pud")
+autoplay = true
+parameters/looping = true
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]

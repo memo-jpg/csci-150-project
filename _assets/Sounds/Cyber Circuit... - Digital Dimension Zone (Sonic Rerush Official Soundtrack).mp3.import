@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dqocmfiyjxy5u"
+path="res://.godot/imported/Cyber Circuit... - Digital Dimension Zone (Sonic Rerush Official Soundtrack).mp3-7889a981819d7d40f0255fd168ca2c0a.mp3str"
+
+[deps]
+
+source_file="res://_assets/Sounds/Cyber Circuit... - Digital Dimension Zone (Sonic Rerush Official Soundtrack).mp3"
+dest_files=["res://.godot/imported/Cyber Circuit... - Digital Dimension Zone (Sonic Rerush Official Soundtrack).mp3-7889a981819d7d40f0255fd168ca2c0a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

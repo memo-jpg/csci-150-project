@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://044peym2y1m7"
+path="res://.godot/imported/Rasetsu Alternative - BGM #11 “SHOT SKY” (DnB).mp3-3d3ca9dc624457f74aa93c685620d51b.mp3str"
+
+[deps]
+
+source_file="res://_assets/Sounds/Rasetsu Alternative - BGM #11 “SHOT SKY” (DnB).mp3"
+dest_files=["res://.godot/imported/Rasetsu Alternative - BGM #11 “SHOT SKY” (DnB).mp3-3d3ca9dc624457f74aa93c685620d51b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

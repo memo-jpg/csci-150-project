@@ -1070,3 +1070,6 @@ tile_set = ExtResource("1_jhupi")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1794326839]
 position = Vector2(579, 324)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1446668006]
+autoplay = true
