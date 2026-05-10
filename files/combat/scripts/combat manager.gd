@@ -225,7 +225,6 @@ func _reset_card_visuals(cardIndex):
 		cardNodes[cardIndex].z_index = 0
 		
 		
-
 func _enemy_selected(enemyIndex):
 	if activeCardIndex == -1:
 		return
@@ -234,7 +233,6 @@ func _enemy_selected(enemyIndex):
 
 	if success:
 		render_hand()
-		#probably play attack sfx here?
 
 	check_combat_state()
 
@@ -274,10 +272,12 @@ func resolve_card_effect(card: CardData, enemyNode: Node2D):
 		"attack":
 			enemyNode.apply_damage_to_enemy(card.damage)
 			#maybe play attack sfx here?
+			$AudioStreamPlayer/AudioStreamPlayer.play()
 
 		"defense":
 			apply_block_to_player(card.shield)
 			#maybe play defense sfx here?
+			$AudioStreamPlayer/AudioStreamPlayer2.play()
 
 		"status":
 			print("Status card used:", card.name)

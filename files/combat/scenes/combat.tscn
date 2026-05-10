@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://b8sqxgi3idirp" path="res://_assets/projectResources/kenneyAssets/cityTileset/Tilemap/tilemap_packed.png" id="7_vbr26"]
 [ext_resource type="Script" uid="uid://dksq6xjngymi5" path="res://files/saveGame/saverLoader.gd" id="8_eavn3"]
 [ext_resource type="AudioStream" uid="uid://044peym2y1m7" path="res://_assets/Sounds/Rasetsu Alternative - BGM #11 “SHOT SKY” (DnB).mp3" id="9_vbr26"]
+[ext_resource type="AudioStream" uid="uid://brslf4u6iqyht" path="res://_assets/Sounds/Realistic Punch Sound effect.mp3" id="10_s483j"]
+[ext_resource type="AudioStream" uid="uid://bwql8doqx1myk" path="res://_assets/Sounds/Parry Sound Effects.mp3" id="11_3ktni"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jhupi"]
 texture = ExtResource("7_vbr26")
@@ -1116,6 +1118,14 @@ script = ExtResource("8_eavn3")
 stream = ExtResource("9_vbr26")
 autoplay = true
 parameters/looping = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayer" unique_id=164286178]
+stream = ExtResource("10_s483j")
+volume_db = 0.5
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="AudioStreamPlayer" unique_id=576826291]
+stream = ExtResource("11_3ktni")
+volume_db = 24.0
 
 [connection signal="pressed" from="End Combat (test)" to="." method="_on_end_combat_test_pressed"]
 [connection signal="pressed" from="End Turn" to="." method="_on_end_turn_pressed"]

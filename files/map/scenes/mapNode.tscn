@@ -38,6 +38,6 @@ region_rect = Rect2(0, 0, 1230, 400)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=321610981]
 stream = ExtResource("4_1yte8")
-volume_db = -10.495
+volume_db = -31.009
 autoplay = true
 parameters/looping = true
